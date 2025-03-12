@@ -426,9 +426,15 @@ export const getSingleGallery = async (id: string) => {
 export const getDownloadUrl = async (fileUrl: string) => {
   if (!fileUrl) throw new Error('No file URL provided')
 
-  const response = await fetch(fileUrl)
-  const blob = await response.blob()
-  const url = URL.createObjectURL(blob)
+  try {
+    const response = await fetch(fileUrl)
+    if (!response.ok)
+      throw new Error(`Failed to fetch file: ${response.statusText}`)
 
-  return url
+    const blob = await response.blob()
+    return URL.createObjectURL(blob)
+  } catch (error) {
+    console.error('Error generating download URL:', error)
+    return null
+  }
 }

@@ -63,12 +63,6 @@ export default async function Page() {
                 </div>
 
                 <div className='flex justify-between mt-4'>
-                  {/* <Link
-                    href={`/control/gallery/edit-gallery/${gallery?.id}`}
-                    className='px-3 py-2 bg-blue-500 text-white rounded-md text-sm hover:bg-blue-600'
-                  >
-                    Edit
-                  </Link> */}
                   <form action={deleteGallery} method='POST'>
                     <input type='hidden' name='galleryId' value={gallery?.id} />
                     <button

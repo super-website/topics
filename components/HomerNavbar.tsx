@@ -8,8 +8,8 @@ import logo from '../public/images/logo.png'
 
 const lists = [
   { id: 1, name: 'Home', url: '/' },
-  { id: 2, name: 'Subjects', url: 'subjects' },
-  { id: 3, name: 'Gallery', url: 'gallery' },
+  { id: 2, name: 'Subjects', url: '/subjects' },
+  { id: 3, name: 'Gallery', url: '/gallery' },
 ]
 
 export default function HomeNavbar() {

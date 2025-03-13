@@ -1,10 +1,12 @@
 import GalleryForm from '@/components/AddGalleryForm'
-import React from 'react'
+import React, { Suspense } from 'react'
 
 export default function page() {
   return (
     <div>
-      <GalleryForm />
+      <Suspense fallback={<div>Loading...</div>}>
+        <GalleryForm />
+      </Suspense>
     </div>
   )
 }

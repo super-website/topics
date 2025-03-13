@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import { createGallery } from '@/utils/actions'
 import { useSearchParams } from 'next/navigation'
+import Image from 'next/image'
 
 export default function GalleryForm() {
   const [title, setTitle] = useState('')
@@ -83,7 +84,7 @@ export default function GalleryForm() {
           <div className='flex flex-wrap gap-4 mt-3'>
             {files.map((file, index) => (
               <div key={index} className='relative w-24 h-24'>
-                <img
+                <Image
                   src={URL.createObjectURL(file)}
                   alt='Gallery Image'
                   width={200}

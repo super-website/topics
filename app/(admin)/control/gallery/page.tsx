@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { getAllGallery, deleteGallery } from '@/utils/actions'
 import Image from 'next/image'
 import Link from 'next/link'

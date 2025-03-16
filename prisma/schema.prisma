@@ -63,6 +63,6 @@ model Gallery {
 
   id        String   @id @default(uuid()) @map("_id")
   title     String
-  images    Json   
+  images    String[]   
   createdAt DateTime @default(now())
 }

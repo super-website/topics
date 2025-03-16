@@ -83,7 +83,7 @@ export default function AddNewTopic({ subjects }: { subjects: Subject[] }) {
             onChange={handleEditorChange}
             options={{
               spellChecker: false,
-              maxHeight: '400px',
+              maxHeight: '200px',
             }}
           />
         </div>

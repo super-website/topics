@@ -21,8 +21,6 @@ export const getAllSubject = async () => {
 }
 
 export const getAllTopics = async (query: string) => {
-  console.log(query)
-
   if (!query) {
     return await prisma.topics.findMany({
       include: {

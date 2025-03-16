@@ -1,6 +1,5 @@
 import { getAllSubject } from '@/utils/actions'
 import Link from 'next/link'
-import React from 'react'
 
 export const metadata = {
   title: 'Subjects - Education With US',
@@ -16,7 +15,7 @@ export default async function Page() {
 
   return (
     <div className='max-w-2xl mx-auto px-4 py-6'>
-      <h1 className='text-2xl font-semibold mb-4'>MBA Subjects</h1>
+      <h1 className='text-2xl font-semibold mb-4'>Subjects</h1>
       <div className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
         {subjects.map((subject) => (
           <div

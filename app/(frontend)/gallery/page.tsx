@@ -9,7 +9,7 @@ export default async function Page() {
       {data.length === 0 ? (
         <p className='text-gray-500 text-center'>No images available.</p>
       ) : (
-        <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2'>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-2'>
           {data.map((gallery) => {
             let images: { public_id: string; secure_url: string }[] = []
 

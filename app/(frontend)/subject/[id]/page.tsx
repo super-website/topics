@@ -2,29 +2,6 @@ import { getSinglSubject } from '@/utils/actions'
 import Link from 'next/link'
 import React from 'react'
 
-export const metadata = async ({ params }: { params: { id: string } }) => {
-  const { id } = params
-  const subject = await getSinglSubject(id)
-
-  if (!subject) {
-    return {
-      title: 'Subject Not Found - Education With US',
-      description: 'The requested subject could not be found.',
-      keywords: 'subject not found, MBA, education, online learning',
-      author: 'Ameer Muhavia',
-    }
-  }
-
-  return {
-    title: `${subject.name} - Education With US`,
-    description:
-      subject.short_desc ||
-      `Learn more about the ${subject.name} subject, including topics and details.`,
-    keywords: `${subject.name}, ${subject.short_name}, MBA, subjects, online education, business management`,
-    author: 'Ameer Muhavia',
-  }
-}
-
 export default async function Page({ params }: { params: { id: string } }) {
   const { id } = params
   const subject = await getSinglSubject(id)

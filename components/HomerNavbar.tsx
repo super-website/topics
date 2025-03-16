@@ -56,7 +56,7 @@ export default function HomeNavbar() {
           />
         </div>
 
-        <div className='navbar-end'>
+        <div className='navbar-end hidden md:block'>
           <ul className='flex space-x-6'>
             {lists.map((item) => (
               <li key={item.id}>

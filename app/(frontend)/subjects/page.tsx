@@ -3,7 +3,7 @@ import Link from 'next/link'
 import React from 'react'
 
 export const metadata = {
-  title: 'MBA Subjects - Education With US',
+  title: 'Subjects - Education With US',
   description:
     'Explore various MBA subjects with detailed topics to enhance your learning experience.',
   keywords:

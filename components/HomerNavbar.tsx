@@ -41,7 +41,7 @@ export default function HomeNavbar() {
               alt='Logo'
               width={160}
               height={50}
-              className='cursor-pointer sm:max-w-28'
+              className='cursor-pointer max-w-28 md:max-w-40'
             />
           </Link>
         </div>

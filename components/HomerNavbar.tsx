@@ -56,7 +56,7 @@ export default function HomeNavbar() {
           />
         </div>
 
-        <div className='navbar-end visible md:hidden'>
+        <div className='navbar-end visible md:invisible'>
           <div className='dropdown'>
             <div
               tabIndex={0}
@@ -101,7 +101,7 @@ export default function HomeNavbar() {
           </div>
         </div>
 
-        <div className='navbar-end hidden md:visible'>
+        <div className='navbar-end invisible md:visible'>
           <ul className='flex space-x-6'>
             {lists.map((item) => (
               <li key={item.id}>

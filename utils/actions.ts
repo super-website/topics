@@ -15,11 +15,9 @@ cloudinary.config({
 })
 
 export const getAllSubject = async () => {
-  return {
-    subjects: await prisma.subject.findMany({
-      include: { topics: true },
-    }),
-  }
+  return await prisma.subject.findMany({
+    include: { topics: true },
+  })
 }
 
 export const getAllTopics = async (query: string) => {

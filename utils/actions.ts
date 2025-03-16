@@ -358,7 +358,7 @@ export const createGallery = async (formData: FormData) => {
 }
 
 export const getAllGallery = async () => {
-  return await prisma.gallery.findMany()
+  return await prisma.gallery.findMany({})
 }
 
 export const deleteGallery = async (formData: FormData) => {

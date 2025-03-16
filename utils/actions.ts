@@ -229,8 +229,6 @@ export const deleteSubject = async (formData: FormData) => {
     })
 
     revalidatePath('/')
-
-    return { success: true, message: 'Subject deleted successfully' }
   } catch (error) {
     console.error('Error deleting subject:', error)
 

@@ -1,7 +1,8 @@
 import React from 'react'
 import Sidebar from '@/components/Sidebar'
 import Content from '@/components/Content'
-
+import adsImg from '../../public/images/ads.jpg'
+import Image from 'next/image'
 export default function Page({
   searchParams,
 }: {
@@ -16,7 +17,15 @@ export default function Page({
       <div className='max-w-2xl w-full'>
         <Content query={query} />
       </div>
-      <h2 className='hidden md:flex'>Ads</h2>
+      <div>
+        <Image
+          src={adsImg}
+          alt='ads'
+          width={100}
+          height={100}
+          className='object-cover'
+        />
+      </div>
     </div>
   )
 }

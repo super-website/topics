@@ -18,6 +18,7 @@ export default function Page({
         <Content query={query} />
       </div>
       <div>
+        <h2 className='text-xl font-bold mb-3'>Advertisement</h2>
         <Image
           src={adsImg}
           alt='ads'

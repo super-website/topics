@@ -22,7 +22,7 @@ export default function Page({
           src={adsImg}
           alt='ads'
           height={800}
-          width={300}
+          width={200}
           className='object-cover'
         />
       </div>

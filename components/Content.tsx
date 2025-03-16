@@ -1,5 +1,3 @@
-'use server'
-
 import { getAllTopics } from '@/utils/actions'
 import Link from 'next/link'
 import React from 'react'

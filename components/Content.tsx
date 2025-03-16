@@ -1,3 +1,5 @@
+'use server'
+
 import { getAllTopics } from '@/utils/actions'
 import Link from 'next/link'
 import React from 'react'
@@ -14,8 +16,16 @@ interface Topic {
 }
 
 export default async function Content({ query }: { query: string }) {
-  const data = await getAllTopics(query)
-  const topics: Topic[] = Array.isArray(data) ? data : data.topics || []
+  let topics: Topic[] = []
+
+  try {
+    const data = await getAllTopics(query)
+    topics = Array.isArray(data) ? data : data.topics || []
+  } catch (error) {
+    console.error('Error fetching topics:', error)
+    // Optionally, you could return a fallback value or handle the error differently
+    topics = []
+  }
 
   return (
     <div className='space-y-5 mr-5 md:mr-0'>

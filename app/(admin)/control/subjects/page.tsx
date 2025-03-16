@@ -26,7 +26,6 @@ export default async function page() {
             </tr>
           </thead>
           <tbody>
-            {/* row 1 */}
             {data.map((subject) => {
               return (
                 <tr key={subject.id}>

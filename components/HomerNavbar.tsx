@@ -1,9 +1,9 @@
-'use client' // Ensures it runs on the client side
+'use client'
 
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import logo from '../public/images/logo.png'
 
 const lists = [
@@ -17,22 +17,23 @@ export default function HomeNavbar() {
   const pathname = usePathname()
   const { replace } = useRouter()
 
-  const handleSearch = (term: string) => {
+  const [searchTerm, setSearchTerm] = useState(searchParams.get('query') || '')
+
+  useEffect(() => {
     const params = new URLSearchParams(searchParams)
 
-    if (term) {
-      params.set('query', term)
+    if (searchTerm) {
+      params.set('query', searchTerm)
     } else {
       params.delete('query')
     }
 
     replace(`${pathname}?${params.toString()}`)
-  }
+  }, [searchTerm, pathname, searchParams, replace])
 
   return (
     <nav className='bg-base-200 shadow-md'>
       <div className='max-w-7xl mx-auto navbar px-4 lg:px-8'>
-        {/* Navbar Start - Logo */}
         <div className='navbar-start'>
           <Link href='/'>
             <Image
@@ -45,20 +46,16 @@ export default function HomeNavbar() {
           </Link>
         </div>
 
-        {/* Navbar Center - Search Box */}
         <div className='navbar-center hidden md:flex'>
           <input
             type='text'
-            onChange={(e) => {
-              handleSearch(e.target.value)
-            }}
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
             placeholder='Search for a topic 🤗'
             className='input input-sm rounded-full input-bordered'
-            defaultValue={searchParams.get('query')?.toString()}
           />
         </div>
 
-        {/* Navbar End - Links */}
         <div className='navbar-end'>
           <ul className='flex space-x-6'>
             {lists.map((item) => (

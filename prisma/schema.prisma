@@ -9,7 +9,7 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
 }
 
@@ -19,17 +19,19 @@ datasource db {
 
 
 model Topics {
-  id         String   @id @default(uuid())
+  
+  id        String   @id @default(uuid()) @map("_id")
   title      String
-  short_desc String   @db.Text
-  long_desc  String   @db.Text        
+  short_desc String   @db.String
+  long_desc  String   @db.String        
   createdAt  DateTime @default(now())
   subjectId  String
   subject    Subject  @relation(fields: [subjectId], references: [id])
 }
 
 model Subject {
-  id          String   @id @default(uuid()) 
+  
+  id        String   @id @default(uuid()) @map("_id")
   name        String   
   short_name  String   @default("Unknown") 
   short_desc  String   
@@ -38,7 +40,8 @@ model Subject {
 
 
 model Admin {
-  id       String  @id @default(cuid()) 
+  
+  id        String   @id @default(cuid()) @map("_id")
   name     String  
   email    String  @unique
   password String  
@@ -57,7 +60,8 @@ enum Role {
 
 
 model Gallery {
-  id        String   @id @default(uuid())
+
+  id        String   @id @default(uuid()) @map("_id")
   title     String
   images    Json   
   createdAt DateTime @default(now())

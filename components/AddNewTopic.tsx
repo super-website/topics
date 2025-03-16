@@ -94,10 +94,10 @@ export default function AddNewTopic({ subjects }: { subjects: Subject[] }) {
             className='select select-bordered w-full mt-1'
             required
           >
-            <option value='' disabled selected>
+            <option value='' disabled>
               Select a Subject
             </option>
-            {subjects.map((subject) => (
+            {subjects?.map((subject) => (
               <option value={subject.id} key={subject.id}>
                 {subject.name}
               </option>

@@ -12,7 +12,7 @@ interface Topic {
   subject?: {
     id: string
     short_name: string
-  }
+  } | null
 }
 
 export default async function Content({ query }: { query: string }) {
@@ -23,7 +23,6 @@ export default async function Content({ query }: { query: string }) {
     topics = Array.isArray(data) ? data : data.topics || []
   } catch (error) {
     console.error('Error fetching topics:', error)
-    // Optionally, you could return a fallback value or handle the error differently
     topics = []
   }
 

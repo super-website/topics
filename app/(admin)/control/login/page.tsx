@@ -5,6 +5,7 @@ export default function LoginPage({
 }: {
   searchParams: { error: string | undefined }
 }) {
+  
   const error = searchParams?.error
 
   return (

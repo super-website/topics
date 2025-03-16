@@ -1,30 +1,30 @@
-import EditTopic from "@/components/EditTopic";
-import { getAllSubject, getSingleTopic } from "@/utils/actions";
-import React from "react";
+import EditTopic from '@/components/EditTopic'
+import { getAllSubject, getSingleTopic } from '@/utils/actions'
+import React from 'react'
 
 interface Subject {
-  id: string;
-  name: string;
+  id: string
+  name: string
 }
 
 interface Topic {
-  id: string;
-  title: string;
-  short_desc: string;
-  long_desc: string;
-  subjectId: string;
+  id: string
+  title: string
+  short_desc: string
+  long_desc: string
+  subjectId: string | null // subjectId can be null
   subject?: {
-    id: string;
-    name: string;
-    short_name: string;
-    short_desc: string;
-  };
+    id: string
+    name: string
+    short_name: string
+    short_desc: string
+  } | null
 }
 
 export default async function Page({ params }: { params: { id: string } }) {
-  const subjects: Subject[] = (await getAllSubject()) || [];
-  const { id } = params;
-  const topic: Topic | null = await getSingleTopic(id);
+  const subjects: Subject[] = (await getAllSubject()) || []
+  const { id } = params
+  const topic: Topic | null = await getSingleTopic(id)
 
-  return <EditTopic subjects={subjects} topic={topic || undefined} />;
+  return <EditTopic subjects={subjects} topic={topic || undefined} />
 }

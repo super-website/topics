@@ -21,8 +21,8 @@ export default function Page({
         <Image
           src={adsImg}
           alt='ads'
-          layout='fill'
-          objectFit='cover'
+          height={800}
+          width={300}
           className='object-cover'
         />
       </div>

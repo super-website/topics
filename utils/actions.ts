@@ -216,15 +216,22 @@ export const deleteSubject = async (formData: FormData) => {
   if (typeof id !== 'string' || !id.trim()) {
     throw new Error('Id is required')
   }
-  await prisma.subject.delete({
-    where: {
-      id,
-    },
-  })
 
-  revalidatePath('/')
+  try {
+    await prisma.subject.delete({
+      where: { id },
+    })
+
+    revalidatePath('/')
+
+    return { success: true, message: 'Subject deleted successfully' }
+  } catch (error) {
+    // Log the error for debugging purposes
+    console.error('Error deleting subject:', error)
+
+    throw new Error(`Failed to delete subject`)
+  }
 }
-
 // auth
 
 // Create Admin if none exist

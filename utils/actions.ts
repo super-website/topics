@@ -25,7 +25,9 @@ export const getAllTopics = async (query: string) => {
 
   if (!query) {
     return await prisma.topics.findMany({
-      include: { subject: true },
+      include: {
+        subject: true,
+      },
     })
   }
 
@@ -36,7 +38,9 @@ export const getAllTopics = async (query: string) => {
           contains: query.toLowerCase(),
         },
       },
-      include: { subject: true },
+      include: {
+        subject: true,
+      },
     }),
   }
 }
@@ -219,14 +223,15 @@ export const deleteSubject = async (formData: FormData) => {
 
   try {
     await prisma.subject.delete({
-      where: { id },
+      where: {
+        id,
+      },
     })
 
     revalidatePath('/')
 
     return { success: true, message: 'Subject deleted successfully' }
   } catch (error) {
-    // Log the error for debugging purposes
     console.error('Error deleting subject:', error)
 
     throw new Error(`Failed to delete subject`)

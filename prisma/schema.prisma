@@ -25,8 +25,8 @@ model Topics {
   short_desc String   @db.String
   long_desc  String   @db.String        
   createdAt  DateTime @default(now())
-  subjectId  String
-  subject    Subject  @relation(fields: [subjectId], references: [id])
+  subjectId  String?
+  subject    Subject?  @relation(fields: [subjectId], references: [id])
 }
 
 model Subject {

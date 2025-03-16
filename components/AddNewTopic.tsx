@@ -2,8 +2,9 @@
 import React, { useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { createTopic } from '@/utils/actions'
-import ReactSimpleMDEEditor from 'react-simplemde-editor'
-import 'simplemde/dist/simplemde.min.css'
+import { SimpleMdeReact } from 'react-simplemde-editor'
+import 'easymde/dist/easymde.min.css'
+
 interface Subject {
   id: string
   name: string
@@ -78,13 +79,10 @@ export default function AddNewTopic({ subjects }: { subjects: Subject[] }) {
             Long Description
           </label>
 
-          <ReactSimpleMDEEditor
+          <SimpleMdeReact
+            placeholder='Description'
             value={longDesc}
             onChange={handleEditorChange}
-            options={{
-              spellChecker: false,
-              maxHeight: '200px',
-            }}
           />
         </div>
 

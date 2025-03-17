@@ -25,7 +25,7 @@ export default async function Content({ query }: { query: string }) {
   }
 
   return (
-    <div className='space-y-5 mr-5 md:mr-0'>
+    <div className='space-y-5 mr-5 md:mr-0 py-4'>
       <h2 className='text-xl font-bold mb-3'>Topics</h2>
       {topics.length > 0 ? (
         topics.map((topic) => (

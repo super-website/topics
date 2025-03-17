@@ -15,15 +15,9 @@ cloudinary.config({
 })
 
 export const getAllSubject = async () => {
-  try {
-    const subjects = await prisma.subject.findMany({
-      include: { topics: true },
-    })
-    return subjects
-  } catch (error) {
-    console.error('Error fetching subjects during build:', error)
-    return []
-  }
+  return await prisma.subject.findMany({
+    include: { topics: true },
+  })
 }
 
 export const getAllTopics = async (query: string) => {

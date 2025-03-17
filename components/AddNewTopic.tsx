@@ -1,4 +1,3 @@
-'use client'
 import React, { useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { createTopic } from '@/utils/actions'
@@ -15,6 +14,7 @@ export default function AddNewTopic({ subjects }: { subjects: Subject[] }) {
   const success = searchParams.get('success')
 
   const [longDesc, setLongDesc] = useState('')
+  const [loading, setLoading] = useState(false)
 
   const handleEditorChange = (value: string) => {
     setLongDesc(value)
@@ -24,14 +24,17 @@ export default function AddNewTopic({ subjects }: { subjects: Subject[] }) {
     event.preventDefault()
 
     const formData = new FormData(event.currentTarget)
-
     formData.append('long_desc', longDesc)
+
+    setLoading(true)
 
     try {
       await createTopic(formData)
       console.log('Topic created successfully!')
     } catch (error) {
       console.error('Error creating topic:', error)
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -105,8 +108,12 @@ export default function AddNewTopic({ subjects }: { subjects: Subject[] }) {
           </select>
         </div>
 
-        <button type='submit' className='btn btn-primary w-full'>
-          Submit
+        <button
+          type='submit'
+          className='btn btn-primary w-full'
+          disabled={loading}
+        >
+          {loading ? 'Submitting...' : 'Submit'}
         </button>
       </form>
     </div>

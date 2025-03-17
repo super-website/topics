@@ -2,8 +2,6 @@
 import React, { useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { createTopic } from '@/utils/actions'
-import { SimpleMdeReact } from 'react-simplemde-editor'
-import 'easymde/dist/easymde.min.css'
 
 interface Subject {
   id: string
@@ -13,31 +11,6 @@ interface Subject {
 export default function AddNewTopic({ subjects }: { subjects: Subject[] }) {
   const searchParams = useSearchParams()
   const success = searchParams.get('success')
-
-  const [longDesc, setLongDesc] = useState('')
-  const [loading, setLoading] = useState(false)
-
-  const handleEditorChange = (value: string) => {
-    setLongDesc(value)
-  }
-
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-
-    const formData = new FormData(event.currentTarget)
-    formData.append('long_desc', longDesc)
-
-    setLoading(true)
-
-    try {
-      await createTopic(formData)
-      console.log('Topic created successfully!')
-    } catch (error) {
-      console.error('Error creating topic:', error)
-    } finally {
-      setLoading(false)
-    }
-  }
 
   return (
     <div className='p-6 max-w-6xl mx-auto bg-white rounded-lg shadow-sm'>
@@ -49,7 +22,7 @@ export default function AddNewTopic({ subjects }: { subjects: Subject[] }) {
         </div>
       )}
 
-      <form onSubmit={handleSubmit} method='POST' className='space-y-4'>
+      <form action={createTopic} method='POST' className='space-y-4'>
         <div className='form-control'>
           <label htmlFor='title' className='block text-sm font-medium'>
             Title
@@ -83,11 +56,11 @@ export default function AddNewTopic({ subjects }: { subjects: Subject[] }) {
             Long Description
           </label>
 
-          <SimpleMdeReact
-            placeholder='Description'
-            value={longDesc}
-            onChange={handleEditorChange}
-          />
+          <textarea
+            name='long_desc'
+            required
+            className='textarea textarea-bordered'
+          ></textarea>
         </div>
 
         <div className='form-control'>
@@ -109,12 +82,8 @@ export default function AddNewTopic({ subjects }: { subjects: Subject[] }) {
           </select>
         </div>
 
-        <button
-          type='submit'
-          className='btn btn-primary w-full'
-          disabled={loading}
-        >
-          {loading ? 'Submitting...' : 'Submit'}
+        <button type='submit' className='btn btn-primary w-full'>
+          Submit
         </button>
       </form>
     </div>

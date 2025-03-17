@@ -57,7 +57,7 @@ export default function HomeNavbar() {
         </div>
 
         <div className='navbar-end visible md:invisible'>
-          <div className='dropdown dropdown-left'>
+          <div className='dropdown '>
             <div
               tabIndex={0}
               role='button'

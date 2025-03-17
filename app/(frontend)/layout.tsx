@@ -13,7 +13,7 @@ export default function HomeLayout({
       </Suspense>
       <div
         className='max-w-7xl mx-auto
-      pt-10'
+      py-10'
       >
         {children}
       </div>

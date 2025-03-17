@@ -46,7 +46,7 @@ export default function HomeNavbar() {
           </Link>
         </div>
 
-        <div className='navbar-center invisible md:visible'>
+        <div className='navbar-center hidden md:inline-block'>
           <input
             type='text'
             value={searchTerm}

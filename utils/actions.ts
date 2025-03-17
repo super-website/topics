@@ -73,7 +73,7 @@ export const createTopic = async (formData: FormData) => {
       subjectId,
     },
   })
-
+  revalidatePath('/control/topics')
   redirect('add-topic?success=true')
 }
 
@@ -164,6 +164,7 @@ export const createSubject = async (formData: FormData) => {
       short_desc,
     },
   })
+  revalidatePath('/control/subjects')
   redirect('/control/subjects')
 }
 

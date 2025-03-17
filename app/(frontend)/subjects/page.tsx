@@ -11,6 +11,7 @@ export const metadata = {
 }
 
 export default async function Page() {
+  // Direct data fetching in a server component
   const subjects = await getAllSubject()
 
   return (

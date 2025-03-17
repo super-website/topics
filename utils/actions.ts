@@ -312,7 +312,7 @@ export const logout = async () => {
   cookies().delete('role')
   redirect('/control/login')
 }
-export const createGallery = async (formData: FormData): Promise<void> => {
+export const createGallery = async (formData: FormData) => {
   const files = formData.getAll('files') as File[]
   const title = formData.get('title') as string
 
@@ -350,16 +350,12 @@ export const createGallery = async (formData: FormData): Promise<void> => {
         images: uploadedImages,
       },
     })
-
-    redirect('/control/gallery/add-gallery?success=true')
     revalidatePath('/control/gallery')
   } catch (error) {
-    console.error(
-      'Upload failed:',
-      error instanceof Error ? error.message : error
-    )
+    console.error('Upload failed:', error)
     throw new Error('Gallery creation failed')
   }
+  redirect('/control/gallery/add-gallery?success=true')
 }
 
 export const getAllGallery = async () => {

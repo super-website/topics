@@ -21,7 +21,7 @@ export default async function Page() {
   const response = await getAllTopics('')
   const data: Topic[] = Array.isArray(response)
     ? response
-    : response?.topics || []
+    : response.topics || []
 
   return (
     <div>

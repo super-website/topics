@@ -17,7 +17,7 @@ export default function Page({
       <div className='max-w-2xl w-full'>
         <Content query={query} />
       </div>
-      <div className='invisible md:visible'>
+      <div className='hidden md:flex'>
         <h2 className='text-xl font-bold mb-3'>Advertisement</h2>
         <Image
           src={adsImg}

@@ -1,6 +1,5 @@
 import AddNewTopic from '@/components/AddNewTopic'
 import { getAllSubject } from '@/utils/actions'
-import { Suspense } from 'react'
 
 interface Subject {
   id: string
@@ -10,11 +9,11 @@ interface Subject {
 }
 
 export default async function AddTopic() {
-  const subjects: Subject[] = (await getAllSubject()) || []
+  const subjects: Subject[] = await getAllSubject()
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <AddNewTopic subjects={subjects} />;
-    </Suspense>
+    <div>
+      <AddNewTopic subjects={subjects} />
+    </div>
   )
 }

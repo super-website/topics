@@ -1,3 +1,4 @@
+'use server'
 import { getAllSubject } from '@/utils/actions'
 import Link from 'next/link'
 

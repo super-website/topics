@@ -41,7 +41,7 @@ export default function HomeNavbar() {
               alt='Logo'
               width={160}
               height={50}
-              className='cursor-pointer max-w-28 md:max-w-40 w-28 md:w-auto' // responsive width adjustment
+              className='cursor-pointer max-w-28 md:max-w-40'
             />
           </Link>
         </div>
@@ -56,12 +56,12 @@ export default function HomeNavbar() {
           />
         </div>
 
-        <div className='navbar-end visible md:invisible'>
+        <div className='navbar-end visible md:invisible pr-4 md:pr-0'>
           <div className='dropdown dropdown-left'>
             <div
               tabIndex={0}
               role='button'
-              className='btn btn-ghost btn-circle pr-4 md:pr-0'
+              className='btn btn-ghost btn-circle'
             >
               <svg
                 xmlns='http://www.w3.org/2000/svg'
@@ -70,12 +70,13 @@ export default function HomeNavbar() {
                 viewBox='0 0 24 24'
                 stroke='currentColor'
               >
+                {' '}
                 <path
                   strokeLinecap='round'
                   strokeLinejoin='round'
                   strokeWidth='2'
                   d='M4 6h16M4 12h16M4 18h7'
-                />
+                />{' '}
               </svg>
             </div>
             <ul

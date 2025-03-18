@@ -30,7 +30,7 @@ export default async function Content({ query }: { query: string }) {
       {topics.length > 0 ? (
         topics.map((topic) => (
           <div
-            className='card max-w-2xl bg-base-100 card-sm shadow-sm rounded-none '
+            className='card max-w-sm md:max-w-2xl bg-base-100 card-sm shadow-sm rounded-none '
             key={topic.id}
           >
             <div className='card-body'>

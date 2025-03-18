@@ -53,7 +53,7 @@ export default async function Content({ query }: { query: string }) {
           </div>
         ))
       ) : (
-        <p className='text-gray-500'>No topics found</p>
+        <p className='text-gray-500 text/center'>No topics found</p>
       )}
     </div>
   )

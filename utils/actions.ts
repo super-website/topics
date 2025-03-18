@@ -15,7 +15,6 @@ cloudinary.config({
 export const getAllSubject = async () => {
   const subjects = await prisma.subject.findMany({
     include: { topics: true },
-    cache: 'no-store',
   })
 
   return subjects

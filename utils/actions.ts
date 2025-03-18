@@ -33,7 +33,7 @@ export const getAllTopics = async (query: string) => {
     topics: await prisma.topics.findMany({
       where: {
         title: {
-          contains: query.toLowerCase(),
+          contains: query.toLocaleLowerCase(),
         },
       },
       include: {

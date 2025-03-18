@@ -10,8 +10,32 @@ export const metadata = {
   author: 'Ameer Muhavia',
 }
 
+interface Topic {
+  id: string
+  short_desc: string
+  title: string
+  long_desc: string
+  createdAt: Date
+  subjectId: string | null
+}
+
+interface Subject {
+  id: string
+  short_name: string
+  topics: Topic[]
+}
+
 export default async function Page() {
-  const subjects = await getAllSubject()
+  let subjects: Subject[] = []
+
+  try {
+    const data = await getAllSubject()
+
+    subjects = Array.isArray(data) ? data : data || []
+  } catch (error) {
+    console.error('Error fetching subjects:', error)
+    subjects = []
+  }
 
   return (
     <div className='max-w-2xl mx-auto px-4 py-6'>

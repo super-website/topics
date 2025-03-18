@@ -1,5 +1,3 @@
-'use server'
-
 import prisma from '@/prisma/script'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
@@ -18,6 +16,7 @@ export const getAllSubject = async () => {
   const subjects = await prisma.subject.findMany({
     include: { topics: true },
   })
+  cache: 'no-store'
 
   return subjects
 }

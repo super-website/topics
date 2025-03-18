@@ -1,6 +1,8 @@
 import { getAllSubject } from '@/utils/actions'
 import React from 'react'
 
+export const revalidate = 0
+
 export default async function page() {
   const data = await getAllSubject()
   return (

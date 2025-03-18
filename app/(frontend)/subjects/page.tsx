@@ -10,6 +10,8 @@ export const metadata = {
   author: 'Ameer Muhavia',
 }
 
+export const revalidate = 0
+
 export default async function Page() {
   const subjects = await getAllSubject()
 

@@ -1,4 +1,7 @@
-'use server'
+// app/subjects/page.tsx
+
+'use server' // This tells Next.js that this file should be treated as a server component
+
 import { getAllSubject } from '@/utils/actions'
 import Link from 'next/link'
 
@@ -11,8 +14,9 @@ export const metadata = {
   author: 'Ameer Muhavia',
 }
 
+// Only async functions allowed in server components
 export default async function Page() {
-  const subjects = await getAllSubject()
+  const subjects = await getAllSubject() // Fetch subjects from your database
 
   return (
     <div className='max-w-2xl mx-auto px-4 py-6'>

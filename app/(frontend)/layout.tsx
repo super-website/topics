@@ -8,9 +8,7 @@ export default function HomeLayout({
 }) {
   return (
     <div>
-      <Suspense fallback={<p>Loading Navbar...</p>}>
-        <HomeNavbar />
-      </Suspense>
+      <HomeNavbar />
       <div
         className='max-w-7xl mx-auto
       py-10'

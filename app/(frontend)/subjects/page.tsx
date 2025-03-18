@@ -1,5 +1,5 @@
-// app/page.tsx or app/subjects/page.tsx (depending on your structure)
 import { getAllSubject } from '@/utils/actions'
+import { revalidatePath } from 'next/cache'
 import Link from 'next/link'
 
 export const metadata = {
@@ -11,28 +11,8 @@ export const metadata = {
   author: 'Ameer Muhavia',
 }
 
-interface Topic {
-  id: string
-  short_desc: string
-  title: string
-  long_desc: string
-  createdAt: Date
-  subjectId: string | null
-}
-
-interface Subject {
-  id: string
-  short_name: string
-  topics: Topic[]
-}
-
-async function fetchSubjects() {
-  const data = await getAllSubject() // Replace with your actual function to fetch subjects
-  return data
-}
-
 export default async function Page() {
-  const subjects: Subject[] = await fetchSubjects() // Fetch data directly here
+  const subjects = await getAllSubject()
 
   return (
     <div className='max-w-2xl mx-auto px-4 py-6'>

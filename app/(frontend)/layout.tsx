@@ -8,7 +8,9 @@ export default function HomeLayout({
 }) {
   return (
     <div>
-      <HomeNavbar />
+      <Suspense fallback={<p className='loading-spinner'></p>}>
+        <HomeNavbar />
+      </Suspense>
       <div
         className='max-w-7xl mx-auto
       py-10'

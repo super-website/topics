@@ -14,7 +14,7 @@ export default function Page({
       <div>
         <Sidebar />
       </div>
-      <div className='max-w-sm md:max-w-2xl '>
+      <div className='max-w-2xl '>
         <Content query={query} />
       </div>
       <div className='hidden md:block'>

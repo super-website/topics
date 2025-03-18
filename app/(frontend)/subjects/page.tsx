@@ -1,14 +1,14 @@
 import { getAllSubject } from '@/utils/actions'
 import Link from 'next/link'
 
-// export const metadata = {
-//   title: 'Subjects - Education With US',
-//   description:
-//     'Explore various MBA subjects with detailed topics to enhance your learning experience.',
-//   keywords:
-//     'MBA, MBA subjects, online education, learning, study resources, business management',
-//   author: 'Ameer Muhavia',
-// }
+export const metadata = {
+  title: 'Subjects - Education With US',
+  description:
+    'Explore various MBA subjects with detailed topics to enhance your learning experience.',
+  keywords:
+    'MBA, MBA subjects, online education, learning, study resources, business management',
+  author: 'Ameer Muhavia',
+}
 
 export default async function Page() {
   const subjects = await getAllSubject()

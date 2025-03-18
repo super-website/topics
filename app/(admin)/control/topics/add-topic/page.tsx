@@ -8,6 +8,8 @@ interface Subject {
   short_desc: string
 }
 
+export const revalidate = 0
+
 export default async function AddTopic() {
   const subjects: Subject[] = await getAllSubject()
 

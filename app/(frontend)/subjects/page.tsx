@@ -1,3 +1,4 @@
+// app/page.tsx or app/subjects/page.tsx (depending on your structure)
 import { getAllSubject } from '@/utils/actions'
 import Link from 'next/link'
 
@@ -25,17 +26,13 @@ interface Subject {
   topics: Topic[]
 }
 
+async function fetchSubjects() {
+  const data = await getAllSubject() // Replace with your actual function to fetch subjects
+  return data
+}
+
 export default async function Page() {
-  let subjects: Subject[] = []
-
-  try {
-    const data = await getAllSubject()
-
-    subjects = Array.isArray(data) ? data : data || []
-  } catch (error) {
-    console.error('Error fetching subjects:', error)
-    subjects = []
-  }
+  const subjects: Subject[] = await fetchSubjects() // Fetch data directly here
 
   return (
     <div className='max-w-2xl mx-auto px-4 py-6'>

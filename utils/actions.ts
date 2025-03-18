@@ -361,6 +361,7 @@ export const createGallery = async (formData: FormData) => {
 
 export const getAllGallery = async () => {
   return await prisma.gallery.findMany({})
+  revalidatePath('/')
 }
 
 export const deleteGallery = async (formData: FormData) => {

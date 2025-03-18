@@ -33,7 +33,7 @@ export default async function Page() {
                   alt='Gallery Image'
                   width={300}
                   height={300}
-                  className='w-full h-36 object-cover rounded-md transition-transform duration-300 transform group-hover:scale-105'
+                  className='w-full h-42 object-cover rounded-md transition-transform duration-300 transform group-hover:scale-105'
                 />
               </div>
             ))

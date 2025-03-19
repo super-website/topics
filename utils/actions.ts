@@ -34,6 +34,7 @@ export const getAllTopics = async (query: string) => {
       where: {
         title: {
           contains: query.toLowerCase(),
+          mode: 'insensitive',
         },
       },
       include: {

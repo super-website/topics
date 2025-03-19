@@ -144,6 +144,11 @@ export const createSubject = async (formData: FormData) => {
   const name = formData.get('name')
   const short_desc = formData.get('short_desc')
   const short_name = formData.get('short_name')
+  const tags = formData.get('tags')
+
+  if (typeof tags !== 'string' || !tags.trim()) {
+    throw new Error('Tags is required and must be a valid string.')
+  }
 
   if (typeof name !== 'string' || !name.trim()) {
     throw new Error('Name is required and must be a valid string.')
@@ -157,11 +162,17 @@ export const createSubject = async (formData: FormData) => {
     throw new Error('Short Desc is required and must be a valid string.')
   }
 
+  const tagArray = tags
+    .split(',')
+    .map((tag) => tag.trim())
+    .filter((tag) => tag.length > 0)
+
   await prisma.subject.create({
     data: {
       name,
       short_name,
       short_desc,
+      tags: tagArray,
     },
   })
   revalidatePath('/control/subjects')

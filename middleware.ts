@@ -18,13 +18,21 @@ export async function middleware(req: NextRequest) {
   }
 
   try {
-    const secret = new TextEncoder().encode(process.env.JWT_SECRET)
+    const secretKey = process.env.JWT_SECRET
+    if (!secretKey) {
+      throw new Error('JWT_SECRET is not defined')
+    }
+
+    const secret = new TextEncoder().encode(secretKey)
     const { payload } = await jwtVerify(token, secret)
 
     if (payload.role !== role) {
-      return NextResponse.redirect(
-        new URL('/control/login?error=true', req.url)
+      const res = NextResponse.redirect(
+        new URL('/control/login?error=role_mismatch', req.url)
       )
+      res.cookies.set('token', '', { maxAge: -1 })
+      res.cookies.set('role', '', { maxAge: -1 })
+      return res
     }
 
     if (isLoginPage) {
@@ -33,9 +41,11 @@ export async function middleware(req: NextRequest) {
   } catch (error) {
     console.error('JWT Verification Failed:', error)
 
-    const res = NextResponse.redirect(new URL('/control/login', req.url))
-    res.cookies.delete('token')
-    res.cookies.delete('role')
+    const res = NextResponse.redirect(
+      new URL('/control/login?error=invalid_token', req.url)
+    )
+    res.cookies.set('token', '', { maxAge: -1 })
+    res.cookies.set('role', '', { maxAge: -1 })
     return res
   }
 

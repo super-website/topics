@@ -56,7 +56,7 @@ export default function HomeNavbar() {
           />
         </div>
 
-        <div className='navbar-end hidden md:flex'>
+        <div className='navbar-end flex md:hidden'>
           <div className='dropdown dropdown-left'>
             <div
               tabIndex={0}

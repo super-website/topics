@@ -2,9 +2,28 @@ import { getSingleTopic } from '@/utils/actions'
 import Link from 'next/link'
 import React from 'react'
 
-export default async function page({ params }: { params: { id: string } }) {
-  const { id } = params
+import { Metadata } from 'next'
+
+type Props = {
+  params: Promise<{ id: string }>
+}
+
+export const generateMetadata = async ({
+  params,
+}: Props): Promise<Metadata> => {
+  const id = (await params).id
   const topic = await getSingleTopic(id)
+
+  return {
+    title: topic?.title || 'Topic',
+    description: topic?.short_desc || 'Learn more about this topic.',
+  }
+}
+
+export default async function Page({ params }: Props) {
+  const id = (await params).id
+  const topic = await getSingleTopic(id)
+
   return (
     <div>
       <div className='breadcrumbs text-sm ml-5 md:ml-0'>

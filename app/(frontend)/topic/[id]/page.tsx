@@ -14,9 +14,18 @@ export const generateMetadata = async ({
   const id = (await params).id
   const topic = await getSingleTopic(id)
 
+  if (!topic) {
+    return {
+      title: 'Topic Not Found',
+      description: 'This topic does not exist.',
+      keywords: ['not found', 'error', 'missing topic'], // Default SEO keywords
+    }
+  }
+
   return {
-    title: topic?.title || 'Topic',
-    description: topic?.short_desc || 'Learn more about this topic.',
+    title: topic.title || 'Topic',
+    description: topic.short_desc || 'Learn more about this topic.',
+    keywords: topic.tags || [], // Add tags as SEO keywords
   }
 }
 

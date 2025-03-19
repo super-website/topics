@@ -56,7 +56,7 @@ export default function HomeNavbar() {
           />
         </div>
 
-        <div className='navbar-end visible md:invisible pr-4 md:pr-0'>
+        <div className='navbar-end hidden md:flex'>
           <div className='dropdown dropdown-left'>
             <div
               tabIndex={0}
@@ -81,7 +81,7 @@ export default function HomeNavbar() {
             </div>
             <ul
               tabIndex={0}
-              className='menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow'
+              className='menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-6 w-40 p-2 shadow'
             >
               {lists.map((item) => (
                 <li key={item.id}>

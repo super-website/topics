@@ -82,6 +82,20 @@ export default function AddNewTopic({ subjects }: { subjects: Subject[] }) {
           </select>
         </div>
 
+        <div className='form-control'>
+          <label htmlFor='tags' className='block text-sm font-medium'>
+            Tags
+          </label>
+          <input
+            type='text'
+            id='tags'
+            name='tags'
+            placeholder='Enter Tags'
+            className='input input-bordered w-full mt-1'
+            required
+          />
+        </div>
+
         <button type='submit' className='btn btn-primary w-full'>
           Submit
         </button>

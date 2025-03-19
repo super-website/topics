@@ -23,7 +23,8 @@ model Topics {
   id        String   @id @default(uuid()) @map("_id")
   title      String
   short_desc String   @db.String
-  long_desc  String   @db.String        
+  long_desc  String   @db.String     
+  tags       String[]   
   createdAt  DateTime @default(now())
   subjectId  String?
   subject    Subject?  @relation(fields: [subjectId], references: [id])

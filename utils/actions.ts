@@ -48,6 +48,11 @@ export const createTopic = async (formData: FormData) => {
   const short_desc = formData.get('short_desc')
   const long_desc = formData.get('long_desc')
   const subjectId = formData.get('subjectId')
+  const tags = formData.get('tags')
+
+  if (typeof tags !== 'string' || !tags.trim()) {
+    throw new Error('Tags is required and must be a valid string.')
+  }
 
   if (typeof title !== 'string' || !title.trim()) {
     throw new Error('Title is required and must be a valid string.')
@@ -65,11 +70,17 @@ export const createTopic = async (formData: FormData) => {
     throw new Error('Subject ID is required and must be a valid string.')
   }
 
+  const tagsArray = tags
+    .split(',')
+    .map((tag) => tag.trim())
+    .filter((tag) => tag.length > 0)
+
   await prisma.topics.create({
     data: {
       title,
       short_desc,
       long_desc,
+      tags: tagsArray,
       subjectId,
     },
   })

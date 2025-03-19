@@ -8,7 +8,7 @@ export default function GalleryPage({ data }: { data: any[] }) {
       {data.length === 0 ? (
         <p className='text-gray-500 text-center'>No images available.</p>
       ) : (
-        <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2'>
+        <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4'>
           {data.map((gallery) => {
             let images: { public_id: string; secure_url: string }[] = []
 
@@ -26,13 +26,16 @@ export default function GalleryPage({ data }: { data: any[] }) {
             }
 
             return images.map((image) => (
-              <div key={image.public_id} className='relative group'>
+              <div
+                key={image.public_id}
+                className='relative group bg-gray-100 rounded-lg overflow-hidden shadow-md'
+              >
                 <Image
                   src={image.secure_url}
                   alt='Gallery Image'
                   width={300}
                   height={300}
-                  className='w-full h-36 object-cover rounded-md transition-transform duration-300 transform group-hover:scale-105'
+                  className='w-full h-full object-cover rounded-lg transition-transform duration-300 transform group-hover:scale-105'
                 />
               </div>
             ))

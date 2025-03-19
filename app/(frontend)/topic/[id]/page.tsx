@@ -32,7 +32,7 @@ export default async function page({ params }: { params: { id: string } }) {
           <div className='card-title border-b pb-3 border-gray-500'>
             <h2>{topic?.title}</h2>
           </div>
-          <div className='card-body border-b border-gray-500 p-2 text-gray-500'>
+          <div className='card-body border-b border-gray-500 p-2 text-black'>
             <p>{topic?.long_desc}</p>
           </div>
           <div className='card-actions justify-between py-2'>

@@ -101,7 +101,7 @@ export default function HomeNavbar() {
           </div>
         </div>
 
-        <div className='navbar-end invisible md:visible'>
+        <div className='navbar-end hidden md:visible'>
           <ul className='flex space-x-6'>
             {lists.map((item) => (
               <li key={item.id}>

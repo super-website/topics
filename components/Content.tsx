@@ -34,7 +34,10 @@ export default async function Content({ query }: { query: string }) {
             key={topic.id}
           >
             <div className='card-body'>
-              <Link href={`/topic/${topic.id}`} className='card-title border-b'>
+              <Link
+                href={`/topic/${topic.id}`}
+                className='card-title border-b hover:text-primary'
+              >
                 {topic.title}
               </Link>
               <p className='text-sm mt-2 border-b py-2'>{topic.short_desc}</p>

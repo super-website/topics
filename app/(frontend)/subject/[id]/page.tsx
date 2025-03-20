@@ -51,7 +51,7 @@ export default async function Page({ params }: { params: { id: string } }) {
               <div className='card-body'>
                 <Link
                   href={`/topic/${topic.id}`}
-                  className='card-title border-b pb-2'
+                  className='card-title border-b pb-2 hover:text-primary'
                 >
                   {topic?.title}
                 </Link>

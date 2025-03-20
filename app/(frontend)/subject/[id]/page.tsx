@@ -1,6 +1,24 @@
 import { getSinglSubject } from '@/utils/actions'
+import { Metadata } from 'next'
 import Link from 'next/link'
 import React from 'react'
+
+type Props = {
+  params: Promise<{ id: string }>
+}
+
+export const generateMetadata = async ({
+  params,
+}: Props): Promise<Metadata> => {
+  const id = (await params).id
+  const subject = await getSinglSubject(id)
+
+  return {
+    title: subject?.name || 'Subject',
+    description: subject?.short_desc || 'Subject description',
+    keywords: subject?.tags || [],
+  }
+}
 
 export default async function Page({ params }: { params: { id: string } }) {
   const { id } = params

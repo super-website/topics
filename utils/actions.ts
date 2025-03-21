@@ -457,22 +457,6 @@ export const getSingleGallery = async (id: string) => {
   })
 }
 
-export const getDownloadUrl = async (fileUrl: string) => {
-  if (!fileUrl) throw new Error('No file URL provided')
-
-  try {
-    const response = await fetch(fileUrl)
-    if (!response.ok)
-      throw new Error(`Failed to fetch file: ${response.statusText}`)
-
-    const blob = await response.blob()
-    return URL.createObjectURL(blob)
-  } catch (error) {
-    console.error('Error generating download URL:', error)
-    return null
-  }
-}
-
 export const createComment = async (formData: FormData) => {
   const name = formData.get('name') as string
   const email = formData.get('email') as string
@@ -490,7 +474,9 @@ export const createComment = async (formData: FormData) => {
     },
   })
 
-  revalidatePath('/')
-
   redirect('/contact-us?success=true')
+}
+
+export const getAllComments = async () => {
+  return await prisma.contact.findMany({})
 }

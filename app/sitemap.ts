@@ -33,6 +33,7 @@ export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const topicUrls = topicsInside.map((topic) => ({
     url: `https://educationwithhamza.vercel.app/topic/${topic.id}`,
+    lastModified: topic.createdAt.toISOString(),
     changeFrequency: 'daily' as const,
     priority: 0.7,
   }))

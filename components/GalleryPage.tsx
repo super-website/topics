@@ -58,6 +58,7 @@ export default function GalleryPage({ data }: { data: any[] }) {
                       console.error('Error downloading image:', error)
                     }
                   }}
+                  className='absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300'
                 >
                   Download Image
                 </button>

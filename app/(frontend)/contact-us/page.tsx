@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Page() {
   return (
-    <div className='container mx-auto p-5'>
+    <div className='max-w-4xl mx-auto p-5 '>
       <div className='grid grid-cols-1 md:grid-cols-2 gap-10'>
         <div className='space-y-5'>
           <h2 className='text-2xl font-bold'>Leave a Message</h2>

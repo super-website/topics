@@ -14,7 +14,9 @@ export default function Navbar() {
     <nav className='bg-base-200  shadow-md'>
       <div className='max-w-7xl mx-auto navbar'>
         <div className='navbar-start'>
-          <span className='text-xl font-bold'>🔥 Logo</span>
+          <Link href='/control' className='text-2xl font-bold'>
+            C<span className='text-primary'>M</span>S
+          </Link>
         </div>
         <div className='navbar-center'>
           <ul className='flex space-x-4'>

@@ -3,6 +3,15 @@ import Image from 'next/image'
 
 export const revalidate = 0
 
+export const metadata = {
+  title: 'Notes Gallery',
+  description:
+    'View the gallery of notes and images shared by students and teachers.',
+  keywords:
+    'notes, images, gallery, study resources, online education, learning',
+  author: 'Ameer Muhavia',
+}
+
 export default async function Page() {
   const data = await getAllGallery()
   return (

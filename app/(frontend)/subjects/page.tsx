@@ -2,7 +2,7 @@ import { getAllSubject } from '@/utils/actions'
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'Subjects - Education With US',
+  title: 'Subjects',
   description:
     'Explore various MBA subjects with detailed topics to enhance your learning experience.',
   keywords:

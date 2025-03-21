@@ -9,8 +9,8 @@ const hind = Hind({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Education With US',
-    template: '%s | Education With US',
+    default: 'Education With Hamza | Online Courses & Study Resources',
+    template: '%s | Education With Hamza',
   },
   description:
     'Education With US offers high-quality online courses and resources to help you learn and grow in various subjects. Learn at your own pace with expert-led content.',

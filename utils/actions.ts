@@ -472,3 +472,25 @@ export const getDownloadUrl = async (fileUrl: string) => {
     return null
   }
 }
+
+export const createComment = async (formData: FormData) => {
+  const name = formData.get('name') as string
+  const email = formData.get('email') as string
+  const message = formData.get('message') as string
+
+  if (!name || !email || !message) {
+    throw new Error('Name, email, and message are required')
+  }
+
+  await prisma.contact.create({
+    data: {
+      name,
+      email,
+      message,
+    },
+  })
+
+  revalidatePath('/')
+
+  redirect('/contact-us?success=true')
+}

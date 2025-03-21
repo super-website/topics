@@ -2,9 +2,6 @@ import { createSubject } from '@/utils/actions'
 import React from 'react'
 
 export default function page() {
-
-  
-
   return (
     <div className='p-6 max-w-6xl mx-auto bg-white rounded-lg shadow-sm'>
       <h1 className='text-3xl font-semibold mb-4'>Add Subject</h1>

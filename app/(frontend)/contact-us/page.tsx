@@ -1,8 +1,20 @@
 import React from 'react'
 
-export default function Page() {
+export default function Page({
+  searchParams,
+}: {
+  searchParams?: URLSearchParams
+}) {
+  const success = searchParams?.get('success')
+
   return (
     <div className='max-w-4xl mx-auto p-5 '>
+      {success && (
+        <div className='bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-5'>
+          <p className='font-bold'>Success</p>
+          <p>Your message has been sent successfully.</p>
+        </div>
+      )}
       <div className='grid grid-cols-1 md:grid-cols-2 gap-10'>
         <div className='space-y-5'>
           <h2 className='text-2xl font-bold'>Leave a Message</h2>

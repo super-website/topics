@@ -1,6 +1,7 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Hind, Inter } from 'next/font/google'
+import Head from 'next/head'
 
 const hind = Hind({
   subsets: ['latin'],
@@ -25,6 +26,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en' className={hind.className}>
+      <Head>
+        <meta
+          name='google-site-verification'
+          content='1P7hTnTaBqkmJtTnIsUdo9toXudOtMJ1vVzEC1fCWVw'
+        />
+      </Head>
       <body className='bg-gray-200'>{children}</body>
     </html>
   )

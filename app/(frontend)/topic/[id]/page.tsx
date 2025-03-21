@@ -61,7 +61,7 @@ export default async function Page({ params }: Props) {
             <h1 className='text-2xl'>{topic?.title}</h1>
           </div>
           <div className='card-body border-b border-gray-500 p-2 text-black'>
-            <p>{topic?.long_desc}</p>
+            <p dangerouslySetInnerHTML={{ __html: topic?.long_desc || '' }}></p>
           </div>
           <div className='card-actions justify-between py-2'>
             <span>

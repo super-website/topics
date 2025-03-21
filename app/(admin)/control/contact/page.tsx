@@ -12,13 +12,19 @@ export default async function page() {
         className='grid grid-cols-1 gap-4'
         style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))' }}
       >
-        {data.map((comment) => (
-          <div key={comment.id}>
-            <h2>{comment.name}</h2>
-            <p>{comment.email}</p>
-            <p>{comment.message}</p>
+        {data.length === 0 ? (
+          <p className='text-gray-500 text-center'>No comments available.</p>
+        ) : (
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-2'>
+            {data.map((comment) => (
+              <div key={comment.id} className='relative group'>
+                <h2>{comment.name}</h2>
+                <p>{comment.email}</p>
+                <p>{comment.message}</p>
+              </div>
+            ))}
           </div>
-        ))}
+        )}
       </div>
     </div>
   )

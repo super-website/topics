@@ -22,7 +22,7 @@ export default async function Page() {
             No comments available.
           </p>
         ) : (
-          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
+          <div className='table w-full table-zebra'>
             {data.map((comment) => (
               <div
                 key={comment.id}

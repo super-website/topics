@@ -37,6 +37,29 @@ export default function GalleryPage({ data }: { data: any[] }) {
                   height={300}
                   className='w-full h-full object-cover rounded-lg transition-transform duration-300 transform group-hover:scale-105'
                 />
+
+                <button
+                  onClick={async () => {
+                    try {
+                      const response = await fetch(image.secure_url)
+                      const blob = await response.blob()
+                      const blobUrl = URL.createObjectURL(blob)
+
+                      const a = document.createElement('a')
+                      a.href = blobUrl
+                      a.download = 'image.jpg'
+                      document.body.appendChild(a)
+                      a.click()
+                      document.body.removeChild(a)
+
+                      URL.revokeObjectURL(blobUrl)
+                    } catch (error) {
+                      console.error('Error downloading image:', error)
+                    }
+                  }}
+                >
+                  Download Image
+                </button>
               </div>
             ))
           })}

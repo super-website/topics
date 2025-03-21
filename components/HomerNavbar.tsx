@@ -34,16 +34,20 @@ export default function HomeNavbar() {
   return (
     <nav className='bg-base-200 shadow-md'>
       <div className='max-w-7xl mx-auto navbar px-4 lg:px-8'>
-        <div className='navbar-start'>
-          <Link href='/'>
+        <div className='navbar-start flex items-center space-x-4'>
+          <Link href='/' className='flex items-center'>
             <Image
               src={logo}
               alt='Logo'
               width={160}
               height={50}
-              className='cursor-pointer max-w-28 '
+              className='cursor-pointer max-w-28'
             />
           </Link>
+
+          <h2 className='text-2xl font-semibold text-gray-800 hover:text-blue-600 transition-colors duration-300'>
+            EducationWithHamza
+          </h2>
         </div>
 
         <div className='navbar-center hidden md:flex'>

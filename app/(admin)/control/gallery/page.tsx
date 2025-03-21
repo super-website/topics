@@ -6,28 +6,21 @@ export default async function Page() {
   const galleries = await getAllGallery()
 
   return (
-    <div className='max-w-7xl mx-auto p-6'>
-      <div className='flex justify-between items-center flex-wrap mb-6'>
-        <h1 className='text-2xl font-extrabold text-gray-800'>Gallery</h1>
-        <Link
-          href='/control/gallery/add-gallery'
-          className='btn btn-primary px-6 py-2 rounded-lg text-white'
-        >
+    <div className='max-w-5xl mx-auto p-6'>
+      <div className='flex justify-between items-center flex-wrap'>
+        <h1 className='text-sm uppercase font-semibold'>Gallery</h1>
+        <Link href='/control/gallery/add-gallery' className='btn btn-primary'>
           Add New
         </Link>
       </div>
 
-      {/* Empty State */}
       {galleries.length === 0 ? (
-        <p className='text-gray-500 text-center mt-4 text-lg'>
-          No galleries available.
-        </p>
+        <p className='text-gray-500 mt-4'>No galleries available.</p>
       ) : (
-        <ul className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
+        <ul className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-6'>
           {galleries.map((gallery) => {
             let images: { public_id: string; secure_url: string }[] = []
 
-            // Safely parse gallery images
             try {
               if (typeof gallery.images === 'string') {
                 images = JSON.parse(gallery.images)
@@ -44,44 +37,40 @@ export default async function Page() {
             return (
               <li
                 key={gallery.id}
-                className='bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300'
+                className='bg-white p-4 rounded-lg shadow-md relative'
               >
-                {/* Gallery Title */}
-                <h2 className='text-xl font-semibold text-center text-gray-800 mb-4'>
+                <h2 className='text-lg font-semibold text-center mb-2'>
                   {gallery.title}
                 </h2>
 
-                {/* Images */}
-                <div className='flex flex-wrap gap-4 justify-center'>
+                <div className='flex flex-wrap gap-2'>
                   {images.length > 0 ? (
                     images.map((image) => (
-                      <div
-                        key={image.public_id}
-                        className='w-24 h-24 overflow-hidden rounded-md shadow-sm'
-                      >
+                      <>
                         <Image
+                          key={image.public_id}
                           src={image.secure_url}
                           alt={gallery.title}
-                          width={96}
-                          height={96}
-                          className='object-cover w-full h-full'
+                          width={200}
+                          height={100}
+                          className='rounded-md object-cover'
                         />
-                      </div>
+                        <span>{image.secure_url}</span>
+                      </>
                     ))
                   ) : (
-                    <p className='text-gray-500 text-sm text-center mt-4'>
+                    <p className='text-gray-500 text-sm'>
                       No images available.
                     </p>
                   )}
                 </div>
 
-                {/* Delete Button */}
-                <div className='mt-6 flex justify-center'>
+                <div className='flex justify-between mt-4'>
                   <form action={deleteGallery} method='POST'>
                     <input type='hidden' name='galleryId' value={gallery?.id} />
                     <button
                       type='submit'
-                      className='px-4 py-2 bg-red-600 text-white rounded-lg text-sm hover:bg-red-700 transition duration-200'
+                      className='px-3 py-2 bg-red-500 text-white rounded-md text-sm hover:bg-red-600'
                     >
                       Delete
                     </button>

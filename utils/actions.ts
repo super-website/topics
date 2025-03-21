@@ -250,7 +250,7 @@ export const deleteSubject = async (formData: FormData) => {
       },
     })
 
-    revalidatePath('/')
+    revalidatePath('/control/subjects')
   } catch (error) {
     console.error('Error deleting subject:', error)
 

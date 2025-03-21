@@ -18,14 +18,14 @@ export const generateMetadata = async ({
     return {
       title: 'Topic Not Found',
       description: 'This topic does not exist.',
-      keywords: ['not found', 'error', 'missing topic'], // Default SEO keywords
+      keywords: ['not found', 'error', 'missing topic'],
     }
   }
 
   return {
     title: topic.title || 'Topic',
     description: topic.short_desc || 'Learn more about this topic.',
-    keywords: topic.tags || [], // Add tags as SEO keywords
+    keywords: topic.tags || [],
   }
 }
 
@@ -53,7 +53,7 @@ export default async function Page({ params }: Props) {
 
       <div className='max-w-2xl mx-5  md:mx-auto pt-10 space-y-5'>
         <div className='card bg-info p-4 rounded-none bg-opacity-30'>
-          <p className='text-xs'>{topic?.short_desc}</p>
+          <p className='text-xs space-y-3'>{topic?.short_desc}</p>
         </div>
 
         <div className='card bg-gray-400 bg-opacity-25 rounded-none p-4'>

@@ -54,6 +54,24 @@ export default function Page() {
               1234, Main Street, City, Country
             </span>
           </p>
+
+          <h3>Social Media</h3>
+
+          <div>
+            <a
+              href='https://facebook.com'
+              className='text-blue-600 hover:underline'
+            >
+              Facebook
+            </a>
+
+            <a
+              href='https://twitter.com'
+              className='text-blue-600 hover:underline'
+            >
+              Twitter
+            </a>
+          </div>
         </div>
       </div>
     </div>

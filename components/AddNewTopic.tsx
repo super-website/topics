@@ -17,11 +17,11 @@ export default function AddNewTopic({ subjects }: { subjects: Subject[] }) {
       <h1 className='text-3xl font-semibold mb-4'>Add Topic</h1>
 
       {success && (
-        <div className='alert alert-success mb-4'>
-          Topic added successfully!
+        <div className='bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-5'>
+          <p className='font-bold'>Success</p>
+          <p>Topic Added Successfully.</p>
         </div>
       )}
-
       <form action={createTopic} method='POST' className='space-y-4'>
         <div className='form-control'>
           <label htmlFor='title' className='block text-sm font-medium'>

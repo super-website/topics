@@ -58,7 +58,7 @@ export default async function Page({ params }: Props) {
 
         <div className='card bg-gray-400 bg-opacity-25 rounded-none p-4'>
           <div className='card-title border-b pb-3 border-gray-500'>
-            <h2>{topic?.title}</h2>
+            <h1>{topic?.title}</h1>
           </div>
           <div className='card-body border-b border-gray-500 p-2 text-black'>
             <p>{topic?.long_desc}</p>

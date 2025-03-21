@@ -34,7 +34,7 @@ export default function HomeNavbar() {
   return (
     <nav className='bg-base-200 shadow-md'>
       <div className='max-w-7xl mx-auto navbar px-4 lg:px-8'>
-        <div className='navbar-start flex items-center space-x-4'>
+        <div className='navbar-start flex items-center '>
           <Link href='/' className='flex items-center'>
             <Image
               src={logo}
@@ -45,7 +45,7 @@ export default function HomeNavbar() {
             />
           </Link>
 
-          <h2 className='text-2xl font-semibold text-gray-800 hover:text-blue-600 transition-colors duration-300'>
+          <h2 className='text-2xl font-semibold hover:text-blue-600 transition-colors duration-300'>
             EducationWithHamza
           </h2>
         </div>

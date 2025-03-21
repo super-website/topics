@@ -8,7 +8,10 @@ const hind = Hind({
 })
 
 export const metadata: Metadata = {
-  title: 'Education With US',
+  title: {
+    default: 'Education With US',
+    template: '%s | Education With US',
+  },
   description:
     'Education With US offers high-quality online courses and resources to help you learn and grow in various subjects. Learn at your own pace with expert-led content.',
   keywords:

@@ -26,12 +26,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en' className={hind.className}>
-      <Head>
-        <meta
-          name='google-site-verification'
-          content='1P7hTnTaBqkmJtTnIsUdo9toXudOtMJ1vVzEC1fCWVw'
-        />
-      </Head>
       <body className='bg-gray-200'>{children}</body>
     </html>
   )

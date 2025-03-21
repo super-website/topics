@@ -57,7 +57,7 @@ export default function Page() {
 
           <h3>Social Media</h3>
 
-          <div>
+          <div className='space-x-3'>
             <a
               href='https://facebook.com'
               className='text-blue-600 hover:underline'

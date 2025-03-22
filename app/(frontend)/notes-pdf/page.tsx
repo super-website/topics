@@ -9,6 +9,8 @@ interface Pdf {
   url: string
 }
 
+export const revalidate = 0
+
 export default async function Page() {
   const pdf: Pdf[] = await getAllPdf()
   return <PDFCard pdfs={pdf} />

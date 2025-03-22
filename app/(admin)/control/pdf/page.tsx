@@ -1,10 +1,10 @@
 import { deletePdf, getAllPdf } from '@/utils/actions'
 import React from 'react'
 
+export const revalidate = 0
+
 export default async function Page() {
   const data = await getAllPdf()
-
-  console.log(data)
 
   return (
     <div className='p-6'>

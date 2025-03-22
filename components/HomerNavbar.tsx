@@ -45,7 +45,7 @@ export default function HomeNavbar() {
             />
           </Link>
 
-          <h2 className='text-2xl font-semibold hover:text-blue-600 transition-colors duration-300'>
+          <h2 className='text-sm md:text-2xl font-semibold hover:text-blue-600 transition-colors duration-300'>
             EducationWithHamza
           </h2>
         </div>

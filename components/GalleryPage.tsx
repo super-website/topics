@@ -27,7 +27,7 @@ export default function GalleryPage({ data }: { data: any[] }) {
             }
 
             return images
-              .filter((image) => isValidImage(image.secure_url)) // Filter out PDFs
+              .filter((image) => isValidImage(image.secure_url))
               .map((image) => (
                 <div
                   key={image.public_id}
@@ -73,7 +73,6 @@ export default function GalleryPage({ data }: { data: any[] }) {
   )
 }
 
-// Function to check if the file URL is an image
 const isValidImage = (url: string) => {
   const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.bmp']
   return imageExtensions.some((ext) => url.toLowerCase().endsWith(ext))

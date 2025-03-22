@@ -78,3 +78,10 @@ model Contact {
   message   String
   createdAt DateTime @default(now())
 }
+
+model pdf {
+  id        String   @id @default(uuid()) @map("_id")
+  title     String
+  url       String
+  createdAt DateTime @default(now())
+}

@@ -6,7 +6,12 @@ import { redirect } from 'next/navigation'
 import { cookies } from 'next/headers'
 import bcrypt from 'bcryptjs'
 import { SignJWT } from 'jose'
-import { v2 as cloudinary } from 'cloudinary'
+import {
+  v2 as cloudinary,
+  UploadApiErrorResponse,
+  UploadApiResponse,
+} from 'cloudinary'
+import stream from 'stream'
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_NAME,
@@ -257,9 +262,6 @@ export const deleteSubject = async (formData: FormData) => {
     throw new Error(`Failed to delete subject`)
   }
 }
-// auth
-
-// Create Admin if none exist
 
 export async function createFirstAdmin() {
   const isAlreadyAdmin = await prisma.admin.findFirst()
@@ -479,4 +481,57 @@ export const createComment = async (formData: FormData) => {
 
 export const getAllComments = async () => {
   return await prisma.contact.findMany({})
+}
+
+export const createPdf = async (formData: FormData) => {
+  try {
+    const title = formData.get('title') as string
+    const file = formData.get('file') as File
+
+    if (!title || !file) {
+      throw new Error('Title and file are required')
+    }
+
+    if (file.type !== 'application/pdf') {
+      throw new Error('Only PDF files are allowed')
+    }
+
+    const buffer = Buffer.from(await file.arrayBuffer())
+
+    const bufferStream = new stream.PassThrough()
+    bufferStream.end(buffer)
+
+    const result = await new Promise<UploadApiResponse>((resolve, reject) => {
+      cloudinary.uploader
+        .upload_stream(
+          {
+            folder: 'pdfs',
+            resource_type: 'raw',
+          },
+          (
+            error: UploadApiErrorResponse | undefined,
+            result: UploadApiResponse | undefined
+          ) => {
+            if (error) {
+              reject(error)
+            } else if (result) {
+              resolve(result)
+            } else {
+              reject(new Error('Unknown error occurred during upload'))
+            }
+          }
+        )
+        .end(buffer)
+    })
+
+    await prisma.pdf.create({
+      data: {
+        title,
+        url: result.secure_url,
+      },
+    })
+  } catch (error) {
+    console.error('Error creating PDF:', error)
+    throw new Error('Failed to create PDF. Please try again.')
+  }
 }

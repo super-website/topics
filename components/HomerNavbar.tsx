@@ -5,11 +5,13 @@ import Link from 'next/link'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import React, { useState, useEffect } from 'react'
 import logo from '../public/images/logo.png'
+import { url } from 'inspector'
 
 const lists = [
   { id: 1, name: 'Home', url: '/' },
   { id: 2, name: 'Subjects', url: '/subjects' },
   { id: 3, name: 'Gallery', url: '/gallery' },
+  { id: 4, name: 'Pdf', url: '/notes-pdf' },
 ]
 
 export default function HomeNavbar() {

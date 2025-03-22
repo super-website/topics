@@ -52,15 +52,17 @@ export default function HomeNavbar() {
           </h2>
         </div>
 
-        <div className='navbar-center hidden md:flex'>
-          <input
-            type='text'
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            placeholder='Search for a topic 🤗'
-            className='input input-sm rounded-full input-bordered'
-          />
-        </div>
+        {pathname === '/' && (
+          <div className='navbar-center hidden md:flex'>
+            <input
+              type='text'
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              placeholder='Search for a topic 🤗'
+              className='input input-sm rounded-full input-bordered'
+            />
+          </div>
+        )}
 
         <div className='navbar-end flex md:hidden'>
           <div className='dropdown dropdown-left'>

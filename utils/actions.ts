@@ -501,7 +501,17 @@ export const createPdf = async (formData: FormData) => {
 
     const result = await new Promise<UploadApiResponse>((resolve, reject) => {
       const stream = cloudinary.uploader.upload_stream(
-        { folder: 'pdfs', resource_type: 'raw' },
+        {
+          folder: 'pdfs',
+          resource_type: 'raw',
+          transformation: [
+            {
+              width: 1000,
+              height: 1000,
+              crop: 'limit',
+            },
+          ],
+        },
         (error, result) => {
           if (error || !result) {
             return reject(error || new Error('Upload failed'))
@@ -521,7 +531,6 @@ export const createPdf = async (formData: FormData) => {
         url: result.secure_url,
       },
     })
-
   } catch (error: any) {
     console.error('Error creating PDF:', error)
 
@@ -530,8 +539,7 @@ export const createPdf = async (formData: FormData) => {
     )
   }
 
-    redirect('/control/pdf')
-
+  redirect('/control/pdf')
 }
 
 export const getAllPdf = async () => {

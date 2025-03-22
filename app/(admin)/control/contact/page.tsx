@@ -1,5 +1,7 @@
 import { getAllComments } from '@/utils/actions'
 
+export const revalidate = 0
+
 export default async function Page() {
   const data = await getAllComments()
 

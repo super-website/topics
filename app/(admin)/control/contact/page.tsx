@@ -15,16 +15,13 @@ export default async function Page() {
         <p className='text-lg font-semibold'>Here are the comments</p>
       </div>
 
-      <div
-        className='grid grid-cols-1 md:grid-cols-3 gap-6'
-        style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))' }}
-      >
+      <div className='overflow-x-auto'>
         {data.length === 0 ? (
           <p className='text-gray-500 text-center text-lg'>
             No comments available.
           </p>
         ) : (
-          <div className='table w-full table-zebra'>
+          <div className='table w-full table-zebra space-y-10'>
             {data.map((comment) => (
               <div
                 key={comment.id}

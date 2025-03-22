@@ -476,7 +476,7 @@ export const createComment = async (formData: FormData) => {
     },
   })
 
-  redirect('/contact-us?success=true')
+  redirect('/contact?success=true')
 }
 
 export const getAllComments = async () => {

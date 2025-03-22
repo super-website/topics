@@ -518,6 +518,7 @@ export const createPdf = async (formData: FormData) => {
         url: result.secure_url,
       },
     })
+    redirect('/control/pdf/')
   } catch (error: any) {
     console.error('Error creating PDF:', error)
 

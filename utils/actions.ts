@@ -522,7 +522,6 @@ export const createPdf = async (formData: FormData) => {
       },
     })
 
-    redirect('/control/pdf')
   } catch (error: any) {
     console.error('Error creating PDF:', error)
 
@@ -530,6 +529,9 @@ export const createPdf = async (formData: FormData) => {
       `Failed to create PDF. Error details: ${error.message || error}`
     )
   }
+
+    redirect('/control/pdf')
+
 }
 
 export const getAllPdf = async () => {

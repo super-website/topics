@@ -496,33 +496,23 @@ export const createPdf = async (formData: FormData) => {
       throw new Error('Only PDF files are allowed')
     }
 
-    const buffer = Buffer.from(await file.arrayBuffer())
+    const arrayBuffer = await file.arrayBuffer()
 
-    const bufferStream = new stream.PassThrough()
-    bufferStream.end(buffer)
-
-    const result = await new Promise<UploadApiResponse>((resolve, reject) => {
-      cloudinary.uploader
-        .upload_stream(
-          {
-            folder: 'pdfs',
-            resource_type: 'raw',
-          },
-          (
-            error: UploadApiErrorResponse | undefined,
-            result: UploadApiResponse | undefined
-          ) => {
-            if (error) {
-              reject(error)
-            } else if (result) {
-              resolve(result)
-            } else {
-              reject(new Error('Unknown error occurred during upload'))
+    const buffer = Buffer.from(arrayBuffer)
+    const result = await new Promise<UploadApiResponse | UploadApiErrorResponse>(
+      (resolve, reject) => {
+        cloudinary.uploader.upload_stream(
+          { folder: 'pdfs' },
+          (error, result) => {
+            if (error || !result) {
+              return reject(error || new Error('Upload failed'))
             }
+            resolve(result)
           }
-        )
-        .end(buffer)
-    })
+        ).end(buffer)
+      }
+    )
+
 
     await prisma.pdf.create({
       data: {

@@ -483,10 +483,12 @@ export const getAllComments = async () => {
   return await prisma.contact.findMany({})
 }
 
+
 export const createPdf = async (formData: FormData) => {
+
   try {
     const title = formData.get('title') as string
-    const file = formData.get('file') as File
+    const file = formData.get('pdf') as File
 
     if (!title || !file) {
       throw new Error('Title and file are required')
@@ -497,22 +499,20 @@ export const createPdf = async (formData: FormData) => {
     }
 
     const arrayBuffer = await file.arrayBuffer()
-
     const buffer = Buffer.from(arrayBuffer)
-    const result = await new Promise<UploadApiResponse | UploadApiErrorResponse>(
-      (resolve, reject) => {
-        cloudinary.uploader.upload_stream(
-          { folder: 'pdfs' },
-          (error, result) => {
-            if (error || !result) {
-              return reject(error || new Error('Upload failed'))
-            }
-            resolve(result)
-          }
-        ).end(buffer)
-      }
-    )
 
+    const result = await new Promise<
+      UploadApiResponse | UploadApiErrorResponse
+    >((resolve, reject) => {
+      cloudinary.uploader
+        .upload_stream({ folder: 'pdfs' }, (error, result) => {
+          if (error || !result) {
+            return reject(error || new Error('Upload failed'))
+          }
+          resolve(result)
+        })
+        .end(buffer)
+    })
 
     await prisma.pdf.create({
       data: {
@@ -520,8 +520,21 @@ export const createPdf = async (formData: FormData) => {
         url: result.secure_url,
       },
     })
-  } catch (error) {
+  } catch (error: any) {
+    
     console.error('Error creating PDF:', error)
-    throw new Error('Failed to create PDF. Please try again.')
+
+    
+    throw new Error(
+      `Failed to create PDF. Error details: ${error.message || error}`
+    )
   }
+}
+
+
+
+export const getAllPdf =  async ()  => {
+  return await prisma.pdf.findMany({
+    
+  })
 }

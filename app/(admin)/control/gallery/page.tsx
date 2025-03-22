@@ -55,7 +55,6 @@ export default async function Page() {
                           height={100}
                           className='rounded-md object-cover'
                         />
-                        <span>{image.secure_url}</span>
                       </>
                     ))
                   ) : (

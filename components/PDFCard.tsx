@@ -32,7 +32,7 @@ export default function PDFCard({ pdfs }: { pdfs: Pdf[] }) {
                   />
                 </figure>
                 <div className='card-body'>
-                  <h2 className='card-title'>{pdf.title}</h2>
+                  <h2 className='card-title text-xs'>{pdf.title}</h2>
                   <div className='card-actions justify-end'>
                     <button
                       onClick={() => {

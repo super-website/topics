@@ -499,18 +499,21 @@ export const createPdf = async (formData: FormData) => {
     const arrayBuffer = await file.arrayBuffer()
     const buffer = Buffer.from(arrayBuffer)
 
-    const result = await new Promise<
-      UploadApiResponse | UploadApiErrorResponse
-    >((resolve, reject) => {
-      cloudinary.uploader
-        .upload_stream({ folder: 'pdfs' }, (error, result) => {
+    const result = await new Promise<UploadApiResponse>((resolve, reject) => {
+      const stream = cloudinary.uploader.upload_stream(
+        { folder: 'pdfs', resource_type: 'raw' },
+        (error, result) => {
           if (error || !result) {
             return reject(error || new Error('Upload failed'))
           }
           resolve(result)
-        })
-        .end(buffer)
+        }
+      )
+
+      stream.end(buffer)
     })
+
+    console.log('Upload Result:', result)
 
     await prisma.pdf.create({
       data: {
@@ -518,7 +521,6 @@ export const createPdf = async (formData: FormData) => {
         url: result.secure_url,
       },
     })
-    redirect('/control/pdf/')
   } catch (error: any) {
     console.error('Error creating PDF:', error)
 

@@ -483,9 +483,7 @@ export const getAllComments = async () => {
   return await prisma.contact.findMany({})
 }
 
-
 export const createPdf = async (formData: FormData) => {
-
   try {
     const title = formData.get('title') as string
     const file = formData.get('pdf') as File
@@ -521,20 +519,26 @@ export const createPdf = async (formData: FormData) => {
       },
     })
   } catch (error: any) {
-    
     console.error('Error creating PDF:', error)
 
-    
     throw new Error(
       `Failed to create PDF. Error details: ${error.message || error}`
     )
   }
 }
 
+export const getAllPdf = async () => {
+  return await prisma.pdf.findMany({})
+}
 
+export const deletePdf = async (formData: FormData) => {
+  const id = formData.get('id') as string | number
 
-export const getAllPdf =  async ()  => {
-  return await prisma.pdf.findMany({
-    
+  await prisma.pdf.delete({
+    where: {
+      id: id as string,
+    },
   })
+
+  revalidatePath('/control/pdf')
 }

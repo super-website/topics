@@ -7,6 +7,7 @@ const lists = [
   { id: 1, name: 'topics', url: '/control/topics' },
   { id: 2, name: 'subjects', url: '/control/subjects' },
   { id: 3, name: 'gallery', url: '/control/gallery' },
+  { id: 4, name: 'pdf', url: '/control/pdf' },
 ]
 
 export default function Navbar() {

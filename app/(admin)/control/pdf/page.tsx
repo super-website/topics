@@ -26,21 +26,27 @@ export default async function Page() {
             </tr>
           </thead>
           <tbody>
-            {data.map((pdf: any) => (
-              <tr key={pdf.id}>
-                <td>{pdf.title}</td>
-                <td>
-                  <span>{pdf.url}</span>
-                </td>
-                <td className='flex'>
-                  <button className='btn btn-primary btn-sm mr-2'>Edit</button>
-                  <form action={deletePdf}>
-                    <input type='hidden' value={pdf.id} name='id' />
-                    <button className='btn btn-danger btn-sm'>Delete</button>
-                  </form>
-                </td>
-              </tr>
-            ))}
+            {data.length === 0 ? (
+              <p>No Pdf Available</p>
+            ) : (
+              data.map((pdf: any) => (
+                <tr key={pdf.id}>
+                  <td>{pdf.title}</td>
+                  <td>
+                    <span>{pdf.url}</span>
+                  </td>
+                  <td className='flex'>
+                    <button className='btn btn-primary btn-sm mr-2'>
+                      Edit
+                    </button>
+                    <form action={deletePdf}>
+                      <input type='hidden' value={pdf.id} name='id' />
+                      <button className='btn btn-danger btn-sm'>Delete</button>
+                    </form>
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </div>

@@ -16,7 +16,7 @@ export default async function Page() {
       </div>
 
       <div
-        className='grid grid-cols-1 gap-6'
+        className='grid grid-cols-1 md:grid-cols-3 gap-6'
         style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))' }}
       >
         {data.length === 0 ? (

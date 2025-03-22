@@ -41,7 +41,7 @@ export default function HomeNavbar() {
             <Image
               src={logo}
               alt='Logo'
-              width={160}
+              width={80}
               height={50}
               className='cursor-pointer max-w-28'
             />

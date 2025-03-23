@@ -62,7 +62,7 @@ export default function ContactForm() {
           <p className='text-gray-700'>
             Phone:{' '}
             <a href='tel:+000000000' className='text-blue-600'>
-              +92 341 0188551
+              +92 XXX XXXXXXX
             </a>
           </p>
           <p className='text-gray-700'>

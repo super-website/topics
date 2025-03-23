@@ -542,7 +542,18 @@ export const createPdf = async (formData: FormData) => {
   redirect('/control/pdf')
 }
 
-export const getAllPdf = async () => {
+export const getAllPdf = async (query: string) => {
+  if (query) {
+    return await prisma.pdf.findMany({
+      where: {
+        title: {
+          contains: query.toLowerCase(),
+          mode: 'insensitive',
+        },
+      },
+    })
+  }
+
   return await prisma.pdf.findMany({})
 }
 

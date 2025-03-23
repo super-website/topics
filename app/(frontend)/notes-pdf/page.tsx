@@ -11,7 +11,11 @@ interface Pdf {
 
 export const revalidate = 0
 
-export default async function Page() {
-  const pdf: Pdf[] = await getAllPdf()
-  return <PDFCard pdfs={pdf} />
+export default async function Page({ searchParams }: { searchParams: string }) {
+  const urlParams = new URLSearchParams(searchParams)
+
+  const query = urlParams.get('query') || ''
+
+  const pdf: Pdf[] = await getAllPdf(query)
+  return <PDFCard pdfs={pdf} query={query} />
 }

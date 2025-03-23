@@ -45,6 +45,27 @@ export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'daily',
       priority: 1,
     },
+    {
+      url: 'https://educationwithhamza.vercel.app/subjects',
+      changeFrequency: 'daily',
+      priority: 0.9,
+    },
+
+    {
+      url: 'https://educationwithhamza.vercel.app/contact',
+      changeFrequency: 'daily',
+      priority: 0.9,
+    },
+    {
+      url: 'https://educationwithhamza.vercel.app/notes-pdf',
+      changeFrequency: 'daily',
+      priority: 0.9,
+    },
+    {
+      url: 'https://educationwithhamza.vercel.app/gallery',
+      changeFrequency: 'daily',
+      priority: 0.9,
+    },
     ...urls,
     ...topicUrls,
   ]

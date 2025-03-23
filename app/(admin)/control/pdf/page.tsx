@@ -9,7 +9,7 @@ export default async function Page() {
   return (
     <div className='p-6'>
       <div className='flex justify-between items-center mb-6'>
-        <h1 className='text-3xl font-bold mb-6'>PDF's</h1>
+        <h1 className='text-3xl font-bold mb-6'>PDFs</h1>
 
         <a href='/control/pdf/add-pdf' className='btn btn-primary mb-6'>
           Add PDF

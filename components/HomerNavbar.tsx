@@ -89,7 +89,7 @@ export default function HomeNavbar() {
             </div>
             <ul
               tabIndex={0}
-              className='menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-6 w-40 p-2 shadow'
+              className='menu menu-sm dropdown-content bg-gray-700 rounded-box z-1 mt-6 w-40 p-2 shadow-2xl z-10'
             >
               {lists.map((item) => (
                 <li key={item.id}>

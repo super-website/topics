@@ -1,3 +1,4 @@
+import Footer from '@/components/Footer'
 import HomeNavbar from '@/components/HomerNavbar'
 import React, { Suspense } from 'react'
 
@@ -13,10 +14,11 @@ export default function HomeLayout({
       </Suspense>
       <div
         className='max-w-7xl mx-auto
-      py-10'
+      py-10 min-h-screen'
       >
         {children}
       </div>
+      <Footer />
     </div>
   )
 }

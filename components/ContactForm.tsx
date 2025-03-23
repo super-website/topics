@@ -74,7 +74,7 @@ export default function ContactForm() {
 
           <h3>Social Media</h3>
 
-          <div className='space-x-3'>
+          <div className='space-x-3 flex'>
             <Link
               href='https://www.youtube.com/@EducationWithHamza-g8v'
               target='_blank'

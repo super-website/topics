@@ -42,8 +42,8 @@ export default function PDFCard({ pdfs, query }: PDFCardProps) {
 
   return (
     <div>
-      <div className='flex justify-between items-center mb-6'>
-        <h1 className='text-3xl font-bold'>Notes PDF</h1>
+      <div className='flex justify-between items-center mb-6 flex-col md:flex-row  mx-10'>
+        <h1 className='text-xl md:text-2xl font-bold'>Notes PDF</h1>
 
         <form>
           <input
@@ -56,7 +56,7 @@ export default function PDFCard({ pdfs, query }: PDFCardProps) {
         </form>
       </div>
 
-      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
+      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mx-10'>
         {pdfs.length === 0 ? (
           <p>No Pdf Available</p>
         ) : (

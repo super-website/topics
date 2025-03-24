@@ -4,7 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import React, { useState, useEffect } from 'react'
-import logo from '../public/images/logo.png'
+import logo from '../public/images/logo2.png'
 
 const lists = [
   { id: 1, name: 'Home', url: '/' },
@@ -40,7 +40,7 @@ export default function HomeNavbar() {
             <Image
               src={logo}
               alt='Logo'
-              width={80}
+              width={50}
               height={50}
               className='cursor-pointer max-w-28'
             />

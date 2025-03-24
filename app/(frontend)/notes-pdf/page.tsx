@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 
 import { getAllPdf } from '@/utils/actions'
 import PDFCard from '@/components/PDFCard'
@@ -26,5 +26,9 @@ export default async function Page({ searchParams }: { searchParams: string }) {
   const query = urlParams.get('query') || ''
 
   const pdf: Pdf[] = await getAllPdf(query)
-  return <PDFCard pdfs={pdf} query={query} />
+  return (
+    <Suspense fallback={<span className='loading-spinner'></span>}>
+      <PDFCard pdfs={pdf} query={query} />
+    </Suspense>
+  )
 }

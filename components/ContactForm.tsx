@@ -61,8 +61,8 @@ export default function ContactForm() {
           </p>
           <p className='text-gray-700'>
             Phone:{' '}
-            <a href='tel:+000000000' className='text-blue-600'>
-              +92 XXX XXXXXXX
+            <a href='tel:+92 312 5608356' className='text-blue-600'>
+              +92 312 5608356
             </a>
           </p>
           <p className='text-gray-700'>

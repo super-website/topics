@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   description:
     'Education With US offers high-quality online courses and resources to help you learn and grow in various subjects. Learn at your own pace with expert-led content.',
   keywords:
-    'online education, learn online, courses, e-learning, study resources',
+    'online education, learn online, courses, e-learning, study resources, education with hamza, education with us',
 }
 
 export default function RootLayout({

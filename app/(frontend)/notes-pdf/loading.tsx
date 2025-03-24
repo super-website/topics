@@ -1,5 +1,5 @@
 import React from 'react'
 
 export default function loading() {
-  return <div className='spinner'></div>
+  return <div className='loading-spinner'></div>
 }

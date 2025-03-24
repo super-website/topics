@@ -4,7 +4,7 @@ import React from 'react'
 export default function page() {
   return (
     <div>
-      <form action={createPdf} method='post' encType='multipart/form-data'>
+      <form action={createPdf} method='post'>
         <h1 className='text-2xl font-semibold'>Add Pdf</h1>
 
         <label className='block'>

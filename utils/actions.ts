@@ -523,8 +523,6 @@ export const createPdf = async (formData: FormData) => {
       stream.end(buffer)
     })
 
-    console.log('Upload Result:', result)
-
     await prisma.pdf.create({
       data: {
         title,

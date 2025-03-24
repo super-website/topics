@@ -27,7 +27,7 @@ export default async function Page({ searchParams }: { searchParams: string }) {
 
   const pdf: Pdf[] = await getAllPdf(query)
   return (
-    <Suspense fallback={<span className='loading-spinner'></span>}>
+    <Suspense fallback={<span className='loading-spinner'>loading.....</span>}>
       <PDFCard pdfs={pdf} query={query} />
     </Suspense>
   )

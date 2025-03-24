@@ -2,7 +2,7 @@
 import { createComment } from '@/utils/actions'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
-import React, { use } from 'react'
+import React from 'react'
 
 export default function ContactForm() {
   const searchParams = useSearchParams()

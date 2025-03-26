@@ -103,7 +103,7 @@ export default function PDFCard({ pdfs, query }: PDFCardProps) {
                     disabled={loading === pdf.id}
                   >
                     {loading === pdf.id ? (
-                      <div className='spinner-border animate-spin w-5 h-5 border-t-2 border-white border-4 rounded-full'></div>
+                      <div className='spinner animate-spin w-5 h-5 border-t-2 border-white border-4 rounded-full'></div>
                     ) : (
                       'Download'
                     )}

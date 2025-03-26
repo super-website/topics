@@ -23,6 +23,7 @@ export default function PDFCard({ pdfs, query }: PDFCardProps) {
   const { replace } = useRouter()
 
   const [searchTerm, setSearchTerm] = useState(searchParams.get('query') || '')
+  const [loading, setLoading] = useState<string | null>(null)
 
   useEffect(() => {
     const params = new URLSearchParams(searchParams)
@@ -38,6 +39,28 @@ export default function PDFCard({ pdfs, query }: PDFCardProps) {
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value)
+  }
+
+  const handleDownload = (pdf: Pdf) => {
+    setLoading(pdf.id)
+    fetch(pdf.url)
+      .then((response) => response.blob())
+      .then((blob) => {
+        const url = window.URL.createObjectURL(blob)
+        const link = document.createElement('a')
+
+        link.href = url
+        link.setAttribute('download', `${pdf.title}.pdf`)
+        document.body.appendChild(link)
+        link.click()
+        link.parentNode?.removeChild(link)
+
+        setLoading(null)
+      })
+      .catch((error) => {
+        console.error(error)
+        setLoading(null)
+      })
   }
 
   return (
@@ -75,24 +98,15 @@ export default function PDFCard({ pdfs, query }: PDFCardProps) {
                 <h2 className='card-title text-xs'>{pdf.title}</h2>
                 <div className='card-actions justify-end'>
                   <button
-                    onClick={() => {
-                      fetch(pdf.url)
-                        .then((response) => response.blob())
-                        .then((blob) => {
-                          const url = window.URL.createObjectURL(blob)
-                          const link = document.createElement('a')
-
-                          link.href = url
-                          link.setAttribute('download', `${pdf.title}.pdf`)
-                          document.body.appendChild(link)
-                          link.click()
-                          link.parentNode?.removeChild(link)
-                        })
-                        .catch((error) => console.error(error))
-                    }}
+                    onClick={() => handleDownload(pdf)}
                     className='btn btn-primary'
+                    disabled={loading === pdf.id}
                   >
-                    Download
+                    {loading === pdf.id ? (
+                      <div className='spinner-border animate-spin w-5 h-5 border-t-2 border-white border-4 rounded-full'></div>
+                    ) : (
+                      'Download'
+                    )}
                   </button>
                 </div>
               </div>

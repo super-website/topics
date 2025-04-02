@@ -8,6 +8,7 @@ const lists = [
   { id: 2, name: 'subjects', url: '/control/subjects' },
   { id: 3, name: 'gallery', url: '/control/gallery' },
   { id: 4, name: 'pdf', url: '/control/pdf' },
+  { id: 5, name: 'comments', url: '/control/contact' },
 ]
 
 export default function Navbar() {

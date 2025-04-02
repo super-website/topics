@@ -7,13 +7,7 @@ export default async function Page() {
 
   return (
     <div className='max-w-7xl mx-auto p-5'>
-      <h1 className='text-4xl font-extrabold text-center text-gray-800 mb-8'>
-        Comments
-      </h1>
-
-      <div className='alert alert-info mb-8'>
-        <p className='text-lg font-semibold'>Here are the comments</p>
-      </div>
+      <h1 className='text-xl   text-gray-800 mb-8'>Comments</h1>
 
       <div className='overflow-x-auto'>
         {data.length === 0 ? (
@@ -21,25 +15,28 @@ export default async function Page() {
             No comments available.
           </p>
         ) : (
-          <div className='table w-full table-zebra space-y-10'>
-            {data.map((comment) => (
-              <div
-                key={comment.id}
-                className='relative group p-6 bg-white rounded-xl shadow-xl hover:shadow-2xl transition-shadow duration-300 ease-in-out'
-              >
-                <div className='mb-4'>
-                  <h2 className='text-2xl font-semibold text-gray-800 group-hover:text-blue-500'>
-                    {comment.name}
-                  </h2>
-                  <p className='text-sm text-gray-500'>{comment.email}</p>
-                </div>
-                <p className='text-gray-700 text-base leading-relaxed'>
-                  {comment.message}
-                </p>
-
-                <div className='absolute inset-0 bg-blue-100 opacity-0 group-hover:opacity-40 rounded-xl transition-opacity duration-300'></div>
-              </div>
-            ))}
+          <div className='overflow-x-auto'>
+            <table className='table table-zebra w-full'>
+              {/* head */}
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Message</th>
+                  <th>Created At</th>
+                </tr>
+              </thead>
+              <tbody>
+                {data.map((comment) => (
+                  <tr key={comment.id}>
+                    <th>{comment.name}</th>
+                    <td>{comment.email}</td>
+                    <td>{comment.message}</td>
+                    <td>{new Date(comment.createdAt).toLocaleDateString()}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         )}
       </div>

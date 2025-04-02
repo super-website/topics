@@ -483,6 +483,18 @@ export const getAllComments = async () => {
   return await prisma.contact.findMany({})
 }
 
+export const deleteComment = async (formData: FormData) => {
+  const id = formData.get('id') as string | number
+
+  await prisma.contact.delete({
+    where: {
+      id: id as string,
+    },
+  })
+
+  revalidatePath('/control/contact')
+}
+
 export const createPdf = async (formData: FormData) => {
   try {
     const title = formData.get('title') as string

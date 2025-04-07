@@ -28,7 +28,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={hind.className}>
-      <body className="bg-gray-200">{children}</body>
+      <body className="bg-gray-200">
+        {children}
+
+        <Analytics />
+      </body>
     </html>
   );
 }

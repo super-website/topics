@@ -14,5 +14,6 @@ export const metadata = {
 
 export default async function Page() {
   const data = await getAllGallery()
+
   return <GalleryPage data={data} />
 }

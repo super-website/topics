@@ -28,6 +28,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={hind.className}>
+      <head>
+        {process.env.NODE_ENV === "production" && (
+          <script
+            async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7339717436236652"
+            crossOrigin="anonymous"
+          ></script>
+        )}
+      </head>
       <body className="bg-gray-200">
         {children}
 

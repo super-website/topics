@@ -566,7 +566,7 @@ export const getAllPdf = async (query: string) => {
         },
       },
       orderBy: {
-        id: "desc",
+        createdAt: "desc",
       },
     });
   }
@@ -584,4 +584,88 @@ export const deletePdf = async (formData: FormData) => {
   });
 
   revalidatePath("/control/pdf");
+};
+
+export const createScheme = async (formData: FormData) => {
+  try {
+    const title = formData.get("title") as string;
+    const short_desc = formData.get("short_desc") as string;
+    const tags = formData.get("tags") as string;
+    const classEl = formData.get("class") as string;
+    const file = formData.get("url") as File;
+
+    if (!title || !file || !short_desc || !tags || !classEl) {
+      throw new Error("Title and file are required");
+    }
+
+    if (file.type !== "application/pdf") {
+      throw new Error("Only PDF files are allowed");
+    }
+
+    const arrayBuffer = await file.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
+
+    const result = await new Promise<UploadApiResponse>((resolve, reject) => {
+      const stream = cloudinary.uploader.upload_stream(
+        {
+          folder: "pdfs",
+          resource_type: "raw",
+          transformation: [
+            {
+              width: 1000,
+              height: 1000,
+              crop: "limit",
+            },
+          ],
+        },
+        (error, result) => {
+          if (error || !result) {
+            return reject(error || new Error("Upload failed"));
+          }
+          resolve(result);
+        }
+      );
+
+      stream.end(buffer);
+    });
+
+    const tagsArray = tags
+      .split(",")
+      .map((tag) => tag.trim())
+      .filter((tag) => tag.length > 0);
+
+    await prisma.scheme.create({
+      data: {
+        title,
+        short_desc,
+        tags: tagsArray,
+        class: classEl,
+        url: result.secure_url,
+      },
+    });
+  } catch (error: any) {
+    console.error("Error creating PDF:", error);
+
+    throw new Error(
+      `Failed to create PDF. Error details: ${error.message || error}`
+    );
+  }
+
+  redirect("/control/scheme");
+};
+
+export const getAllScheme = async () => {
+  return await prisma.scheme.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+};
+
+export const getSingleScheme = async (id: string) => {
+  return await prisma.scheme.findUnique({
+    where: {
+      id,
+    },
+  });
 };

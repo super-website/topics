@@ -94,5 +94,5 @@ model Scheme {
   tags    String[]
   url String
   class   String
-  createdAt  DateTime
+ createdAt DateTime @default(now())
 }

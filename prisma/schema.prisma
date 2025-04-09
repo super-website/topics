@@ -85,3 +85,14 @@ model pdf {
   url       String
   createdAt DateTime @default(now())
 }
+
+
+model Scheme {
+  id        String   @id @default(uuid()) @map("_id")
+  title     String
+  short_desc String @db.String
+  tags    String[]
+  url String
+  class   String
+  createdAt  DateTime
+}

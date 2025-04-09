@@ -32,7 +32,7 @@ export default function RootLayout({
       <body className="bg-gray-200">
         <Script
           async
-          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.PUBLIC_GOOGLE_ADS}`}
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_GOOGLE_ADS}`}
           crossOrigin="anonymous"
         ></Script>
         {children}

@@ -1,11 +1,46 @@
-import Script from "next/script";
-import React from "react";
+"use client";
+import React, { useEffect } from "react";
 
-export default function Adsense() {
+const Adsense = () => {
+  useEffect(() => {
+    const loadAdScript = () => {
+      return new Promise((resolve, reject) => {
+        const script = document.createElement("script");
+        script.src = "//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js";
+        script.async = true;
+        script.onload = resolve;
+        script.onerror = reject;
+        document.head.appendChild(script);
+      });
+    };
+
+    const initializeAd = async () => {
+      try {
+        await loadAdScript();
+
+        const adElement = document.querySelector(".adsbygoogle");
+
+        if (adElement && !adElement.querySelector("iframe")) {
+          (window.adsbygoogle = window.adsbygoogle || []).push({});
+        }
+      } catch (error) {
+        console.error("Failed to load AdSense script", error);
+      }
+    };
+
+    initializeAd();
+
+    return () => {};
+  }, []);
+
   return (
-    <Script
-      async
-      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7339717436236652"
+    <div
+      className="adsbygoogle"
+      style={{ display: "block" }}
+      data-ad-client="your-ad-client-id"
+      data-ad-slot="your-ad-slot-id"
     />
   );
-}
+};
+
+export default Adsense;

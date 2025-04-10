@@ -42,8 +42,6 @@ export default async function Page({ params }: { params: { id: string } }) {
         </div>
       </div>
 
-      <Adsense />
-
       <div className="flex flex-col gap-4">
         {subject?.topics?.length > 0 ? (
           subject.topics.map((topic) => (

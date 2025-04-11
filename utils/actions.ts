@@ -669,3 +669,16 @@ export const getSingleScheme = async (id: string) => {
     },
   });
 };
+
+export const deleteScheme = async (formData: FormData) => {
+  const id = formData.get("id");
+  if (typeof id !== "string" || !id.trim()) {
+    throw new Error("Id is Required");
+  }
+  await prisma.pdf.delete({
+    where: {
+      id,
+    },
+  });
+  revalidatePath("/control/scheme");
+};

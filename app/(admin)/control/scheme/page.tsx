@@ -1,4 +1,5 @@
-import { getAllScheme } from "@/utils/actions";
+import DeleteBtn from "@/components/DeleteBtn";
+import { deleteScheme, getAllScheme } from "@/utils/actions";
 import React from "react";
 
 export default async function Page() {
@@ -23,6 +24,7 @@ export default async function Page() {
 
             <div className="flex space-x-2">
               <button className="btn btn-primary text-white">Edit</button>
+              <DeleteBtn deleteAction={deleteScheme} id={item.id} />
             </div>
           </div>
         ))}

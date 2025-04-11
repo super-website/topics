@@ -1,4 +1,3 @@
-import Adsense from "@/components/Adsense";
 import { getSinglSubject } from "@/utils/actions";
 import { Metadata } from "next";
 import Link from "next/link";

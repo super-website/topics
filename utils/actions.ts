@@ -686,11 +686,3 @@ export const deleteScheme = async (formData: FormData) => {
   });
   revalidatePath("/control/scheme");
 };
-
-export const config = {
-  api: {
-    bodyParser: {
-      sizeLimit: "50mb",
-    },
-  },
-};

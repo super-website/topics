@@ -3,12 +3,11 @@ import { createComment } from "@/utils/actions";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import React from "react";
-import { useFormStatus } from "react-dom";
+import SubmitBtn from "./SubmitBtn";
 
 export default function ContactForm() {
   const searchParams = useSearchParams();
   const success = searchParams.get("success");
-  const { pending } = useFormStatus();
 
   return (
     <div className="max-w-4xl mx-auto p-5 ">
@@ -46,13 +45,7 @@ export default function ContactForm() {
               ></textarea>
             </div>
             <div className="form-label">
-              <button
-                type="submit"
-                className="btn btn-primary px-6 py-2"
-                disabled={pending}
-              >
-                {pending ? "Submitting..." : "Submit"}
-              </button>
+              <SubmitBtn />
             </div>
           </form>
         </div>

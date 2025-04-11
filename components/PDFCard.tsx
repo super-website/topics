@@ -5,7 +5,6 @@ import React, { useEffect, useState } from "react";
 import pdfIcon from "@/public/images/pdf.png";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
-import Adsense from "./Adsense";
 
 interface Pdf {
   id: string;

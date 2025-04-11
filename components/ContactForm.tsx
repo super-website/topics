@@ -46,12 +46,12 @@ export default function ContactForm() {
               ></textarea>
             </div>
             <div className="form-label">
-              <button className="btn btn-primary px-6 py-2">
-                {pending ? (
-                  <span className="loading loading-spinner"></span>
-                ) : (
-                  "Submit"
-                )}
+              <button
+                type="submit"
+                className="btn btn-primary px-6 py-2"
+                disabled={pending}
+              >
+                {pending ? "Submitting..." : "Submit"}
               </button>
             </div>
           </form>

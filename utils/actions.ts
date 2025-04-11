@@ -571,7 +571,11 @@ export const getAllPdf = async (query: string) => {
     });
   }
 
-  return await prisma.pdf.findMany({});
+  return await prisma.pdf.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
 };
 
 export const deletePdf = async (formData: FormData) => {

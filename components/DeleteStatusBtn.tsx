@@ -7,7 +7,7 @@ export default function DeleteStatusBtn() {
   return (
     <button
       type="submit"
-      className="btn btn-primary px-6 py-2"
+      className="btn btn-error px-6 py-2"
       disabled={pending}
     >
       {pending ? <span className="loading loading-spinner"></span> : "Delete"}

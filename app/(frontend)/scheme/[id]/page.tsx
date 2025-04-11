@@ -1,4 +1,3 @@
-import Adsense from "@/components/Adsense";
 import { getSingleScheme } from "@/utils/actions";
 import { Metadata } from "next";
 import React from "react";
@@ -68,7 +67,19 @@ export default async function page({ params }: Props) {
           ></iframe>
         </div>
 
-        <Adsense />
+        <ins
+          className="adsbygoogle"
+          style={{ display: "block" }}
+          data-ad-client="ca-pub-7339717436236652"
+          data-ad-slot="4193914349"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(adsbygoogle = window.adsbygoogle || []).push({});`,
+          }}
+        ></script>
 
         {data.url && (
           <div className="flex flex-col justify-center mt-4">

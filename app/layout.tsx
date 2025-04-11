@@ -1,9 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Hind, Inter } from "next/font/google";
-import Head from "next/head";
+import { Hind } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
-import Script from "next/script";
 
 const hind = Hind({
   subsets: ["latin"],
@@ -15,7 +13,6 @@ export const metadata: Metadata = {
     default: "Education With Hamza | Online Courses & Study Resources",
     template: "%s | Education With Hamza",
   },
-
   description:
     "Education With US offers high-quality online courses and resources to help you learn and grow in various subjects. Learn at your own pace with expert-led content.",
   keywords:
@@ -29,12 +26,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={hind.className}>
-      <body className="bg-gray-200">
-        <Script
+      <head>
+        <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7339717436236652"
           crossOrigin="anonymous"
-        ></Script>
+        ></script>
+      </head>
+      <body className="bg-gray-200">
         {children}
         <Analytics />
       </body>

@@ -69,8 +69,6 @@ export default function PDFCard({ pdfs, query }: PDFCardProps) {
       <div className="flex justify-between items-center mb-6 flex-col md:flex-row  mx-10">
         <h1 className="text-xl md:text-2xl font-bold">Notes PDF</h1>
 
-        <Adsense />
-
         <form>
           <input
             type="text"

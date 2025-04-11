@@ -1,3 +1,4 @@
+import Adsense from "@/components/Adsense";
 import { getSingleScheme } from "@/utils/actions";
 import { Metadata } from "next";
 import React from "react";
@@ -66,6 +67,8 @@ export default async function page({ params }: Props) {
             title="PDF Viewer"
           ></iframe>
         </div>
+
+        <Adsense />
 
         {data.url && (
           <div className="flex flex-col justify-center mt-4">

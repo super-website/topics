@@ -3,7 +3,6 @@ import Sidebar from "@/components/Sidebar";
 import Content from "@/components/Content";
 import adsImg from "../../public/images/ads.jpg";
 import Image from "next/image";
-import Adsense from "@/components/Adsense";
 export default function Page({
   searchParams,
 }: {
@@ -12,7 +11,6 @@ export default function Page({
   const query = searchParams?.query || "";
   return (
     <>
-      <Adsense />
       <div className="flex gap-4">
         <div>
           <Sidebar />

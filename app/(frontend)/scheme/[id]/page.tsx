@@ -58,6 +58,15 @@ export default async function page({ params }: Props) {
           </p>
         </div>
 
+        <div>
+          <iframe
+            src={`https://docs.google.com/gview?url=${data.url}&embedded=true`}
+            style={{ width: "100%", height: "90vh" }}
+            frameBorder="0"
+            title="PDF Viewer"
+          ></iframe>
+        </div>
+
         {data.url && (
           <div className="flex flex-col justify-center mt-4">
             <p className="mb-2">Click Below To Download 👇🏻</p>

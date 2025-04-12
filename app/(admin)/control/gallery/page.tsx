@@ -66,7 +66,7 @@ export default async function Page() {
                 </div>
 
                 <div className="flex justify-between mt-4">
-                  <DeleteBtn deleteAction={deleteGallery} id={gallery.id} />
+                  <DeleteBtn deleteAction={deleteGallery} id={gallery?.id} />
                 </div>
               </li>
             );

@@ -340,7 +340,7 @@ export const login = async (formData: FormData) => {
 export const logout = async () => {
   cookies().delete("token");
   cookies().delete("role");
-  redirect("/control/login");
+  redirect("/control/login?error=unauthenticated");
 };
 export const createGallery = async (formData: FormData) => {
   const files = formData.getAll("files") as File[];

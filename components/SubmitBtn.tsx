@@ -7,10 +7,10 @@ export default function SubmitBtn() {
   return (
     <button
       type="submit"
-      className="btn btn-primary px-6 py-2"
+      className="btn btn-primary px-6 py-2 w-full"
       disabled={pending}
     >
-      {pending ? "Submitting..." : "Submit"}
+      {pending ? <span className="loading loading-spinner"></span> : "Submit"}
     </button>
   );
 }

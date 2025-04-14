@@ -3,6 +3,7 @@ import Link from "next/link";
 import React from "react";
 
 import { Metadata } from "next";
+import AdSlot from "@/components/AdsComponent";
 
 type Props = {
   params: Promise<{ id: string }>;
@@ -56,19 +57,7 @@ export default async function Page({ params }: Props) {
           <p className="text-xs space-y-3">{topic?.short_desc}</p>
         </div>
 
-        <ins
-          className="adsbygoogle"
-          style={{ display: "block" }}
-          data-ad-client="ca-pub-7339717436236652"
-          data-ad-slot="4193914349"
-          data-ad-format="auto"
-          data-full-width-responsive="true"
-        />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(adsbygoogle = window.adsbygoogle || []).push({});`,
-          }}
-        ></script>
+        <AdSlot adClient="ca-pub-7339717436236652" adSlot="4193914349" />
 
         <div className="card bg-gray-400 bg-opacity-25 rounded-none p-4">
           <div className="card-title border-b pb-3 border-gray-500">

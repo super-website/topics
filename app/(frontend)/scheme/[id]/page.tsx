@@ -1,6 +1,7 @@
 import CreateReview from "@/components/Review";
 import {
   deleteAllReview,
+  getAverageSchemeReview,
   getSchemeReview,
   getSingleScheme,
 } from "@/utils/actions";
@@ -35,7 +36,7 @@ export const generateMetadata = async ({
 export default async function page({ params }: Props) {
   const { id } = await params;
   const data = await getSingleScheme(id);
-
+  const avgRating = await getAverageSchemeReview(id);
   const reviews = await getSchemeReview(id);
 
   if (!data) {
@@ -74,21 +75,6 @@ export default async function page({ params }: Props) {
           ></iframe>
         </div>
 
-        <div>
-          <ins
-            className="adsbygoogle"
-            style={{ display: "block" }}
-            data-ad-client="ca-pub-7339717436236652"
-            data-ad-slot="4193914349"
-            data-ad-format="auto"
-            data-full-width-responsive="true"
-          />
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `(adsbygoogle = window.adsbygoogle || []).push({});`,
-            }}
-          ></script>
-        </div>
         {data.url && (
           <div className="flex flex-col justify-center mt-4">
             <p className="mb-2">Click Below To Download 👇🏻</p>
@@ -106,7 +92,24 @@ export default async function page({ params }: Props) {
       <div className="max-w-2xl mx-auto mt-4">
         <div className="collapse bg-base-100 border border-base-300 mb-4">
           <input type="radio" name="my-accordion-1" defaultChecked />
-          <div className="collapse-title font-semibold">Reviews</div>
+          <div className="collapse-title font-semibold justify-between flex items-center">
+            Reviews
+            <div className="rating mt-2 flex items-center gap-2">
+              {[...Array(5)].map((_, i) => (
+                <input
+                  key={i}
+                  type="radio"
+                  className="mask mask-star-2 bg-yellow-400"
+                  checked={Math.round(avgRating) === i + 1}
+                  readOnly
+                />
+              ))}
+              <span className="ml-2 text-sm text-gray-600">
+                ({avgRating.toFixed(1)})
+              </span>
+            </div>
+          </div>
+
           <div className="collapse-content text-sm">
             {reviews && reviews.length > 0 ? (
               reviews.map((review) => (

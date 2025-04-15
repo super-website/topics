@@ -719,6 +719,19 @@ export const getSchemeReview = async (id: string) => {
   });
 };
 
+export const getAverageSchemeReview = async (id: string) => {
+  const result = await prisma.review.aggregate({
+    where: {
+      schemeId: id,
+    },
+    _avg: {
+      rating: true,
+    },
+  });
+
+  return result._avg.rating ?? 0;
+};
+
 export const deleteAllReview = async () => {
   await prisma.review.deleteMany({});
 };

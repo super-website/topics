@@ -1,4 +1,9 @@
-import { getSingleScheme } from "@/utils/actions";
+import CreateReview from "@/components/Review";
+import {
+  deleteAllReview,
+  getSchemeReview,
+  getSingleScheme,
+} from "@/utils/actions";
 import { Metadata } from "next";
 import React from "react";
 
@@ -30,6 +35,8 @@ export const generateMetadata = async ({
 export default async function page({ params }: Props) {
   const { id } = await params;
   const data = await getSingleScheme(id);
+
+  const reviews = await getSchemeReview(id);
 
   if (!data) {
     return (
@@ -67,20 +74,21 @@ export default async function page({ params }: Props) {
           ></iframe>
         </div>
 
-        <ins
-          className="adsbygoogle"
-          style={{ display: "block" }}
-          data-ad-client="ca-pub-7339717436236652"
-          data-ad-slot="4193914349"
-          data-ad-format="auto"
-          data-full-width-responsive="true"
-        />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(adsbygoogle = window.adsbygoogle || []).push({});`,
-          }}
-        ></script>
-
+        <div>
+          <ins
+            className="adsbygoogle"
+            style={{ display: "block" }}
+            data-ad-client="ca-pub-7339717436236652"
+            data-ad-slot="4193914349"
+            data-ad-format="auto"
+            data-full-width-responsive="true"
+          />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `(adsbygoogle = window.adsbygoogle || []).push({});`,
+            }}
+          ></script>
+        </div>
         {data.url && (
           <div className="flex flex-col justify-center mt-4">
             <p className="mb-2">Click Below To Download 👇🏻</p>
@@ -93,6 +101,55 @@ export default async function page({ params }: Props) {
             </a>
           </div>
         )}
+      </div>
+
+      <div className="max-w-2xl mx-auto mt-4">
+        <div className="collapse bg-base-100 border border-base-300 mb-4">
+          <input type="radio" name="my-accordion-1" defaultChecked />
+          <div className="collapse-title font-semibold">Reviews</div>
+          <div className="collapse-content text-sm">
+            {reviews && reviews.length > 0 ? (
+              reviews.map((review) => (
+                <div
+                  key={review.id}
+                  className="card bg-base-100 shadow-sm mb-4 border border-base-300"
+                >
+                  <div className="card-body p-4">
+                    <h3 className="card-title text-base font-semibold">
+                      {review.name} —{" "}
+                      <span className="text-sm text-gray-500">
+                        {review.email}
+                      </span>
+                    </h3>
+                    <p className="text-sm mt-2">{review.content}</p>
+                    <div className="rating mt-2">
+                      {[...Array(5)].map((_, i) => (
+                        <input
+                          key={i}
+                          type="radio"
+                          name={`rating-${review.id}`}
+                          className="mask mask-star-2 bg-yellow-400"
+                          checked={i + 1 === review.rating}
+                          readOnly
+                        />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <p>No reviews yet.</p>
+            )}
+          </div>
+        </div>
+
+        <div className="collapse bg-base-100 border border-base-300">
+          <input type="radio" name="my-accordion-1" />
+          <div className="collapse-title font-semibold">Leave a Review</div>
+          <div className="collapse-content text-sm">
+            <CreateReview schemeId={data.id} />
+          </div>
+        </div>
       </div>
     </div>
   );

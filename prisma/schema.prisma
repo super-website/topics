@@ -95,4 +95,17 @@ model Scheme {
   url String
   class   String
  createdAt DateTime @default(now())
+ reviews  Review[]
+ 
+}
+
+
+model Review {
+   id        String   @id @default(uuid()) @map("_id")
+   content     String
+   name        String
+   email       String
+   rating      Int
+  schemeId   String?
+  scheme    Scheme?  @relation(fields: [schemeId], references: [id])
 }

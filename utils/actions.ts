@@ -686,3 +686,39 @@ export const deleteGallery = async (formData: FormData) => {
 
   revalidatePath("/control/gallery");
 };
+
+export const createReview = async (formData: FormData) => {
+  const name = formData.get("name") as string;
+  const email = formData.get("email") as string;
+  const content = formData.get("content") as string;
+  const rating = parseInt(formData.get("rating") as string);
+  const schemeId = formData.get("schemeId") as string;
+
+  if (!name || !email || !content || !rating || !schemeId) {
+    throw new Error("Missing required fields");
+  }
+
+  await prisma.review.create({
+    data: {
+      name,
+      email,
+      content,
+      rating,
+      schemeId,
+    },
+  });
+
+  revalidatePath(`/scheme/${schemeId}`);
+};
+
+export const getSchemeReview = async (id: string) => {
+  return await prisma.review.findMany({
+    where: {
+      schemeId: id,
+    },
+  });
+};
+
+export const deleteAllReview = async () => {
+  await prisma.review.deleteMany({});
+};

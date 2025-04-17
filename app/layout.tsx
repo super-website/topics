@@ -3,11 +3,6 @@ import type { Metadata } from "next";
 import { Hind } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 
-const hind = Hind({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-});
-
 export const metadata: Metadata = {
   title: {
     default: "Education With Hamza | Online Courses & Study Resources",
@@ -25,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={hind.className} data-theme="light">
+    <html lang="en" data-theme="light">
       <head>
         <script
           async

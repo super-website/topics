@@ -90,7 +90,7 @@ export default async function page({ params }: Props) {
       </div>
 
       <div className="max-w-2xl mx-auto mt-4">
-        <div className="collapse bg-base-100 border border-base-300 mb-4">
+        <div className="collapse bg-base-100  border border-base-300 mb-4">
           <input type="radio" name="my-accordion-1" defaultChecked />
           <div className="collapse-title font-semibold justify-between flex items-center">
             Reviews

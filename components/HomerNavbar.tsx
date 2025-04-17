@@ -68,6 +68,7 @@ export default function HomeNavbar() {
           <div className="dropdown dropdown-left">
             <div
               tabIndex={0}
+              aria-label="Open menu"
               role="button"
               className="btn btn-ghost btn-circle"
             >

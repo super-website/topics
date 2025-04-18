@@ -44,7 +44,6 @@ export default function PDFCard({ pdfs }: PDFCardProps) {
 
   const handleDownload = async (pdf: Pdf) => {
     setLoading(pdf.id);
-
     await updateDownloadCount(pdf.id);
 
     fetch(pdf.url)
@@ -60,6 +59,7 @@ export default function PDFCard({ pdfs }: PDFCardProps) {
         link.parentNode?.removeChild(link);
 
         setLoading(null);
+
         setRecentlyDownloaded(pdf.id);
 
         setTimeout(() => {

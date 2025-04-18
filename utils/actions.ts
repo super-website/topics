@@ -555,7 +555,7 @@ export const getAllPdf = async (query: string) => {
         },
       },
       orderBy: {
-        createdAt: "desc",
+        download: "desc",
       },
     });
   }

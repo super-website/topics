@@ -84,6 +84,7 @@ model pdf {
   title     String
   url       String
   createdAt DateTime @default(now())
+  download  Int @default(0)
 }
 
 

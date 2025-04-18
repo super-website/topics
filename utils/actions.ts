@@ -567,6 +567,29 @@ export const getAllPdf = async (query: string) => {
   });
 };
 
+export const updateDownloadCount = async (id: string) => {
+  const pdf = await prisma.pdf.findUnique({
+    where: { id },
+    select: { download: true },
+  });
+
+  if (!pdf) {
+    console.error("PDF not found");
+    return;
+  }
+
+  const updatedPdf = await prisma.pdf.update({
+    where: { id },
+    data: {
+      download: pdf.download + 1,
+    },
+  });
+
+  revalidatePath("/notes-pdf");
+
+  return updatedPdf;
+};
+
 export const deletePdf = async (formData: FormData) => {
   const id = formData.get("id") as string | number;
 

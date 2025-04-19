@@ -42,7 +42,7 @@ export default async function page({ params }: Props) {
   if (!data) {
     return (
       <div className="p-6 text-center">
-        <h2 className="text-3xl font-bold text-gray-800">Scheme Not Found</h2>
+        <h1 className="text-3xl font-bold text-gray-800">Scheme Not Found</h1>
         <p className="mt-4 text-gray-600">
           The scheme with the provided ID does not exist.
         </p>
@@ -52,9 +52,9 @@ export default async function page({ params }: Props) {
 
   return (
     <div className="p-6">
-      <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">
+      <h1 className="text-2xl font-bold text-center mb-8 text-gray-800">
         {data.title}
-      </h2>
+      </h1>
 
       <div className="bg-white border border-gray-300 rounded-lg shadow-md p-6 max-w-2xl mx-auto">
         <p className="text-gray-700 text-sm mb-4">{data.short_desc}</p>

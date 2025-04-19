@@ -16,9 +16,9 @@ export default async function Page() {
 
   return (
     <div className="p-6">
-      <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">
+      <h1 className="text-3xl font-bold text-center mb-8 text-gray-800">
         Available Class Schemes
-      </h2>
+      </h1>
 
       <div className="space-y-6">
         {data.map((item) => (

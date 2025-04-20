@@ -8,7 +8,7 @@ export const metadata = {
   description:
     "Explore a comprehensive gallery of student notes, study materials, and educational resources in PDF format, shared by students and educators.",
   keywords:
-    "student notes, study resources, educational PDFs, online learning materials, classroom resources, notes gallery, teacher and student notes, study guides, education with hamza",
+    "student notes, study resources, educational PDFs, online learning materials, classroom resources, notes gallery, teacher and student notes, study guides, education with hamza, notes pdf",
   author: "Ameer Muhavia",
 };
 

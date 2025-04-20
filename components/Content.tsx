@@ -47,7 +47,7 @@ export default async function Content({ query }: { query: string }) {
                     ...{" "}
                     <Link
                       href={`/topic/${topic.id}`}
-                      className="text-primary hover:underline"
+                      className="text-primary font-semibold hover:underline"
                     >
                       Read more
                     </Link>

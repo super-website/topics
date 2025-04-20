@@ -4,7 +4,8 @@ import { getAllPdf, getAllSubject, getAllTopics } from "@/utils/actions";
 export const revalidate = 60;
 
 export default async function page() {
-  const topics = await getAllTopics("");
+  const rawTopics = await getAllTopics("");
+  const topics = Array.isArray(rawTopics) ? rawTopics : rawTopics.topics;
   const pdfs = await getAllPdf("");
   const subjects = await getAllSubject();
   return (
@@ -13,9 +14,7 @@ export default async function page() {
       <div className="grid lg:grid-cols-3 grid-cols-1 gap-10">
         <div className="stats stats-vertical p-8 ">
           <div className="stat-title">Total Topics</div>
-          <div className="stat-value p-4 text-center">
-            {Array(topics).length}
-          </div>
+          <div className="stat-value p-4 text-center">{topics.length}</div>
           <div className="stat-actions">
             <span className="stat-desc">Published</span>
           </div>

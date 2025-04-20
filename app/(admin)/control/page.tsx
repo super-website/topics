@@ -14,7 +14,7 @@ export default async function page() {
         <div className="stats stats-vertical p-8 ">
           <div className="stat-title">Total Topics</div>
           <div className="stat-value p-4 text-center">
-            {topics.toLocaleString().length}
+            {Array(topics).length}
           </div>
           <div className="stat-actions">
             <span className="stat-desc">Published</span>

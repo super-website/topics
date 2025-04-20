@@ -24,7 +24,9 @@ export const generateMetadata = async ({
   }
 
   return {
-    title: topic.title || "Topic",
+    title: {
+      absolute: topic.title || "Topic",
+    },
     description: topic.short_desc || "Learn more about this topic.",
     keywords: topic.tags || [],
   };

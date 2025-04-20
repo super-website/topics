@@ -12,8 +12,10 @@ export default async function page() {
       <h1 className="m-10 ml-0 text-3xl">Dashboard</h1>
       <div className="grid lg:grid-cols-3 grid-cols-1 gap-10">
         <div className="stats stats-vertical p-8 ">
-          <div className="stat-title">Total Subjects</div>
-          <div className="stat-value p-4 text-center">{topics.length}</div>
+          <div className="stat-title">Total Topics</div>
+          <div className="stat-value p-4 text-center">
+            {topics.toLocaleString().length}
+          </div>
           <div className="stat-actions">
             <span className="stat-desc">Published</span>
           </div>

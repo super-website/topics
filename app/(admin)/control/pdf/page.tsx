@@ -1,3 +1,4 @@
+import DeleteBtn from "@/components/DeleteBtn";
 import { deletePdf, getAllPdf } from "@/utils/actions";
 import React from "react";
 
@@ -38,13 +39,7 @@ export default async function Page() {
                   </td>
                   <td>{pdf.download}</td>
                   <td className="flex">
-                    <button className="btn btn-primary btn-sm mr-2">
-                      Edit
-                    </button>
-                    <form action={deletePdf}>
-                      <input type="hidden" value={pdf.id} name="id" />
-                      <button className="btn btn-danger btn-sm">Delete</button>
-                    </form>
+                    <DeleteBtn deleteAction={deletePdf} id={pdf.id} />
                   </td>
                 </tr>
               ))

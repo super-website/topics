@@ -562,7 +562,7 @@ export const getAllPdf = async (query: string) => {
 
   return await prisma.pdf.findMany({
     orderBy: {
-      createdAt: "desc",
+      download: "desc",
     },
   });
 };

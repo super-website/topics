@@ -56,7 +56,7 @@ export default async function Page({ params }: Props) {
 
       <div className="max-w-2xl mx-5  md:mx-auto pt-10 space-y-5">
         <div className="card bg-info p-4 rounded-none bg-opacity-30">
-          <p className="text-xs space-y-3">{topic?.short_desc}</p>
+          <p className="text-sm space-y-3">{topic?.short_desc}</p>
         </div>
 
         <div>

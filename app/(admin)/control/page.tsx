@@ -26,9 +26,9 @@ export default async function page() {
         </div>
         <div className="stats stats-vertical p-8 ">
           <div className="stat-title">Total Pdfs</div>
-          <div className="stat-value p-4 text-center">{data.length}</div>
+          <div className="stat-value p-4 text-center">{pdfs.length}</div>
           <div className="stat-actions">
-            <span className="stat-desc">{pdfs.length}</span>
+            <span className="stat-desc">Published</span>
           </div>
         </div>
       </div>

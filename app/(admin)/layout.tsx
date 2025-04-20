@@ -14,7 +14,7 @@ export default function AdminPanel({
   return (
     <div>
       {!isLoginPage && <Navbar />}
-      <div className="max-w-7xl lg:mx-auto p-10 mx-4">{children}</div>
+      <div className="max-w-7xl lg:mx-auto pt-20 p-10 mx-4">{children}</div>
     </div>
   );
 }

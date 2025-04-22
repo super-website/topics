@@ -55,49 +55,43 @@ export default function GalleryForm() {
           />
         </label>
 
-        <label className="block">
-          <span className="font-medium text-gray-700">Images</span>
-          <input
-            name="files"
-            type="file"
-            multiple
-            onChange={handleFileChange}
-            className="hidden"
-            id="fileInput"
-          />
-          <div className="flex items-center gap-2 mt-2">
-            <button
-              type="button"
-              onClick={() => document.getElementById("fileInput")?.click()}
-              className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
-            >
-              Choose Files
-            </button>
-            {files.length > 0 && (
-              <span className="text-gray-600">
-                {files.length} files selected
-              </span>
-            )}
-          </div>
-        </label>
+        <div className="mb-4">
+          <label
+            htmlFor="file-upload"
+            className="border-2 border-dashed border-blue-400 h-48 w-full flex items-center justify-center text-center text-lg text-gray-700 cursor-pointer"
+          >
+            Drop files here to upload
+            <input
+              id="file-upload"
+              name="files"
+              multiple
+              type="file"
+              onChange={handleFileChange}
+              className="hidden"
+            />
+          </label>
+        </div>
 
         {files.length > 0 && (
-          <div className="flex flex-wrap gap-4 mt-3">
+          <div className="border border-dotted border-primary min-h-52 p-4 grid  grid-cols-2 md:grid-cols-3 gap-4">
             {files.map((file, index) => (
-              <div key={index} className="relative w-16 h-16">
+              <div
+                key={index}
+                className="relative border rounded overflow-hidden shadow-sm"
+              >
                 <Image
                   src={URL.createObjectURL(file)}
-                  alt="Gallery Image"
-                  width={200}
-                  height={200}
-                  className="rounded-md object-cover border"
+                  alt={`Preview ${index + 1}`}
+                  width={100}
+                  height={100}
+                  className="w-full h-40 object-cover"
                 />
                 <button
                   type="button"
                   onClick={() => removeFile(index)}
-                  className="absolute top-1 right-1  text-white text-xs px-2 py-1 rounded-full"
+                  className="absolute top-1 right-1 bg-black  text-white text-xs px-2 py-1 "
                 >
-                  ❌
+                  X
                 </button>
               </div>
             ))}

@@ -44,28 +44,24 @@ export default async function Page() {
                   {gallery.title}
                 </h2>
 
-                <div className="flex flex-wrap gap-2">
-                  {images.length > 0 ? (
-                    images.map((image) => (
-                      <>
-                        <Image
-                          key={image.public_id}
-                          src={image.secure_url}
-                          alt={gallery.title}
-                          width={200}
-                          height={100}
-                          className="rounded-md object-cover"
-                        />
-                      </>
-                    ))
-                  ) : (
-                    <p className="text-gray-500 text-sm">
-                      No images available.
-                    </p>
-                  )}
+                <div className="border border-dotted border-primary min-h-52 p-4 flex flex-wrap gap-4">
+                  {images.map((file, index) => (
+                    <div
+                      key={index}
+                      className=" border rounded overflow-hidden shadow-sm"
+                    >
+                      <Image
+                        src={file.secure_url}
+                        alt={`Preview ${index + 1}`}
+                        width={100}
+                        height={100}
+                        className="w-full h-40 object-cover"
+                      />
+                    </div>
+                  ))}
                 </div>
 
-                <div className="flex justify-between mt-4">
+                <div className="flex justify-end mt-4">
                   <DeleteBtn deleteAction={deleteGallery} id={gallery?.id} />
                 </div>
               </li>

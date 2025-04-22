@@ -23,7 +23,7 @@ export default function page() {
             htmlFor="file-upload"
             className="border-2 border-dashed border-blue-400 h-48 w-full flex items-center justify-center text-center text-lg text-gray-700 cursor-pointer"
           >
-            Drop Pdf here to upload
+            Click Here to upload Pdf
             <input id="file-upload" name="pdf" type="file" className="hidden" />
           </label>
         </div>

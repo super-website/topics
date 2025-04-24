@@ -1,3 +1,4 @@
+import SubmitBtn from "@/components/SubmitBtn";
 import { createScheme } from "@/utils/actions";
 import React from "react";
 
@@ -63,9 +64,7 @@ export default function Page() {
           />
         </div>
 
-        <button type="submit" className="btn btn-primary w-full">
-          Submit
-        </button>
+        <SubmitBtn />
       </form>
     </div>
   );

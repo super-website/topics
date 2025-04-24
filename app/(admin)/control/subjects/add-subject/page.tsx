@@ -63,9 +63,7 @@ export default function page() {
           />
         </div>
 
-        <div>
-          <SubmitBtn />
-        </div>
+        <SubmitBtn />
       </form>
     </div>
   );

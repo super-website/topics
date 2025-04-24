@@ -98,9 +98,7 @@ export default function GalleryForm() {
           </div>
         )}
 
-        <div className="flex justify-between mt-4">
-          <SubmitBtn />
-        </div>
+        <SubmitBtn />
       </form>
     </div>
   );

@@ -19,7 +19,7 @@ export default function ContactForm() {
         formRef.current.reset();
       }
     } catch (error) {
-      throw new Error("Something Went Wrong" + error);
+      console.log("new error");
     }
   };
 

@@ -44,9 +44,7 @@ export default function ContactForm() {
                 name="message"
               ></textarea>
             </div>
-            <div className="form-label">
-              <SubmitBtn />
-            </div>
+            <SubmitBtn />
           </form>
         </div>
 

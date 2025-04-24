@@ -154,7 +154,7 @@ export default function PDFCard({ pdfs }: PDFCardProps) {
         )}
       </div>
       <div className="py-10 text-center">
-        {pdfs.length > 0 && (
+        {pdfs.length > 0 && limit < pdfs.length && (
           <button
             className="btn btn-primary"
             onClick={() => setLimit((prev) => prev + 5)}

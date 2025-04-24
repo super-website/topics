@@ -6,7 +6,7 @@ export const revalidate = 60;
 export default async function page() {
   const rawTopics = await getAllTopics("");
   const topics = Array.isArray(rawTopics) ? rawTopics : rawTopics.topics;
-  const pdfs = await getAllPdf("");
+  const pdfs = await getAllPdf("", 10);
   const subjects = await getAllSubject();
   return (
     <div>

@@ -2,12 +2,26 @@
 import { createComment } from "@/utils/actions";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import React from "react";
+import React, { useRef } from "react";
 import SubmitBtn from "./SubmitBtn";
 
 export default function ContactForm() {
   const searchParams = useSearchParams();
   const success = searchParams.get("success");
+  const formRef = useRef<HTMLFormElement>(null);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    const formData = new FormData(formRef.current!);
+    try {
+      await createComment(formData);
+
+      if (formRef.current) {
+        formRef.current.reset();
+      }
+    } catch (error) {
+      throw new Error("Something Went Wrong" + error);
+    }
+  };
 
   return (
     <div className="max-w-4xl mx-auto p-5 ">
@@ -20,7 +34,12 @@ export default function ContactForm() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
         <div className="space-y-5">
           <h2 className="text-2xl font-bold">Leave a Message</h2>
-          <form action={createComment} method="POST" className="space-y-4">
+          <form
+            ref={formRef}
+            onSubmit={handleSubmit}
+            method="POST"
+            className="space-y-4"
+          >
             <div className="form-label">
               <input
                 type="text"

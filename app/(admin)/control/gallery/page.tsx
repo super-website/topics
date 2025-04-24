@@ -44,7 +44,7 @@ export default async function Page() {
                   {gallery.title}
                 </h2>
 
-                <div className="border border-dotted border-primary min-h-52 p-4 flex flex-wrap gap-4">
+                <div className="border border-dotted border-primary min-h-52 p-4 grid grid-cols-2 gap-4">
                   {images.map((file, index) => (
                     <div
                       key={index}

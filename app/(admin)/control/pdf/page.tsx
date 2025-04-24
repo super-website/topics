@@ -5,7 +5,7 @@ import React from "react";
 export const revalidate = 0;
 
 export default async function Page() {
-  const data = await getAllPdf("");
+  const data = await getAllPdf("", 20);
 
   return (
     <div className="p-6">

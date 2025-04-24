@@ -34,6 +34,9 @@ export default function GalleryForm() {
     files.forEach((file) => formData.append("files", file));
 
     await createGallery(formData);
+
+    setTitle("");
+    setFiles([]);
   };
 
   return (

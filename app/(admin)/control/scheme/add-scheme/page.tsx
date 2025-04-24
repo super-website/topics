@@ -29,15 +29,14 @@ export default function Page() {
           />
         </div>
 
-        <div className="form-control">
-          <label htmlFor="url" className="label">
-            <span className="label-text">Url</span>
+        <div className="mb-4">
+          <label
+            htmlFor="file-upload"
+            className="border-2 border-dashed border-blue-400 h-48 w-full flex items-center justify-center text-center text-lg text-gray-700 cursor-pointer"
+          >
+            Click Here to upload PDF
+            <input id="file-upload" name="url" type="file" className="hidden" />
           </label>
-          <input
-            type="file"
-            name="url"
-            className="file-input file-input-bordered w-full"
-          />
         </div>
 
         <div className="form-control">

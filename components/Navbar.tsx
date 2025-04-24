@@ -1,6 +1,7 @@
 "use client";
 import { logout } from "@/utils/actions";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import React from "react";
 
 const lists = [
@@ -9,9 +10,11 @@ const lists = [
   { id: 3, name: "gallery", url: "/control/gallery" },
   { id: 4, name: "pdf", url: "/control/pdf" },
   { id: 5, name: "comments", url: "/control/contact" },
+  { id: 6, name: "scheme", url: "/control/scheme" },
 ];
 
 export default function Navbar() {
+  const pathName = usePathname();
   return (
     <nav className="bg-base-200 fixed top-0 left-0 right-0 shadow-md z-10">
       <div className="max-w-7xl mx-auto navbar">
@@ -27,7 +30,11 @@ export default function Navbar() {
                 <li key={item.id}>
                   <Link
                     href={item.url}
-                    className="hover:text-primary capitalize"
+                    className={`capitalize ${
+                      pathName === item.url
+                        ? "bg-primary text-white btn"
+                        : "text-primary btn"
+                    }`}
                   >
                     {item.name}
                   </Link>

@@ -545,26 +545,24 @@ export const createPdf = async (formData: FormData) => {
   redirect("/control/pdf");
 };
 
-export const getAllPdf = async (query: string) => {
-  if (query) {
-    return await prisma.pdf.findMany({
-      where: {
-        title: {
-          contains: query.toLowerCase(),
-          mode: "insensitive",
-        },
-      },
-      orderBy: {
-        download: "desc",
-      },
-    });
-  }
-
-  return await prisma.pdf.findMany({
+export const getAllPdf = async (query: string, limit: number) => {
+  const findOptions: any = {
     orderBy: {
       download: "desc",
     },
-  });
+    take: limit,
+  };
+
+  if (query) {
+    findOptions.where = {
+      title: {
+        contains: query.toLowerCase(),
+        mode: "insensitive",
+      },
+    };
+  }
+
+  return await prisma.pdf.findMany(findOptions);
 };
 
 export const updateDownloadCount = async (id: string) => {

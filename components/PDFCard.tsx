@@ -15,6 +15,7 @@ interface Pdf {
 interface PDFCardProps {
   pdfs: Pdf[];
   query: string;
+  limit: number;
 }
 
 export default function PDFCard({ pdfs }: PDFCardProps) {
@@ -23,6 +24,7 @@ export default function PDFCard({ pdfs }: PDFCardProps) {
   const { replace } = useRouter();
 
   const [searchTerm, setSearchTerm] = useState(searchParams.get("query") || "");
+  const [limit, setLimit] = useState(10);
   const [loading, setLoading] = useState<string | null>(null);
   const [recentlyDownloaded, setRecentlyDownloaded] = useState<string | null>(
     null
@@ -35,8 +37,11 @@ export default function PDFCard({ pdfs }: PDFCardProps) {
     } else {
       params.delete("query");
     }
+
+    params.set("limit", limit.toString());
+
     replace(`${pathname}?${params.toString()}`);
-  }, [searchTerm, pathname, searchParams, replace]);
+  }, [searchTerm, pathname, searchParams, replace, limit]);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
@@ -146,6 +151,16 @@ export default function PDFCard({ pdfs }: PDFCardProps) {
               </div>
             );
           })
+        )}
+      </div>
+      <div className="py-10 text-center">
+        {pdfs.length > 0 && (
+          <button
+            className="btn btn-primary"
+            onClick={() => setLimit((prev) => prev + 5)}
+          >
+            Show More
+          </button>
         )}
       </div>
     </div>

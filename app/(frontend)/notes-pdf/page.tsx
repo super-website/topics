@@ -21,11 +21,15 @@ interface Pdf {
 
 export const revalidate = 0;
 
-export default async function Page({ searchParams }: { searchParams: string }) {
-  const urlParams = new URLSearchParams(searchParams);
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: Record<string, string>;
+}) {
+  const query = searchParams.query || "";
+  const limit = parseInt(searchParams.limit || "10", 10);
 
-  const query = urlParams.get("query") || "";
+  const pdf: Pdf[] = await getAllPdf(query, limit);
 
-  const pdf: Pdf[] = await getAllPdf(query);
-  return <PDFCard pdfs={pdf} query={query} />;
+  return <PDFCard pdfs={pdf} query={query} limit={limit} />;
 }

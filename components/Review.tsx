@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useRef } from "react";
 import SubmitBtn from "./SubmitBtn";
 import { createReview } from "@/utils/actions";
 
@@ -7,8 +8,26 @@ type CreateReviewProps = {
 };
 
 export default function CreateReview({ schemeId }: CreateReviewProps) {
+  const formRef = useRef<HTMLFormElement>(null);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const formData = new FormData(formRef.current!);
+
+    try {
+      await createReview(formData);
+
+      if (formRef.current) {
+        formRef.current.reset();
+      }
+    } catch (error) {
+      console.error("Error submitting review:", error);
+    }
+  };
+
   return (
-    <form method="POST" action={createReview}>
+    <form ref={formRef} method="POST" onSubmit={handleSubmit}>
       <h2 className="text-xl font-bold mb-4">Leave a Review</h2>
 
       <input type="hidden" name="schemeId" value={schemeId} />
@@ -64,7 +83,6 @@ export default function CreateReview({ schemeId }: CreateReviewProps) {
         </select>
       </div>
 
-      {/* Submit button */}
       <SubmitBtn />
     </form>
   );

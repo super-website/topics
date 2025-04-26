@@ -59,10 +59,6 @@ export default async function Page({ params }: Props) {
           <p className="text-sm space-y-3">{topic?.short_desc}</p>
         </div>
 
-        <div>
-          <AdSlot adClient="ca-pub-7339717436236652" adSlot="7306166999" />
-        </div>
-
         <div className="card bg-gray-400 bg-opacity-25 rounded-none p-4">
           <div className="card-title border-b pb-3 border-gray-500">
             <h1 className="text-2xl">{topic?.title}</h1>

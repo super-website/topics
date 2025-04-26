@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import pdfIcon from "@/public/images/pdf.png";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { updateDownloadCount } from "@/utils/actions";
+import AdSlot from "./AdsComponent";
 
 interface Pdf {
   id: string;
@@ -82,9 +83,11 @@ export default function PDFCard({ pdfs }: PDFCardProps) {
       <div className="flex justify-between items-center mb-6 flex-col md:flex-row mx-10">
         <h1 className="text-xl md:text-2xl font-bold">Notes PDF</h1>
 
-        <div>
+        <div className="my-4">
+          <p className="text-xs text-gray-500 mb-1">Advertisement</p>
           <AdSlot adClient="ca-pub-7339717436236652" adSlot="7306166999" />
         </div>
+
         <form>
           <input
             type="text"

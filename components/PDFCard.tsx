@@ -170,8 +170,10 @@ export default function PDFCard({ pdfs }: PDFCardProps) {
         )}
       </div>
       <div className="prose mx-auto px-6 md:px-10 py-10 max-w-4xl text-justify">
-        <h2 className="text-2xl font-bold mb-4">About These Study Materials</h2>
-        <p>
+        <h2 className="text-2xl font-bold mb-4 text-center">
+          About These Study Materials
+        </h2>
+        <p className="my-5">
           This collection of PDF notes has been carefully curated to support
           students and lifelong learners in their academic journey. Each file
           contains valuable information, ranging from class notes and lecture

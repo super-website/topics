@@ -190,9 +190,9 @@ export default function PDFCard({ pdfs }: PDFCardProps) {
         <p>
           Regular updates are made to ensure the resources stay relevant and
           accurate. Be sure to bookmark this page or check back often for new
-          notes and updated versions of existing PDFs. Whether you're preparing
-          for exams, brushing up on difficult subjects, or looking for reliable
-          reference materials, you're in the right place.
+          notes and updated versions of existing PDFs. Whether you&apos;re
+          preparing for exams, brushing up on difficult subjects, or looking for
+          reliable reference materials, you&apos;re in the right place.
         </p>
       </div>
     </div>

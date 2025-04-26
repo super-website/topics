@@ -3,7 +3,6 @@ import Link from "next/link";
 import React from "react";
 
 import { Metadata } from "next";
-import AdSlot from "@/components/AdsComponent";
 
 type Props = {
   params: Promise<{ id: string }>;

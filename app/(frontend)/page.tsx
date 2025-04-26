@@ -24,7 +24,7 @@ export default function Page({
             href="https://www.youtube.com/@EducationWithHamza-g8v"
             target="_blank"
           >
-            <h2 className="text-xl font-bold mb-3">Advertisement</h2>
+            <h1 className="text-xl font-bold mb-3">Advertisement</h1>
             <Image
               src={adsImg}
               alt="ads"

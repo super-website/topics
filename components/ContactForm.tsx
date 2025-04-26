@@ -19,7 +19,7 @@ export default function ContactForm() {
       )}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
         <div className="space-y-5">
-          <h2 className="text-2xl font-bold">Leave a Message</h2>
+          <h1 className="text-2xl font-bold">Leave a Message</h1>
           <form action={createComment} method="POST" className="space-y-4">
             <div className="form-label">
               <input

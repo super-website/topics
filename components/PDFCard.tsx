@@ -181,7 +181,7 @@ export default function PDFCard({ pdfs }: PDFCardProps) {
           intended to complement your learning and help you revise essential
           concepts more efficiently.
         </p>
-        <p>
+        <p className="my-5">
           All downloadable content on this platform is free to use for personal
           and educational purposes. We do not host copyrighted material without
           permission, and all documents are either publicly shared by their

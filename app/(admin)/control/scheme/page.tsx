@@ -6,7 +6,7 @@ export default async function Page() {
   const data = await getAllScheme();
 
   return (
-    <div className="p-6">
+    <div>
       <h1 className="text-2xl font-semibold mb-4">All Schemes</h1>
       <div className="space-y-4">
         {data.map((item) => (

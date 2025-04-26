@@ -287,54 +287,62 @@ export async function createFirstAdmin() {
 }
 
 export const login = async (formData: FormData) => {
-  try {
-    const email = formData.get("email");
-    const password = formData.get("password");
+  const email = formData.get("email");
+  const password = formData.get("password");
 
-    if (!email || !password) {
-      throw new Error("Email and password are required.");
-    }
-
-    if (typeof email !== "string" || !email.trim()) {
-      throw new Error("Invalid Email");
-    }
-
-    if (typeof password !== "string" || !password.trim()) {
-      throw new Error("Invalid Password");
-    }
-
-    const user = await prisma.admin.findUnique({ where: { email } });
-
-    if (!user) {
-      throw new Error("User not found.");
-    }
-
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-      throw new Error("Invalid credentials.");
-    }
-
-    const secret = new TextEncoder().encode(process.env.JWT_SECRET);
-    const token = await new SignJWT({ id: user.id, role: user.role })
-      .setProtectedHeader({ alg: "HS256" })
-      .setExpirationTime("1h")
-      .sign(secret);
-
-    cookies().set("token", token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      path: "/",
-    });
-    cookies().set("role", user.role, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      path: "/",
-    });
-
-    redirect("/control");
-  } catch (error) {
-    console.error("Login failed:", error);
+  if (!email || !password) {
+    return redirect(
+      "/control/login?error=" +
+        encodeURIComponent("Email and password are required.")
+    );
   }
+
+  if (typeof email !== "string" || !email.trim()) {
+    return redirect(
+      "/control/login?error=" + encodeURIComponent("Invalid email format.")
+    );
+  }
+
+  if (typeof password !== "string" || !password.trim()) {
+    return redirect(
+      "/control/login?error=" + encodeURIComponent("Invalid password format.")
+    );
+  }
+
+  const user = await prisma.admin.findUnique({ where: { email } });
+
+  if (!user) {
+    return redirect(
+      "/control/login?error=" + encodeURIComponent("User not found.")
+    );
+  }
+
+  const isMatch = await bcrypt.compare(password, user.password);
+  if (!isMatch) {
+    return redirect(
+      "/control/login?error=" + encodeURIComponent("Invalid credentials.")
+    );
+  }
+
+  const secret = new TextEncoder().encode(process.env.JWT_SECRET);
+  const token = await new SignJWT({ id: user.id, role: user.role })
+    .setProtectedHeader({ alg: "HS256" })
+    .setExpirationTime("1h")
+    .sign(secret);
+
+  cookies().set("token", token, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    path: "/",
+  });
+
+  cookies().set("role", user.role, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    path: "/",
+  });
+
+  redirect("/control");
 };
 
 export const logout = async () => {

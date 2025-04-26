@@ -7,7 +7,7 @@ export default async function Page() {
   const galleries = await getAllGallery();
 
   return (
-    <div className="max-w-5xl mx-auto p-6">
+    <div>
       <div className="flex justify-between items-center flex-wrap">
         <h1 className="text-sm uppercase font-semibold">Gallery</h1>
         <Link href="/control/gallery/add-gallery" className="btn btn-primary">

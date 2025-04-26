@@ -163,6 +163,32 @@ export default function PDFCard({ pdfs }: PDFCardProps) {
           </button>
         )}
       </div>
+      <div className="prose mx-auto px-6 md:px-10 py-10 max-w-4xl text-justify">
+        <h2 className="text-2xl font-bold mb-4">About These Study Materials</h2>
+        <p>
+          This collection of PDF notes has been carefully curated to support
+          students and lifelong learners in their academic journey. Each file
+          contains valuable information, ranging from class notes and lecture
+          slides to exam preparation materials and summaries. These PDFs are
+          intended to complement your learning and help you revise essential
+          concepts more efficiently.
+        </p>
+        <p>
+          All downloadable content on this platform is free to use for personal
+          and educational purposes. We do not host copyrighted material without
+          permission, and all documents are either publicly shared by their
+          authors or created by our contributor network. If you believe any
+          content infringes on intellectual property rights, please contact us
+          for prompt removal or attribution.
+        </p>
+        <p>
+          Regular updates are made to ensure the resources stay relevant and
+          accurate. Be sure to bookmark this page or check back often for new
+          notes and updated versions of existing PDFs. Whether you're preparing
+          for exams, brushing up on difficult subjects, or looking for reliable
+          reference materials, you're in the right place.
+        </p>
+      </div>
     </div>
   );
 }

@@ -27,7 +27,9 @@ export const generateMetadata = async ({
   }
 
   return {
-    title: scheme.title || "Scheme",
+    title: {
+      absolute: scheme?.title || "Scheme",
+    },
     description: scheme.short_desc || "Learn more about this scheme.",
     keywords: scheme.tags || [],
   };

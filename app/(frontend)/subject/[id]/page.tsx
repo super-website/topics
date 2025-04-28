@@ -14,9 +14,7 @@ export const generateMetadata = async ({
   const subject = await getSinglSubject(id);
 
   return {
-    title: {
-      absolute: subject?.name || "Subject",
-    },
+    title: ubject?.name || "Subject",
     description: subject?.short_desc || "Subject description",
     keywords: subject?.tags || [],
   };

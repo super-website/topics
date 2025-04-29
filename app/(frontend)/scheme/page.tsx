@@ -40,7 +40,7 @@ export default async function Page() {
               <p className="list-col-wrap text-xs">{item.short_desc}</p>
 
               <Link
-                href={`scheme/${item.slug ? item.slug : item.id}`}
+                href={`scheme/${item.id}`}
                 className="btn btn-square btn-ghost hidden md:block text-center"
               >
                 <svg

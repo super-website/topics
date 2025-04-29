@@ -11,6 +11,8 @@ export const metadata = {
   author: "Ameer Muhavia",
 };
 
+export const revalidate = 0;
+
 export default async function Page() {
   const data = await getAllScheme();
 

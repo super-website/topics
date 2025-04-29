@@ -703,7 +703,7 @@ export const deleteScheme = async (formData: FormData) => {
   if (typeof id !== "string" || !id.trim()) {
     throw new Error("Id is Required");
   }
-  await prisma.pdf.delete({
+  await prisma.scheme.delete({
     where: {
       id,
     },

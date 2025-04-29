@@ -616,8 +616,13 @@ export const createScheme = async (formData: FormData) => {
     const classEl = formData.get("class") as string;
     const file = formData.get("url") as File;
 
+    const slug = title
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+
     if (!title || !file || !short_desc || !tags || !classEl) {
-      throw new Error("Title and file are required");
+      throw new Error("please fill out all fields.");
     }
 
     if (file.type !== "application/pdf") {
@@ -659,6 +664,7 @@ export const createScheme = async (formData: FormData) => {
     await prisma.scheme.create({
       data: {
         title,
+        slug,
         short_desc,
         tags: tagsArray,
         class: classEl,

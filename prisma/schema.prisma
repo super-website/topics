@@ -94,6 +94,7 @@ model Scheme {
   short_desc String @db.String
   tags    String[]
   url String
+  slug String @unique
   class   String
  createdAt DateTime @default(now())
  reviews  Review[]

@@ -28,7 +28,10 @@ export default async function Page() {
         </li>
 
         {data.map((item) => (
-          <li className="list-row bg-base-100 p-5 my-5" key={item.id}>
+          <li
+            className="list-row bg-base-100 p-5 my-5"
+            key={item.slug ? item.slug : item.id}
+          >
             <div>
               <div>{item.class}</div>
               <div className="text-xs uppercase font-semibold opacity-60">

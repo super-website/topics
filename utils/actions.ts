@@ -693,7 +693,7 @@ export const getAllScheme = async () => {
 export const getSingleScheme = async (id: string) => {
   return await prisma.scheme.findFirst({
     where: {
-      OR: [{ id }, { slug: id }],
+      OR: [{ slug: id }, { id }],
     },
   });
 };

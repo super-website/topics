@@ -101,56 +101,57 @@ export default async function Page({ params }: Props) {
         </div>
 
         <div>
-          {filteredTopics.length > 0 &&
-            filteredTopics.map((topic) => (
-              <>
-                <div className="my-5">
-                  <h2 className="text-sm">
-                    More From This {topic.subject?.short_name}
-                  </h2>
-                </div>
-                <div
-                  className="card max-w-sm md:max-w-2xl bg-base-100 card-sm shadow-sm rounded-none "
-                  key={topic.id}
-                >
-                  <div className="card-body">
-                    <Link
-                      href={`/topic/${topic.id}`}
-                      className="card-title border-b hover:text-primary"
-                    >
-                      {topic.title}
-                    </Link>
-                    <p className="text-sm mt-2 border-b py-2">
-                      {topic.short_desc.substring(0, 200)}
-                      {topic.short_desc.length > 200 && (
-                        <>
-                          ...{" "}
+          {filteredTopics.length > 0 && (
+            <>
+              <div>
+                <h2 className="text-sm">
+                  More From This {topic?.subject?.short_name}
+                </h2>
+              </div>
+
+              {filteredTopics.map((topic) => (
+                <div className="my-5" key={topic.id}>
+                  <div className="card max-w-sm md:max-w-2xl bg-base-100 card-sm shadow-sm rounded-none">
+                    <div className="card-body">
+                      <Link
+                        href={`/topic/${topic.id}`}
+                        className="card-title border-b hover:text-primary"
+                      >
+                        {topic.title}
+                      </Link>
+                      <p className="text-sm mt-2 border-b py-2">
+                        {topic.short_desc.substring(0, 200)}
+                        {topic.short_desc.length > 200 && (
+                          <>
+                            ...{" "}
+                            <Link
+                              href={`/topic/${topic.id}`}
+                              className="text-primary font-semibold hover:underline"
+                            >
+                              Read more
+                            </Link>
+                          </>
+                        )}
+                      </p>
+                      <div className="justify-between card-actions">
+                        <span>
+                          {new Date(topic.createdAt).toLocaleDateString()}
+                        </span>
+                        {topic.subject && (
                           <Link
-                            href={`/topic/${topic.id}`}
-                            className="text-primary font-semibold hover:underline"
+                            href={`/subject/${topic.subject.id}`}
+                            className="btn btn-primary"
                           >
-                            Read more
+                            {topic.subject.short_name}
                           </Link>
-                        </>
-                      )}
-                    </p>
-                    <div className="justify-between card-actions">
-                      <span>
-                        {new Date(topic.createdAt).toLocaleDateString()}
-                      </span>
-                      {topic.subject && (
-                        <Link
-                          href={`/subject/${topic.subject.id}`}
-                          className="btn btn-primary"
-                        >
-                          {topic.subject.short_name}
-                        </Link>
-                      )}
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
-              </>
-            ))}
+              ))}
+            </>
+          )}
         </div>
       </div>
     </div>

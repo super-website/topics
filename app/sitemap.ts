@@ -1,4 +1,9 @@
-import { getAllScheme, getAllSubject, getAllTopics } from "@/utils/actions";
+import {
+  getAllGallery,
+  getAllScheme,
+  getAllSubject,
+  getAllTopics,
+} from "@/utils/actions";
 import { MetadataRoute } from "next";
 
 interface Subject {
@@ -22,6 +27,7 @@ export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
   const subjects: Subject[] = await getAllSubject();
   const schemes = await getAllScheme();
   const topics = await getAllTopics("");
+  const images = await getAllGallery();
   const topicsInside: Topic[] = Array.isArray(topics)
     ? topics
     : topics.topics || [];

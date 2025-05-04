@@ -34,7 +34,6 @@ export default function HomeNavbar() {
   return (
     <nav className='bg-base-200 shadow-md'>
       <div className='max-w-7xl mx-auto navbar px-4 lg:px-8'>
-        {/* Left - Logo and Site Name */}
         <div className='navbar-start flex items-center gap-3'>
           <Link href='/' className='flex items-center space-x-2'>
             <div className='w-[50px] h-[50px] relative'>
@@ -52,7 +51,6 @@ export default function HomeNavbar() {
           </Link>
         </div>
 
-        {/* Center - Search bar (only on homepage) */}
         {pathname === '/' && (
           <div className='navbar-center hidden md:flex'>
             <input
@@ -65,12 +63,12 @@ export default function HomeNavbar() {
           </div>
         )}
 
-        {/* Right - Navigation */}
         <div className='navbar-end flex md:hidden'>
           <div className='dropdown dropdown-left'>
             <div
               tabIndex={0}
               role='button'
+              aria-label='navButton'
               className='btn btn-ghost btn-circle'
             >
               <svg
@@ -110,7 +108,6 @@ export default function HomeNavbar() {
           </div>
         </div>
 
-        {/* Desktop nav */}
         <div className='navbar-end hidden md:flex'>
           <ul className='flex space-x-6'>
             {navItems.map((item) => (

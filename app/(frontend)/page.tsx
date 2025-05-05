@@ -82,7 +82,6 @@ export default async function page() {
                   alt='Educational content'
                   width={320}
                   height={448}
-                  priority
                 />
               </div>
             ))}

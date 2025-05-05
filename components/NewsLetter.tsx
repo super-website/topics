@@ -9,25 +9,22 @@ export default function NewsLetter() {
   const [errorMsg, setErrorMsg] = useState('')
 
   const formRef = useRef<HTMLFormElement>(null)
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-
     const formData = new FormData(formRef.current!)
 
     try {
-      setIsLoading(true)
       await subscribeEmail(formData)
       setSuccess(true)
       setError(false)
-      setIsLoading(false)
       formRef.current?.reset()
     } catch (err: any) {
-      setErrorMsg(err)
+      console.error('Error submitting email:', err)
+
+      setErrorMsg('Something went wrong. Please try again.')
 
       setSuccess(false)
       setError(true)
-      setIsLoading(false)
     }
   }
 

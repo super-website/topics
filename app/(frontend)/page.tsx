@@ -46,9 +46,9 @@ export default async function page() {
 
   return (
     <>
-      <div className='grid grid-cols-1 lg:grid-cols-2 gap-24 items-center min-h-screen'>
+      <div className='grid grid-cols-1 lg:grid-cols-2 gap-24 items-center min-h-screen px-10 md:px-0'>
         <div>
-          <h1 className='max-w-2xl text-4xl font-bold tracking-tight sm:text-6xl'>
+          <h1 className='max-w-2xl text-4xl font-bold tracking-tight sm:text-6xl sm:text-center'>
             Discover a New Way to Learn with Hamza
           </h1>
 

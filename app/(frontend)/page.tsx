@@ -48,11 +48,11 @@ export default async function page() {
     <>
       <div className='grid grid-cols-1 lg:grid-cols-2 gap-24 items-center min-h-max px-10 md:px-0 md:min-h-screen'>
         <div>
-          <h1 className='max-w-2xl text-4xl font-bold tracking-tight sm:text-6xl sm:text-center'>
+          <h1 className='max-w-2xl text-4xl font-bold tracking-tight sm:text-6xl text-center md:text-left'>
             Discover a New Way to Learn with Hamza
           </h1>
 
-          <p className='mt-8 max-w-xl text-lg leading-8'>
+          <p className='mt-8 max-w-xl text-lg leading-8 text-center md:text-left'>
             Welcome to{' '}
             <span className='text-primary font-bold'>
               Hamza&#39;s educational

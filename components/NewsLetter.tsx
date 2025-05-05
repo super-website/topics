@@ -82,7 +82,7 @@ export default function NewsLetter() {
       {error && (
         <div className='mt-6 bg-red-100 text-red-700 p-4 rounded'>
           <p className='font-bold'>Error</p>
-          <p>Something went wrong. Please try again.</p>
+          <p>{errorMsg}</p>
         </div>
       )}
     </section>

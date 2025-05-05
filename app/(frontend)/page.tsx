@@ -89,7 +89,7 @@ export default async function page() {
         </div>
       </div>
 
-      <section className='mt-24'>
+      <section className='mt-24 px-10 md:px-0'>
         <h2 className='text-3xl font-bold mb-8 text-center'>Featured Topics</h2>
         <div className='grid gap-6 sm:grid-cols-2 lg:grid-cols-4'>
           {topics.map((topic) => (
@@ -120,7 +120,7 @@ export default async function page() {
         </div>
       </section>
 
-      <section className='mt-24'>
+      <section className='mt-24 px-10 md:px-0'>
         <h2 className='text-3xl font-bold mb-8 text-center'>
           Educational Schemes
         </h2>

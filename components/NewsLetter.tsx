@@ -41,7 +41,7 @@ export default function NewsLetter() {
   }, [success, error])
 
   return (
-    <section className='mt-24 py-16 px-4 bg-base-200 text-center rounded-xl'>
+    <section className='mt-24 py-16 bg-base-200 text-center rounded-xl px-10 md:px-4'>
       <h2 className='text-2xl font-bold mb-4'>Stay in the loop</h2>
       <p className='mb-6'>
         Subscribe to get the latest topics, schemes, and resources.

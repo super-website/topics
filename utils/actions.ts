@@ -765,3 +765,16 @@ export const getAverageSchemeReview = async (id: string) => {
 export const deleteAllReview = async () => {
   await prisma.review.deleteMany({})
 }
+
+export const subscribeEmail = async (formData: FormData) => {
+  const email = formData.get('email') as string
+  if (!email) {
+    throw new Error('Email must be provided.')
+  }
+
+  return await prisma.newsLetter.create({
+    data: {
+      email,
+    },
+  })
+}

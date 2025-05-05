@@ -110,3 +110,9 @@ model Review {
   schemeId   String?
   scheme    Scheme?  @relation(fields: [schemeId], references: [id])
 }
+
+model NewsLetter {
+  id        String   @id @default(uuid()) @map("_id")
+  email       String
+  createdAt     DateTime  @default(now())
+}

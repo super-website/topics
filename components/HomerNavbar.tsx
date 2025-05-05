@@ -51,7 +51,7 @@ export default function HomeNavbar() {
           </Link>
         </div>
 
-        {pathname === '/' && (
+        {pathname === '/topics' && (
           <div className='navbar-center hidden md:flex'>
             <input
               type='text'

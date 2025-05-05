@@ -774,12 +774,9 @@ export const subscribeEmail = async (formData: FormData) => {
 
   const existing = await prisma.newsLetter.findFirst({ where: { email } })
 
-  if (existing) {
-    const error = new Error('Email already subscribed')
-    ;(error as any).code = 'EMAIL_EXISTS'
-    throw error
-  }
-
+ if(existing) {
+  throw new Error('Email Already Exists!')
+ } 
   return await prisma.newsLetter.create({
     data: {
       email,

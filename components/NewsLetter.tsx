@@ -23,13 +23,7 @@ export default function NewsLetter() {
       setIsLoading(false)
       formRef.current?.reset()
     } catch (err: any) {
-      console.error('Error submitting email:', err)
-
-      if (err?.code === 'EMAIL_EXISTS' || err?.message.includes('already')) {
-        setErrorMsg('This email is already subscribed.')
-      } else {
-        setErrorMsg('Something went wrong. Please try again.')
-      }
+      setErrorMsg(err)
 
       setSuccess(false)
       setError(true)

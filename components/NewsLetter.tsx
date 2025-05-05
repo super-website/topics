@@ -6,6 +6,7 @@ export default function NewsLetter() {
   const [success, setSuccess] = useState(false)
   const [error, setError] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [errorMsg, setErrorMsg] = useState('')
 
   const formRef = useRef<HTMLFormElement>(null)
 
@@ -21,8 +22,15 @@ export default function NewsLetter() {
       setError(false)
       setIsLoading(false)
       formRef.current?.reset()
-    } catch (error) {
-      console.error('Error submitting email:', error)
+    } catch (err: any) {
+      console.error('Error submitting email:', err)
+
+      if (err?.code === 'EMAIL_EXISTS' || err?.message.includes('already')) {
+        setErrorMsg('This email is already subscribed.')
+      } else {
+        setErrorMsg('Something went wrong. Please try again.')
+      }
+
       setSuccess(false)
       setError(true)
       setIsLoading(false)

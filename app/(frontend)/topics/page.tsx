@@ -5,6 +5,25 @@ import Image from 'next/image'
 import Link from 'next/link'
 import Sidebar from '@/components/Sidebar'
 import Content from '@/components/Content'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Explore Topics',
+  description:
+    'Discover comprehensive, free educational resources tailored for students in Pakistan. Education With Hamza offers expertly crafted notes and learning materials for FSC, 1st year, and 2nd year students to help them succeed in board exams.',
+  keywords: [
+    'Education With Hamza',
+    'FSC notes Pakistan',
+    '1st year notes',
+    '2nd year notes',
+    'free board exam preparation',
+    'Pakistani curriculum resources',
+    'education with hamza pdf',
+    'free study material',
+    'FSc English notes',
+  ],
+}
+
 export default function Page({
   searchParams,
 }: {

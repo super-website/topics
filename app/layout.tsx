@@ -1,6 +1,5 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import { Hind } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/react'
 
 export const metadata: Metadata = {
@@ -9,9 +8,9 @@ export const metadata: Metadata = {
     template: '%s | Education With Hamza',
   },
   description:
-    'Education With US offers high-quality online courses and resources to help you learn and grow in various subjects. Learn at your own pace with expert-led content.',
+    'Education With Hamza offers high-quality online courses and resources to help you excel in academics. Learn at your own pace with expertly crafted content for Pakistani students.',
   keywords:
-    'online education, learn online, courses, e-learning, study resources, education with hamza, education with us, education',
+    'online education, FSC notes, 1st year, 2nd year, board exam prep, education with hamza, study resources, e-learning, free study material',
 }
 
 export default function RootLayout({

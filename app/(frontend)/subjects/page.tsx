@@ -43,7 +43,7 @@ export default async function Page() {
         </h2>
         <p className='my-5'>
           This section offers a wide range of subjects to help you navigate your
-          academic interests more effectively. Whether you're studying for
+          academic interests more effectively. Whether you &#39; re studying for
           exams, revising concepts, or diving deeper into a particular topic,
           each subject page connects you with curated study materials,
           topic-wise notes, and helpful resources.
@@ -58,8 +58,9 @@ export default async function Page() {
         <p>
           We continuously update subjects with the latest and most relevant
           material. Bookmark your favorite subjects and check back regularly for
-          new content. Whether you're in school, college, or just exploring a
-          new topic, you'll find reliable and well-structured support here.
+          new content. Whether you &#39; re in school, college, or just
+          exploring a new topic, you &#39; ll find reliable and well-structured
+          support here.
         </p>
       </div>
     </div>

@@ -31,6 +31,9 @@ export const getAllTopics = async (query: string) => {
       include: {
         subject: true,
       },
+      orderBy: {
+        createdAt: 'desc',
+      },
     })
   }
 

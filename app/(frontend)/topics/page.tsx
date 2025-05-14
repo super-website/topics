@@ -6,6 +6,7 @@ import Link from 'next/link'
 import Sidebar from '@/components/Sidebar'
 import Content from '@/components/Content'
 import { Metadata } from 'next'
+import AdSlot from '@/components/AdsComponent'
 
 export const metadata: Metadata = {
   title: 'Explore Topics',
@@ -40,20 +41,10 @@ export default function Page({
           <Content query={query} />
         </div>
         <div className='hidden md:block'>
-          <Link
-            href='https://www.youtube.com/@EducationWithHamza-g8v'
-            target='_blank'
-          >
-            <h1 className='text-xl font-bold mb-3'>Advertisement</h1>
-            <Image
-              src={adsImg}
-              alt='ads'
-              height={600}
-              width={250}
-              className='object-cover'
-              priority
-            />
-          </Link>
+          <div className='my-4'>
+            <p className='text-xs text-gray-500 mb-1'>Advertisement</p>
+            <AdSlot adClient='ca-pub-7339717436236652' adSlot='7306166999' />
+          </div>
         </div>
       </div>
     </>

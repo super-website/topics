@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   description:
     'Discover comprehensive, free educational resources tailored for students in Pakistan. Education With Hamza offers expertly crafted notes and learning materials for FSC, 1st year, and 2nd year students to help them succeed in board exams.',
   keywords: [
-    'Education With Hamza',
+    'education with hamza',
     'FSC notes Pakistan',
     '1st year notes',
     '2nd year notes',
@@ -41,10 +41,8 @@ export default function Page({
           <Content query={query} />
         </div>
         <div className='hidden md:block'>
-          <div className='my-4'>
-            <p className='text-xs text-gray-500 mb-1'>Advertisement</p>
-            <AdSlot adClient='ca-pub-7339717436236652' adSlot='7306166999' />
-          </div>
+          <p className='text-xs text-gray-500 mb-1'>Advertisement</p>
+          <AdSlot adClient='ca-pub-7339717436236652' adSlot='7306166999' />
         </div>
       </div>
     </>

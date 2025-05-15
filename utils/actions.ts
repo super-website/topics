@@ -781,3 +781,59 @@ export const subscribeEmail = async (formData: FormData) => {
     },
   })
 }
+export const updateScheme = async (formData: FormData) => {
+  const schemeId = formData.get('schemeId') as string
+  const title = formData.get('title') as string
+  const existingFile = formData.get('existingFile') as string
+  const newFile = formData.get('url') as File
+
+  const isValidNewFile = newFile && newFile.size > 0
+
+  if (!schemeId || !title || (!existingFile && !newFile)) {
+    throw new Error('Scheme ID, title, and a PDF file are required')
+  }
+
+  const scheme = await prisma.scheme.findUnique({ where: { id: schemeId } })
+  if (!scheme) throw new Error('Scheme not found')
+
+  let uploadedFileUrl = existingFile
+
+  if (isValidNewFile) {
+    const buffer = Buffer.from(await newFile.arrayBuffer())
+
+    const uploaded = await new Promise<{
+      secure_url: string
+      public_id: string
+    }>((resolve, reject) => {
+      cloudinary.uploader
+        .upload_stream(
+          {
+            folder: 'pdfs',
+            resource_type: 'raw',
+            format: 'pdf',
+          },
+          (error, result) => {
+            if (error || !result) reject(error || new Error('Upload failed'))
+            else
+              resolve({
+                secure_url: result.secure_url,
+                public_id: result.public_id,
+              })
+          }
+        )
+        .end(buffer)
+    })
+
+    uploadedFileUrl = uploaded.secure_url
+  }
+
+  await prisma.scheme.update({
+    where: { id: schemeId },
+    data: {
+      title,
+      url: uploadedFileUrl ? uploadedFileUrl : existingFile,
+    },
+  })
+
+  redirect(`/control/scheme`)
+}

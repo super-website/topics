@@ -14,14 +14,14 @@ export const metadata: Metadata = {
     'Discover comprehensive, free educational resources tailored for students in Pakistan. Education With Hamza offers expertly crafted notes and learning materials for FSC, 1st year, and 2nd year students to help them succeed in board exams.',
   keywords: [
     'education with hamza',
-    'FSC notes Pakistan',
+    'fsc notes pakistan',
     '1st year notes',
     '2nd year notes',
     'free board exam preparation',
-    'Pakistani curriculum resources',
+    'pakistani curriculum resources',
     'education with hamza pdf',
     'free study material',
-    'FSc English notes',
+    'fsc English notes',
   ],
 }
 

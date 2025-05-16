@@ -835,5 +835,5 @@ export const updateScheme = async (formData: FormData) => {
     },
   })
 
-  redirect(`/control/scheme`)
+  redirect("/control/scheme")
 }

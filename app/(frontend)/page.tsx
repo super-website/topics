@@ -156,15 +156,13 @@ export default async function page() {
       </section>
 
       <section className='mt-24 px-10 md:px-0'>
-        <h2 className='text-3xl font-bold mb-4 text-center'>
-          Connect with Us
-        </h2>
+        <h2 className='text-3xl font-bold mb-4 text-center'>Connect with Us</h2>
         <p className='text-center mb-8'>
           Stay updated with our latest content and announcements. Follow us on
           our social media channels!
         </p>
 
-        <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
+        <div className=' grid-cols-1 md:grid-cols-3 gap-6  hidden md:grid'>
           {/* WhatsApp Card */}
           <div className='card w-96 bg-base-100 shadow-sm'>
             <div className='card-body items-center text-center'>

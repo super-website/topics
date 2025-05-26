@@ -2,12 +2,40 @@
 import { getAllPdf, getSinglePdf, updateDownloadCount } from '@/utils/actions'
 import React, { useState, useEffect } from 'react'
 import pdfIcon from '@/public/images/pdf.png'
+import { Metadata } from 'next'
 
 interface Pdf {
   id: string
   title: string
   url: string
   download: number
+}
+
+type Props = {
+  params: Promise<{ id: string }>
+}
+
+export const generateMetadata = async ({
+  params,
+}: Props): Promise<Metadata> => {
+  const id = (await params).id
+  const pdf = await getSinglePdf(id)
+
+  if (!pdf) {
+    return {
+      title: 'pdf Not Found',
+      description: 'This pdf does not exist.',
+      keywords: ['not found', 'error', 'missing pdf'],
+    }
+  }
+
+  return {
+    title: {
+      absolute: pdf.title || 'pdf',
+    },
+    description: pdf.title || 'Learn more about this pdf.',
+    keywords: pdf.title.toLowerCase() || [],
+  }
 }
 
 export default function SinglePdf({ pdf }: { pdf: Pdf }) {

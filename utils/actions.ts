@@ -11,7 +11,6 @@ import {
   UploadApiErrorResponse,
   UploadApiResponse,
 } from 'cloudinary'
-import stream from 'stream'
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_NAME,
@@ -572,6 +571,12 @@ export const getAllPdf = async (query: string, limit: number) => {
   return await prisma.pdf.findMany(findOptions)
 }
 
+export const getSinglePdf = async (id: string) => {
+  return await prisma.pdf.findUnique({
+    where: { id },
+  })
+}
+
 export const updateDownloadCount = async (id: string) => {
   const pdf = await prisma.pdf.findUnique({
     where: { id },
@@ -835,5 +840,5 @@ export const updateScheme = async (formData: FormData) => {
     },
   })
 
-  redirect("/control/scheme")
+  redirect('/control/scheme')
 }

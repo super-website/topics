@@ -5,6 +5,7 @@ import pdfIcon from '@/public/images/pdf.png'
 import { usePathname, useSearchParams, useRouter } from 'next/navigation'
 import { updateDownloadCount } from '@/utils/actions'
 import AdSlot from './AdsComponent'
+import Link from 'next/link'
 
 interface Pdf {
   id: string
@@ -107,7 +108,11 @@ export default function PDFCard({ pdfs }: PDFCardProps) {
             const isBouncing = loading === null && pdf.id === recentlyDownloaded
 
             return (
-              <div key={pdf.id} className='card w-full bg-base-100 shadow-xl'>
+              <Link
+                key={pdf.id}
+                className='card w-full bg-base-100 shadow-xl'
+                href={`/notes-pdf/${pdf.id}`}
+              >
                 <figure>
                   <Image
                     src={pdfIcon}
@@ -120,6 +125,8 @@ export default function PDFCard({ pdfs }: PDFCardProps) {
                 <div className='card-body py-0 my-0'>
                   <h2 className='card-title text-xs'>{pdf.title}</h2>
                 </div>
+                {/* wanted to visit single pdf page */}
+
                 <div className='card-actions flex items-center justify-between p-5'>
                   <button
                     onClick={() => handleDownload(pdf)}
@@ -153,7 +160,7 @@ export default function PDFCard({ pdfs }: PDFCardProps) {
                     {pdf.download}
                   </p>
                 </div>
-              </div>
+              </Link>
             )
           })
         )}

@@ -1,5 +1,6 @@
 import {
   getAllGallery,
+  getAllPdf,
   getAllScheme,
   getAllSubject,
   getAllTopics,
@@ -28,6 +29,7 @@ export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
   const schemes = await getAllScheme()
   const topics = await getAllTopics('')
   const images = await getAllGallery()
+  const pdfs = await getAllPdf('', 100)
   const topicsInside: Topic[] = Array.isArray(topics)
     ? topics
     : topics.topics || []
@@ -49,6 +51,12 @@ export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
     lastModified: topic.createdAt.toISOString(),
     changeFrequency: 'daily' as const,
     priority: 0.7,
+  }))
+
+  const pdfUrls = pdfs.map((pdf) => ({
+    url: `https://educationwithhamza.vercel.app/notes-pdf/${pdf.id}`,
+    changeFrequency: 'daily' as const,
+    priority: 0.8,
   }))
 
   return [
@@ -97,5 +105,6 @@ export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
     ...urls,
     ...topicUrls,
     ...schemesUrls,
+    ...pdfUrls,
   ]
 }

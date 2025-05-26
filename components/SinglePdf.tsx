@@ -10,31 +10,27 @@ interface Pdf {
   url: string
   download: number
 }
-
 type Props = {
-  params: Promise<{ id: string }>
+  params: { id: string }
 }
 
 export const generateMetadata = async ({
   params,
 }: Props): Promise<Metadata> => {
-  const id = (await params).id
-  const pdf = await getSinglePdf(id)
+  const pdf = await getSinglePdf(params.id)
 
   if (!pdf) {
     return {
-      title: 'pdf Not Found',
-      description: 'This pdf does not exist.',
+      title: 'PDF Not Found',
+      description: 'This PDF does not exist.',
       keywords: ['not found', 'error', 'missing pdf'],
     }
   }
 
   return {
-    title: {
-      absolute: pdf.title || 'pdf',
-    },
-    description: pdf.title || 'Learn more about this pdf.',
-    keywords: pdf.title.toLowerCase() || [],
+    title: pdf.title,
+    description: `Learn more about ${pdf.title}`,
+    keywords: pdf.title.toLowerCase().split(' '),
   }
 }
 

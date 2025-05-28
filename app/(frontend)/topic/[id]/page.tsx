@@ -29,7 +29,7 @@ export const generateMetadata = async ({
   if (!topic) {
     return {
       title: 'Topic Not Found',
-      description: 'This topic does not exist.',
+      description: 'This topic does not exists.',
       keywords: ['not found', 'error', 'missing topic'],
     }
   }

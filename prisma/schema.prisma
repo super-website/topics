@@ -66,7 +66,6 @@ model Gallery {
   id        String   @id @default(uuid()) @map("_id")
   title     String
   images    Json   
-  
   createdAt DateTime @default(now())
 }
 
@@ -83,9 +82,14 @@ model pdf {
   id        String   @id @default(uuid()) @map("_id")
   title     String
   url       String
+  tags     String[]
+  like    Int @default(0)
   createdAt DateTime @default(now())
   download  Int @default(0)
 }
+
+
+
 
 
 model Scheme {

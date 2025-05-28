@@ -7,6 +7,7 @@ export default function HomeLayout({
 }: {
   children: React.ReactNode
 }) {
+  
   return (
     <div>
       <Suspense fallback={<p className='loading-spinner'></p>}>

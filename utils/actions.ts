@@ -498,6 +498,7 @@ export const createPdf = async (formData: FormData) => {
   try {
     const title = formData.get('title') as string
     const file = formData.get('pdf') as File
+    const tags = formData.get('tags') as string
 
     if (!title || !file) {
       throw new Error('Title and file are required')
@@ -506,6 +507,11 @@ export const createPdf = async (formData: FormData) => {
     if (file.type !== 'application/pdf') {
       throw new Error('Only PDF files are allowed')
     }
+
+    const tagsArray = tags
+      .split(',')
+      .map((tag) => tag.trim())
+      .filter((tag) => tag.length > 0)
 
     const arrayBuffer = await file.arrayBuffer()
     const buffer = Buffer.from(arrayBuffer)
@@ -538,6 +544,7 @@ export const createPdf = async (formData: FormData) => {
       data: {
         title,
         url: result.secure_url,
+        tags: tagsArray,
       },
     })
   } catch (error: any) {
@@ -549,6 +556,27 @@ export const createPdf = async (formData: FormData) => {
   }
 
   redirect('/control/pdf')
+}
+
+export const incrementPdfLike = async (formData: FormData) => {
+  const id = formData.get('id') as string
+  const action = formData.get('like') as string
+
+  if (!id) {
+    throw new Error('Invalid form submission')
+  }
+
+  const pdf = await prisma.pdf.findUnique({ where: { id } })
+  if (!pdf) throw new Error('pdf not found')
+
+  await prisma.pdf.update({
+    where: { id },
+    data: {
+      like: pdf.like + 1,
+    },
+  })
+
+  revalidatePath(`/notes-pdf/${id}`)
 }
 
 export const getAllPdf = async (query: string, limit: number) => {

@@ -197,7 +197,7 @@ export default async function page() {
             <div className='card bg-white shadow-lg hover:shadow-xl transition'>
               <div className='card-body'>
                 <h3 className='card-title text-lg text-primary'>
-                  Tajdar-e-Haram
+                  Tajdar e Haram
                 </h3>
                 <p>
                   A powerful and moving tribute recited by many famous artists.

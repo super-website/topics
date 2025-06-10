@@ -88,7 +88,7 @@ export default function HomeNavbar() {
             </div>
             <ul
               tabIndex={0}
-              className='menu menu-sm dropdown-content bg-base-100 rounded-box w-40 mt-4 shadow-2xl'
+              className='menu menu-sm dropdown-content bg-base-100 rounded-box w-40 mt-4 shadow-2xl z-10'
             >
               {navItems.map((item) => (
                 <li key={item.id}>

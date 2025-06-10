@@ -106,6 +106,12 @@ export default function SinglePdf({ pdf }: { pdf: Pdf }) {
             </form>
           </div>
         </div>
+        <p className='text-gray-700 mt-5'>
+          The {pdf.title} provides comprehensive study material to help students
+          grasp key concepts effectively. This resource is designed to enhance
+          learning and exam preparation, ensuring a deeper understanding of
+          essential topics. Download now to boost your academic success.
+        </p>
       </div>
 
       {/* Related PDFs Section */}

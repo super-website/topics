@@ -581,9 +581,6 @@ export const incrementPdfLike = async (formData: FormData) => {
 
 export const getAllPdf = async (query: string, limit: number) => {
   const findOptions: any = {
-    orderBy: {
-      download: 'desc',
-    },
     take: limit,
   }
 

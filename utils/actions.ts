@@ -497,15 +497,11 @@ export const deleteComment = async (formData: FormData) => {
 export const createPdf = async (formData: FormData) => {
   try {
     const title = formData.get('title') as string
-    const file = formData.get('pdf') as File
+    const pdf = formData.get('pdf') as string
     const tags = formData.get('tags') as string
 
-    if (!title || !file) {
-      throw new Error('Title and file are required')
-    }
-
-    if (file.type !== 'application/pdf') {
-      throw new Error('Only PDF files are allowed')
+    if (!title || !pdf) {
+      throw new Error('Title and pdf are required')
     }
 
     const tagsArray = tags
@@ -513,37 +509,37 @@ export const createPdf = async (formData: FormData) => {
       .map((tag) => tag.trim())
       .filter((tag) => tag.length > 0)
 
-    const arrayBuffer = await file.arrayBuffer()
-    const buffer = Buffer.from(arrayBuffer)
+    // const arrayBuffer = await file.arrayBuffer()
+    // const buffer = Buffer.from(arrayBuffer)
 
-    const result = await new Promise<UploadApiResponse>((resolve, reject) => {
-      const stream = cloudinary.uploader.upload_stream(
-        {
-          folder: 'pdfs',
-          resource_type: 'raw',
-          transformation: [
-            {
-              width: 1000,
-              height: 1000,
-              crop: 'limit',
-            },
-          ],
-        },
-        (error, result) => {
-          if (error || !result) {
-            return reject(error || new Error('Upload failed'))
-          }
-          resolve(result)
-        }
-      )
+    // const result = await new Promise<UploadApiResponse>((resolve, reject) => {
+    //   const stream = cloudinary.uploader.upload_stream(
+    //     {
+    //       folder: 'pdfs',
+    //       resource_type: 'raw',
+    //       transformation: [
+    //         {
+    //           width: 1000,
+    //           height: 1000,
+    //           crop: 'limit',
+    //         },
+    //       ],
+    //     },
+    //     (error, result) => {
+    //       if (error || !result) {
+    //         return reject(error || new Error('Upload failed'))
+    //       }
+    //       resolve(result)
+    //     }
+    //   )
 
-      stream.end(buffer)
-    })
+    //   stream.end(buffer)
+    // })
 
     await prisma.pdf.create({
       data: {
         title,
-        url: result.secure_url,
+        url: pdf,
         tags: tagsArray,
       },
     })

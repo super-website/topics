@@ -120,3 +120,6 @@ model NewsLetter {
   email       String
   createdAt     DateTime  @default(now())
 }
+
+
+

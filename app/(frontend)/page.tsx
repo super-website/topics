@@ -155,86 +155,6 @@ export default async function page() {
         </div>
       </section>
 
-      <section className='mt-24 px-6 md:px-16'>
-        <div className='bg-base-200 rounded-2xl shadow-xl p-8 text-center'>
-          <h2 className='text-3xl md:text-4xl font-bold text-primary mb-4'>
-            Discover Beautiful Naats on
-          </h2>
-          <Link
-            href='https://naat-stream.vercel.app/'
-            target='_blank'
-            className='btn btn-primary btn-wide text-lg'
-          >
-            Visit NaatStream
-          </Link>
-
-          <p className='mt-4 text-base-content text-sm md:text-base max-w-xl mx-auto'>
-            A spiritual destination to listen to soulful Naats. Free, fast, and
-            beautifully designed for every Muslim.
-          </p>
-
-          <div className='mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3'>
-            <div className='card bg-white shadow-lg hover:shadow-xl transition'>
-              <div className='card-body'>
-                <h3 className='card-title text-lg text-primary'>
-                  Aye Rasule Ameen
-                </h3>
-                <p>
-                  A timeless Naat expressing love for the Prophet Muhammad ﷺ.
-                </p>
-                <div className='card-actions justify-end'>
-                  <Link
-                    href='https://naat-stream.vercel.app/naats/aye-rasule-ameen-2025-05-26'
-                    className='btn btn-sm btn-outline btn-primary'
-                    target='_blank'
-                  >
-                    Listen
-                  </Link>
-                </div>
-              </div>
-            </div>
-
-            <div className='card bg-white shadow-lg hover:shadow-xl transition'>
-              <div className='card-body'>
-                <h3 className='card-title text-lg text-primary'>
-                  Tajdar e Haram
-                </h3>
-                <p>
-                  A powerful and moving tribute recited by many famous artists.
-                </p>
-                <div className='card-actions justify-end'>
-                  <Link
-                    href='https://naat-stream.vercel.app/naats/tajdar-e-haram-2025-05-26'
-                    className='btn btn-sm btn-outline btn-primary'
-                    target='_blank'
-                  >
-                    Listen
-                  </Link>
-                </div>
-              </div>
-            </div>
-
-            <div className='card bg-white shadow-lg hover:shadow-xl transition'>
-              <div className='card-body'>
-                <h3 className='card-title text-lg text-primary'>
-                  Ya Nabi Salam Alaika
-                </h3>
-                <p>A poetic masterpiece in praise of the Prophet ﷺ.</p>
-                <div className='card-actions justify-end'>
-                  <Link
-                    target='_blank'
-                    href='https://naat-stream.vercel.app/naats/ya-nabi-salam-alaika-ya-rasool-salam-alaika-naat-mp3-download-2025-05-28'
-                    className='btn btn-sm btn-outline btn-primary'
-                  >
-                    Listen
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <section className='mt-24 px-10 md:px-0'>
         <h2 className='text-3xl font-bold mb-4 text-center'>Connect with Us</h2>
         <p className='text-center mb-8'>
@@ -243,7 +163,6 @@ export default async function page() {
         </p>
 
         <div className=' grid-cols-1 md:grid-cols-3 gap-6  hidden md:grid'>
-          {/* WhatsApp Card */}
           <div className='card w-96 bg-base-100 shadow-sm'>
             <div className='card-body items-center text-center'>
               <svg
@@ -266,7 +185,6 @@ export default async function page() {
             </div>
           </div>
 
-          {/* YouTube Card */}
           <div className='card w-96 bg-base-100 shadow-sm'>
             <div className='card-body items-center text-center'>
               <svg
@@ -289,7 +207,6 @@ export default async function page() {
             </div>
           </div>
 
-          {/* Facebook Card */}
           <div className='card w-96 bg-base-100 shadow-sm'>
             <div className='card-body items-center text-center'>
               <svg

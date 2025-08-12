@@ -1,4 +1,5 @@
 import Footer from '@/components/Footer'
+import Header from '@/components/Header'
 import HomeNavbar from '@/components/HomerNavbar'
 import React, { Suspense } from 'react'
 
@@ -7,18 +8,13 @@ export default function HomeLayout({
 }: {
   children: React.ReactNode
 }) {
-  
   return (
-    <div>
+    <div className='bg-white'>
       <Suspense fallback={<p className='loading-spinner'></p>}>
         <HomeNavbar />
+        <Header />
       </Suspense>
-      <div
-        className='max-w-7xl mx-auto 
-      py-10 min-h-screen'
-      >
-        {children}
-      </div>
+      <div>{children}</div>
       <Footer />
     </div>
   )

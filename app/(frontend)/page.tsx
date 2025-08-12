@@ -1,237 +1,333 @@
-import NewsLetter from '@/components/NewsLetter'
-import { getAllGallery, getAllScheme, getAllTopics } from '@/utils/actions'
-import Image from 'next/image'
-import Link from 'next/link'
-import React from 'react'
+import { getAllGallery, getAllScheme, getAllTopics } from "@/utils/actions";
+import Link from "next/link";
+import React from "react";
+import type { Metadata } from "next";
+import {
+  BookOpen,
+  Layers,
+  FileText,
+  ClipboardList,
+  GraduationCap,
+  Pen,
+} from "lucide-react";
 
-type GalleryImage = {
-  id: string
-  title: string
-  images: {
-    public_id: string
-    secure_url: string
-  }[]
-  createdAt: Date
-}
+export const metadata: Metadata = {
+  title: "Education With Hamza - Learn the Right Way",
+  description:
+    "Free notes, schemes, guides and community support for students in Pakistan",
+};
 
 interface Topic {
-  id: string
-  title: string
-  short_desc: string
-  createdAt: Date
+  id: string;
+  title: string;
+  short_desc: string;
+  createdAt: Date;
   subject?: {
-    id: string
-    short_name: string
-  } | null
+    id: string;
+    short_name: string;
+  } | null;
 }
 
-export const revalidate = 60
+export default async function Page() {
+  const rawData = await getAllGallery();
+  const topics: Topic[] = (await getAllTopics("")).slice(0, 6);
 
-export default async function page() {
-  const rawData = await getAllGallery()
-  const carouselImages = rawData as GalleryImage[]
-
-  let topics: Topic[] = []
-
-  try {
-    const data = await getAllTopics('')
-    topics = Array.isArray(data) ? data : data.topics || []
-    topics = topics.slice(0, 4)
-  } catch (error) {
-    console.error('Error fetching topics:', error)
-    topics = []
-  }
-
-  const schemes = await getAllScheme()
+  const schemes = await getAllScheme();
+  const banners = await getAllGallery();
 
   return (
     <>
-      <div className='grid grid-cols-1 lg:grid-cols-2 gap-24 items-center min-h-max px-10 md:px-0 md:min-h-screen'>
-        <div>
-          <h1 className='max-w-2xl text-4xl font-bold tracking-tight sm:text-6xl text-center md:text-left'>
-            Discover a New Way to Learn with Hamza
-          </h1>
+      <div className="bg-[#6FE6FC]  p-4  place-items-center">
+        <i className="flex align items-center justify-center">
+          {" "}
+          <Pen className="h-6 w-6 text-[#FFFA8D]" />
+          Where learning meets Hamza’s style.
+        </i>
+      </div>
+      {/* Banner */}
+      {banners.map((banner) => (
+        <section
+          key={banner.id}
+          className="relative h-[400px] bg-cover bg-center bg-no-repeat flex items-center justify-start px-8"
+          style={{
+            backgroundImage: `url(${banner.image})`,
+          }}
+        >
+          <div className="absolute inset-0 bg-black bg-opacity-30" />
 
-          <p className='mt-8 max-w-xl text-lg leading-8 text-center md:text-left'>
-            Welcome to{' '}
-            <span className='text-primary font-bold'>
-              Hamza&#39;s educational
-            </span>{' '}
-            platform, where learning becomes engaging and meaningful. Explore
-            topics, dive into interactive content, and empower your knowledge
-            journey. Designed with students in mind, this site helps make
-            education accessible and enjoyable.
+          <div className="relative z-10 text-left max-w-xl space-y-4 px-10">
+            <h1 className="text-white text-3xl md:text-5xl font-bold drop-shadow-md">
+              {banner.title}
+            </h1>
+            {banner.text && (
+              <p className="text-white text-sm md:text-lg opacity-90 drop-shadow-sm">
+                {banner.text}
+              </p>
+            )}
+          </div>
+        </section>
+      ))}
+
+      {/* Why Choose Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-6 text-center">
+          <h2 className="text-4xl font-bold mb-4 text-slate-800">
+            Why Choose Education with Hamza?
+          </h2>
+          <p className="text-slate-600 text-lg mb-12">
+            Get hands-on experience with real projects and expert guidance.
           </p>
 
-          <div className='mt-10'>
-            <Link href='/topics' className='btn btn-primary'>
-              Explore the Topics
-            </Link>
-          </div>
-        </div>
-
-        <div className='hidden h-[28rem] lg:carousel carousel-center p-4 space-x-4 bg-neutral rounded-box'>
-          {carouselImages
-            .flatMap((image) => image.images)
-            .slice(0, 4)
-            .map((singleImg) => (
-              <div key={singleImg.public_id} className='carousel-item'>
-                <Image
-                  src={singleImg.secure_url}
-                  className='rounded-box h-full w-80 object-cover'
-                  alt='Educational content'
-                  width={320}
-                  height={448}
-                />
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                title: "Free Quality Resources",
+                desc: "Get top-tier notes, schemes, and study materials for 1st & 2nd year – all for free.",
+                color: "bg-blue-600",
+              },
+              {
+                title: "Exam-Focused Content",
+                desc: "Access updated PDFs, past papers, and guides tailored for board success.",
+                color: "bg-green-600",
+              },
+              {
+                title: "Community Support",
+                desc: "Learn with guidance, tips, and help from students and educators alike.",
+                color: "bg-purple-600",
+              },
+            ].map((item, i) => (
+              <div
+                key={i}
+                className="p-6 rounded-2xl bg-gradient-to-br from-gray-50 to-white shadow-md hover:shadow-lg transition"
+              >
+                <div
+                  className={`w-16 h-16 ${item.color} rounded-full flex items-center justify-center mx-auto mb-4`}
+                >
+                  <span className="text-white text-2xl font-bold">★</span>
+                </div>
+                <h3 className="text-xl font-bold text-slate-800 mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-slate-600 text-sm">{item.desc}</p>
               </div>
             ))}
-        </div>
-      </div>
-
-      <section className='mt-24 px-10 md:px-0'>
-        <h2 className='text-3xl font-bold mb-8 text-center'>Featured Topics</h2>
-        <div className='grid gap-6 sm:grid-cols-2 lg:grid-cols-4'>
-          {topics.map((topic) => (
-            <div
-              key={topic.id}
-              className='bg-base-100 border border-gray-200 shadow-md rounded-xl p-6 hover:shadow-lg transition duration-300 flex flex-col justify-between'
-            >
-              <div>
-                <h3 className='text-xl font-semibold mb-3'>{topic.title}</h3>
-                <p className='text-sm text-gray-600 mb-4'>
-                  {topic.short_desc.substring(0, 200)}...
-                </p>
-                {topic.subject && (
-                  <span className='inline-block mb-4 px-2 py-1 text-xs bg-primary text-white rounded'>
-                    {topic.subject.short_name}
-                  </span>
-                )}
-              </div>
-              <Link
-                href={`/topic/${topic.id}`}
-                className='text-sm mt-auto text-primary underline hover:text-primary/80 transition'
-                aria-label={`Read more about ${topic.title}`}
-              >
-                Read More →
-              </Link>
-            </div>
-          ))}
+          </div>
         </div>
       </section>
 
-      <section className='mt-24 px-10 md:px-0'>
-        <h2 className='text-3xl font-bold mb-8 text-center'>
-          Educational Schemes
-        </h2>
-        <div className='grid gap-6 sm:grid-cols-2 lg:grid-cols-3'>
-          {schemes.map((scheme) => (
-            <div
-              key={scheme.id}
-              className='bg-base-100 border border-gray-200 shadow-md rounded-xl p-6 hover:shadow-lg transition duration-300 flex flex-col justify-between'
-            >
-              <div>
-                <h3 className='text-xl font-semibold mb-3'>{scheme.title}</h3>
-                <p className='text-sm text-gray-600 mb-4'>
-                  {scheme.short_desc?.substring(0, 200) ||
-                    'No description available.'}
+      <section className="py-20 bg-[#A8F1FF]">
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 text-center">
+              <div className="flex justify-center mb-4">
+                <div className="bg-cyan-100 p-3 rounded-full">
+                  <GraduationCap className="w-6 h-6 text-cyan-600" />
+                </div>
+              </div>
+              <h3 className="text-xl font-semibold text-cyan-600 mb-2">
+                Grades
+              </h3>
+              <p className="text-gray-700 mb-4">
+                Track academic performance and view grade reports to monitor
+                student progress.
+              </p>
+              <Link
+                href="/grades"
+                className="bg-indigo-500 hover:bg-indigo-600 text-white font-medium py-2 px-6 rounded-full shadow-sm"
+              >
+                View grades
+              </Link>
+            </div>
+
+            <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 text-center">
+              <div className="flex justify-center mb-4">
+                <div className="bg-cyan-100 p-3 rounded-full">
+                  <Layers className="w-6 h-6 text-cyan-600" />
+                </div>
+              </div>
+              <h3 className="text-xl font-semibold text-cyan-600 mb-2">
+                Subjects
+              </h3>
+              <p className="text-gray-700 mb-4">
+                Dive into detailed subjects and get comprehensive educational
+                resources tailored by topic.
+              </p>
+              <Link
+                href="/subjects"
+                className="bg-indigo-500 hover:bg-indigo-600 text-white font-medium py-2 px-6 rounded-full shadow-sm"
+              >
+                Check it out
+              </Link>
+            </div>
+
+            <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 text-center">
+              <div className="flex justify-center mb-4">
+                <div className="bg-cyan-100 p-3 rounded-full">
+                  <FileText className="w-6 h-6 text-cyan-600" />
+                </div>
+              </div>
+              <h3 className="text-xl font-semibold text-cyan-600 mb-2">
+                Notes
+              </h3>
+              <p className="text-gray-700 mb-4">
+                Download and print PDF notes and resources to help reinforce
+                learning offline.
+              </p>
+              <Link
+                href="notes-pdf"
+                className="bg-indigo-500 hover:bg-indigo-600 text-white font-medium py-2 px-6 rounded-full shadow-sm"
+              >
+                View & Download
+              </Link>
+            </div>
+
+            <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 text-center">
+              <div className="flex justify-center mb-4">
+                <div className="bg-cyan-100 p-3 rounded-full">
+                  <ClipboardList className="w-6 h-6 text-cyan-600" />
+                </div>
+              </div>
+              <h3 className="text-xl font-semibold text-cyan-600 mb-2">
+                Schemes
+              </h3>
+              <p className="text-gray-700 mb-4">
+                Access structured schemes of work to align your teaching plan
+                with national standards.
+              </p>
+              <Link
+                href="/scheme"
+                className="bg-indigo-500 hover:bg-indigo-600 text-white font-medium py-2 px-6 rounded-full shadow-sm"
+              >
+                View schemes
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 bg-slate-50">
+        <div className="max-w-7xl mx-auto px-6">
+          <h2 className="text-3xl font-bold text-center mb-6">
+            Featured Topics
+          </h2>
+          {topics.length > 0 ? (
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {topics.map((topic) => (
+                <div
+                  key={topic.id}
+                  className="card bg-white p-5 rounded-xl shadow-sm hover:shadow-lg transition"
+                >
+                  <h3 className="font-semibold text-sm text-slate-800 mb-2">
+                    {topic.title}
+                  </h3>
+                  <p className="text-slate-600 text-sm mb-4">
+                    {topic.short_desc.substring(0, 100)}
+                    {topic.short_desc.length > 100 ? "..." : ""}
+                  </p>
+                  <Link
+                    href={`/topic/${topic.id}`}
+                    className="text-primary font-medium hover:underline text-sm"
+                  >
+                    View Details →
+                  </Link>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-center text-slate-500">
+              No topics available at the moment.
+            </p>
+          )}
+        </div>
+      </section>
+
+      {/* Educational Schemes */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <h2 className="text-3xl font-bold text-center mb-10">
+            Educational Schemes
+          </h2>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {schemes.map((scheme) => (
+              <div
+                key={scheme.id}
+                className="card border border-base-300 p-6 rounded-xl hover:shadow-md"
+              >
+                <h3 className="text-sm font-semibold text-slate-800 mb-2">
+                  {scheme.title}
+                </h3>
+                <p className="text-slate-600 text-sm mb-3">
+                  {scheme.short_desc.substring(0, 100) + "..." ||
+                    "No description available."}
                 </p>
                 {scheme.class && (
-                  <span className='inline-block mb-4 px-2 py-1 text-xs bg-secondary text-white rounded'>
-                    {scheme.class}
-                  </span>
+                  <div className="badge badge-secondary mb-3">
+                    {scheme.class.title}
+                  </div>
                 )}
-              </div>
-              {scheme.id && (
                 <Link
                   href={`/scheme/${scheme.id}`}
-                  className='text-sm mt-auto text-primary underline hover:text-primary/80 transition'
-                  aria-label={`Read more about ${scheme.title}`}
+                  className="text-primary text-sm font-medium hover:underline"
                 >
                   Read More →
                 </Link>
-              )}
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className='mt-24 px-10 md:px-0'>
-        <h2 className='text-3xl font-bold mb-4 text-center'>Connect with Us</h2>
-        <p className='text-center mb-8'>
-          Stay updated with our latest content and announcements. Follow us on
-          our social media channels!
-        </p>
-
-        <div className=' grid-cols-1 md:grid-cols-3 gap-6  hidden md:grid'>
-          <div className='card w-96 bg-base-100 shadow-sm'>
-            <div className='card-body items-center text-center'>
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                className='size-10 text-green-500 mb-3'
-                fill='currentColor'
-                viewBox='0 0 24 24'
-              >
-                <path d='M12.003 2.002a9.947 9.947 0 0 0-8.094 15.765L2 22l4.371-1.834A9.948 9.948 0 1 0 12.003 2.002zm0 18.035a8.084 8.084 0 0 1-4.142-1.16l-.296-.175-2.589 1.087.692-2.717-.183-.28a8.087 8.087 0 1 1 6.518 3.245zm4.41-6.218c-.222-.111-1.31-.646-1.514-.72-.203-.074-.352-.111-.5.112s-.574.719-.705.868c-.13.148-.26.166-.482.056-.222-.111-.936-.345-1.782-1.098-.658-.586-1.102-1.309-1.23-1.531-.13-.222-.014-.341.097-.452.1-.1.222-.26.334-.389.112-.13.148-.222.222-.37.074-.148.037-.278-.018-.389-.056-.111-.5-1.205-.686-1.652-.181-.435-.367-.376-.5-.383-.13-.007-.278-.009-.426-.009a.82.82 0 0 0-.593.278c-.203.222-.778.76-.778 1.853 0 1.093.797 2.15.908 2.297.111.148 1.57 2.4 3.808 3.366.532.23.947.368 1.27.47.533.17 1.017.146 1.399.089.427-.063 1.31-.535 1.495-1.05.184-.516.184-.958.13-1.05-.056-.093-.204-.148-.426-.26z' />
-              </svg>
-              <h2 className='text-xl font-bold'>WhatsApp</h2>
-              <a
-                href='https://www.whatsapp.com/channel/0029VaxtocFGU3BNpMi17O1x'
-                target='_blank'
-                rel='noopener noreferrer'
-                className='mt-2 text-sm text-primary hover:underline'
-              >
-                Follow us on WhatsApp
-              </a>
-            </div>
-          </div>
-
-          <div className='card w-96 bg-base-100 shadow-sm'>
-            <div className='card-body items-center text-center'>
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                className='size-10 text-red-600 mb-3'
-                viewBox='0 0 24 24'
-                fill='currentColor'
-              >
-                <path d='M23.498 6.186a2.971 2.971 0 0 0-2.093-2.094C19.726 3.5 12 3.5 12 3.5s-7.726 0-9.405.592A2.971 2.971 0 0 0 .502 6.186C0 7.865 0 12 0 12s0 4.135.502 5.814a2.971 2.971 0 0 0 2.093 2.094C4.274 20.5 12 20.5 12 20.5s7.726 0 9.405-.592a2.971 2.971 0 0 0 2.093-2.094C24 16.135 24 12 24 12s0-4.135-.502-5.814zM9.75 15.02V8.98l6.5 3.02-6.5 3.02z' />
-              </svg>
-              <h2 className='text-xl font-bold'>YouTube</h2>
-              <a
-                href='https://www.youtube.com/@EducationWithHamza-g8v'
-                target='_blank'
-                rel='noopener noreferrer'
-                className='mt-2 text-sm text-primary hover:underline'
-              >
-                Watch our videos
-              </a>
-            </div>
-          </div>
-
-          <div className='card w-96 bg-base-100 shadow-sm'>
-            <div className='card-body items-center text-center'>
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                className='size-10 text-blue-800 mb-3'
-                viewBox='0 0 24 24'
-                fill='currentColor'
-              >
-                <path d='M22.675 0H1.325C.593 0 0 .593 0 1.325v21.351C0 23.408.593 24 1.325 24h11.494v-9.294H9.692v-3.622h3.127V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.464.098 2.795.143v3.24l-1.917.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116C23.407 24 24 23.407 24 22.676V1.325C24 .593 23.407 0 22.675 0z' />
-              </svg>
-              <h2 className='text-xl font-bold'>Facebook</h2>
-              <a
-                href='https://www.facebook.com/profile.php?id=61575230046056'
-                target='_blank'
-                rel='noopener noreferrer'
-                className='mt-2 text-sm text-primary hover:underline'
-              >
-                Follow us on Facebook
-              </a>
-            </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      <NewsLetter />
+      {/* Connect Section */}
+      <section className="py-20 bg-slate-50">
+        <div className="max-w-7xl mx-auto px-6 text-center">
+          <h2 className="text-3xl font-bold mb-4">Connect with Us</h2>
+          <p className="mb-10 text-slate-600">
+            Stay updated with our latest content and announcements.
+          </p>
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              {
+                title: "WhatsApp",
+                color: "text-green-500",
+                icon: "💬",
+                link: "https://www.whatsapp.com/channel/0029VaxtocFGU3BNpMi17O1x",
+              },
+              {
+                title: "YouTube",
+                color: "text-red-600",
+                icon: "▶️",
+                link: "https://www.youtube.com/@EducationWithHamza-g8v",
+              },
+              {
+                title: "Facebook",
+                color: "text-blue-800",
+                icon: "📘",
+                link: "https://www.facebook.com/profile.php?id=61575230046056",
+              },
+            ].map((platform, i) => (
+              <div
+                key={i}
+                className="card p-6 bg-base-100 shadow-sm text-center"
+              >
+                <div className={`text-3xl mb-3 ${platform.color}`}>
+                  {platform.icon}
+                </div>
+                <h3 className="text-xl font-bold text-slate-800">
+                  {platform.title}
+                </h3>
+                <a
+                  href={platform.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-2 inline-block text-sm text-primary hover:underline"
+                >
+                  Follow us on {platform.title}
+                </a>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
     </>
-  )
+  );
 }

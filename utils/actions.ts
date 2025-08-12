@@ -6,11 +6,8 @@ import { redirect } from 'next/navigation'
 import { cookies } from 'next/headers'
 import bcrypt from 'bcryptjs'
 import { SignJWT } from 'jose'
-import {
-  v2 as cloudinary,
-  UploadApiErrorResponse,
-  UploadApiResponse,
-} from 'cloudinary'
+import { v2 as cloudinary, UploadApiResponse } from 'cloudinary'
+import { Prisma } from '@prisma/client'
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_NAME,
@@ -27,28 +24,20 @@ export const getAllSubject = async () => {
 export const getAllTopics = async (query: string) => {
   if (!query) {
     return await prisma.topics.findMany({
-      include: {
-        subject: true,
-      },
-      orderBy: {
-        createdAt: 'desc',
-      },
+      include: { subject: true },
+      orderBy: { createdAt: 'desc' },
     })
   }
 
-  return {
-    topics: await prisma.topics.findMany({
-      where: {
-        title: {
-          contains: query.toLowerCase(),
-          mode: 'insensitive',
-        },
+  return await prisma.topics.findMany({
+    where: {
+      title: {
+        contains: query.toLowerCase(),
+        mode: 'insensitive',
       },
-      include: {
-        subject: true,
-      },
-    }),
-  }
+    },
+    include: { subject: true },
+  })
 }
 
 export const createTopic = async (formData: FormData) => {
@@ -203,6 +192,7 @@ export const updateSubject = async (formData: FormData) => {
   const name = formData.get('name')
   const short_name = formData.get('short_name')
   const short_desc = formData.get('short_desc')
+  const classEl = formData.get('classId') as string
 
   if (typeof id !== 'string' || !id.trim()) {
     throw new Error('ID is required and must be a valid string.')
@@ -228,6 +218,13 @@ export const updateSubject = async (formData: FormData) => {
       name,
       short_name,
       short_desc,
+      class: classEl
+        ? {
+            connect: {
+              id: classEl,
+            },
+          }
+        : undefined,
     },
   })
 
@@ -239,7 +236,7 @@ export const getSinglSubject = async (id: string) => {
     where: {
       id,
     },
-    include: { topics: true },
+    include: { topics: true, class: true },
   })
 }
 
@@ -349,41 +346,40 @@ export const logout = async () => {
   redirect('/control/login?error=unauthenticated')
 }
 export const createGallery = async (formData: FormData) => {
-  const files = formData.getAll('files') as File[]
+  const file = formData.get('file') as File
   const title = formData.get('title') as string
+  const text = formData.get('text') as string
 
-  if (!title || files.length === 0) {
+  if (!title || !file) {
     throw new Error('Title and files are required')
   }
 
   try {
-    const uploadPromises = files.map(async (file) => {
-      const arrayBuffer = await file.arrayBuffer()
-      const buffer = Buffer.from(arrayBuffer)
+    const imageBuffer = await file.arrayBuffer()
+    const imageBuff = Buffer.from(imageBuffer)
 
-      return new Promise<{ secure_url: string; public_id: string }>(
-        (resolve, reject) => {
-          cloudinary.uploader
-            .upload_stream({ folder: 'gallery' }, (error, result) => {
-              if (error || !result) {
-                return reject(error || new Error('Upload failed'))
-              }
-              resolve({
-                secure_url: result.secure_url,
-                public_id: result.public_id,
-              })
-            })
-            .end(buffer)
-        }
-      )
-    })
-
-    const uploadedImages = await Promise.all(uploadPromises)
+    const imageResult = await new Promise<UploadApiResponse>(
+      (resolve, reject) => {
+        const stream = cloudinary.uploader.upload_stream(
+          {
+            folder: 'banner/images',
+            resource_type: 'image',
+          },
+          (error, result) => {
+            if (error || !result)
+              return reject(error || new Error('Upload failed'))
+            resolve(result)
+          }
+        )
+        stream.end(imageBuff)
+      }
+    )
 
     await prisma.gallery.create({
       data: {
         title,
-        images: uploadedImages,
+        image: imageResult.secure_url,
+        text,
       },
     })
     revalidatePath('/control/gallery')
@@ -445,7 +441,7 @@ export const updateGallery = async (formData: FormData) => {
 
   await prisma.gallery.update({
     where: { id: galleryId },
-    data: { title, images },
+    data: { title, image: images.slice(0, 1) },
   })
   redirect(`/control/gallery/edit-gallery/${galleryId}?success=true`)
 }
@@ -497,50 +493,64 @@ export const deleteComment = async (formData: FormData) => {
 export const createPdf = async (formData: FormData) => {
   try {
     const title = formData.get('title') as string
-    const pdf = formData.get('pdf') as string
     const tags = formData.get('tags') as string
+    const classEl = formData.get('classId') as string
+    const file = formData.get('file') as File
 
-    if (!title || !pdf) {
+    console.log(title, tags, classEl, file)
+
+    if (!title || !classEl) {
       throw new Error('Title and pdf are required')
     }
+
+    if (file.type !== 'application/pdf') {
+      throw new Error('Only PDF files are allowed')
+    }
+
+    const arrayBuffer = await file.arrayBuffer()
+    const buffer = Buffer.from(arrayBuffer)
+
+    const result = await new Promise<UploadApiResponse>((resolve, reject) => {
+      const stream = cloudinary.uploader.upload_stream(
+        {
+          folder: 'pdfs',
+          resource_type: 'raw',
+          transformation: [
+            {
+              width: 1000,
+              height: 1000,
+              crop: 'limit',
+            },
+          ],
+        },
+        (error, result) => {
+          if (error || !result) {
+            return reject(error || new Error('Upload failed'))
+          }
+          resolve(result)
+        }
+      )
+
+      stream.end(buffer)
+    })
 
     const tagsArray = tags
       .split(',')
       .map((tag) => tag.trim())
       .filter((tag) => tag.length > 0)
 
-    // const arrayBuffer = await file.arrayBuffer()
-    // const buffer = Buffer.from(arrayBuffer)
-
-    // const result = await new Promise<UploadApiResponse>((resolve, reject) => {
-    //   const stream = cloudinary.uploader.upload_stream(
-    //     {
-    //       folder: 'pdfs',
-    //       resource_type: 'raw',
-    //       transformation: [
-    //         {
-    //           width: 1000,
-    //           height: 1000,
-    //           crop: 'limit',
-    //         },
-    //       ],
-    //     },
-    //     (error, result) => {
-    //       if (error || !result) {
-    //         return reject(error || new Error('Upload failed'))
-    //       }
-    //       resolve(result)
-    //     }
-    //   )
-
-    //   stream.end(buffer)
-    // })
-
     await prisma.pdf.create({
       data: {
         title,
-        url: pdf,
+        url: result.secure_url,
         tags: tagsArray,
+        class: classEl
+          ? {
+              connect: {
+                id: classEl,
+              },
+            }
+          : undefined,
       },
     })
   } catch (error: any) {
@@ -694,7 +704,13 @@ export const createScheme = async (formData: FormData) => {
         title,
         short_desc,
         tags: tagsArray,
-        class: classEl,
+        class: classEl
+          ? {
+              connect: {
+                id: classEl,
+              },
+            }
+          : undefined,
         url: result.secure_url,
       },
     })
@@ -714,6 +730,7 @@ export const getAllScheme = async () => {
     orderBy: {
       createdAt: 'desc',
     },
+    include: { class: true },
   })
 }
 
@@ -721,6 +738,13 @@ export const getSingleScheme = async (id: string) => {
   return await prisma.scheme.findUnique({
     where: {
       id,
+    },
+    include: {
+      class: {
+        include: {
+          pdfs: true,
+        },
+      },
     },
   })
 }
@@ -815,6 +839,7 @@ export const updateScheme = async (formData: FormData) => {
   const title = formData.get('title') as string
   const existingFile = formData.get('existingFile') as string
   const newFile = formData.get('url') as File
+  const classEl = formData.get('classId') as string
 
   const isValidNewFile = newFile && newFile.size > 0
 
@@ -861,8 +886,183 @@ export const updateScheme = async (formData: FormData) => {
     data: {
       title,
       url: uploadedFileUrl ? uploadedFileUrl : existingFile,
+      class: classEl
+        ? {
+            connect: {
+              id: classEl,
+            },
+          }
+        : undefined,
     },
   })
 
   redirect('/control/scheme')
+}
+
+export const getClass = async () => {
+  return await prisma.class.findMany({})
+}
+
+export const getSingleClass = async (id: string) => {
+  return await prisma.class.findUnique({
+    where: { slug: id },
+    include: { subject: true, pdfs: true, schemes: true },
+  })
+}
+
+export const createUser = async (formData: FormData) => {
+  const name = formData.get('name') as string
+  const email = formData.get('email') as string
+  const password = formData.get('password') as string
+  const existingUser = await prisma.user.findUnique({ where: { email } })
+
+  if (existingUser) {
+    return redirect(
+      '/login?error=' + encodeURIComponent('User Already Exists. Login')
+    )
+  }
+
+  const hashedPassword = await bcrypt.hash(password, 10)
+
+  await prisma.user.create({
+    data: {
+      name,
+      email,
+      password: hashedPassword,
+    },
+  })
+
+  redirect('/login?success="User Created! Login Now')
+}
+
+export const userLogin = async (formData: FormData) => {
+  const email = formData.get('email')
+  const password = formData.get('password')
+
+  if (!email || !password) {
+    return redirect(
+      '/login?error=' + encodeURIComponent('Email and password are required.')
+    )
+  }
+
+  if (typeof email !== 'string' || !email.trim()) {
+    return redirect(
+      '/login?error=' + encodeURIComponent('Invalid email format.')
+    )
+  }
+
+  if (typeof password !== 'string' || !password.trim()) {
+    return redirect(
+      '/login?error=' + encodeURIComponent('Invalid password format.')
+    )
+  }
+
+  const user = await prisma.user.findUnique({
+    where: { email },
+  })
+
+  if (!user) {
+    return redirect('/login?error=' + encodeURIComponent('User not found.'))
+  }
+
+  const isMatch = await bcrypt.compare(password, user.password)
+  if (!isMatch) {
+    return redirect(
+      '/login?error=' + encodeURIComponent('Invalid credentials.')
+    )
+  }
+
+  if (!process.env.JWT_SECRET) {
+    throw new Error('JWT_SECRET is not defined in environment variables.')
+  }
+
+  const secret = new TextEncoder().encode(process.env.JWT_SECRET)
+  const token = await new SignJWT({ id: user.id })
+    .setProtectedHeader({ alg: 'HS256' })
+    .setExpirationTime('7d')
+    .sign(secret)
+
+  const cookieStore = await cookies()
+
+  cookieStore.set('userToken', token, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    path: '/',
+    maxAge: 60 * 60 * 24 * 1,
+  })
+
+  cookieStore.set('name', user.name, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    path: '/',
+    maxAge: 60 * 60 * 24 * 1,
+  })
+
+  return redirect(`/`)
+}
+
+export const userLogout = async () => {
+  const cookieStore = await cookies()
+  cookieStore.delete('userToken')
+
+  revalidatePath(`/`)
+  return redirect('/')
+}
+
+export async function searchAll(query: string) {
+  if (!query) return { subjects: [], grades: [], pdfs: [], schemes: [] }
+
+  const search: Prisma.StringFilter = {
+    contains: query,
+    mode: 'insensitive',
+  }
+
+  const [subjects, grades, pdfs, schemes] = await Promise.all([
+    prisma.subject.findMany({
+      where: { name: search },
+    }),
+    prisma.class.findMany({
+      where: {
+        OR: [{ title: search }],
+      },
+    }),
+    prisma.pdf.findMany({
+      where: {
+        OR: [{ title: search }, { tags: { has: query } }],
+      },
+    }),
+    prisma.scheme.findMany({
+      where: {
+        OR: [{ title: search }, { short_desc: search }],
+      },
+    }),
+  ])
+
+  return {
+    subjects,
+    grades,
+    pdfs,
+    schemes,
+  }
+}
+
+export const updateGrade = async (formData: FormData) => {
+  const id = formData.get('id') as string
+  const slug = formData.get('slug') as string
+  const title = formData.get('title') as string
+  const short_desc = formData.get('short_desc') as string
+  const long_desc = formData.get('long_desc') as string
+
+  await prisma.class.update({
+    data: {
+      title,
+      short_desc,
+      long_desc,
+    },
+    where: {
+      id,
+    },
+  })
+
+  redirect(`/control/grades/${slug}/?success=true`)
 }

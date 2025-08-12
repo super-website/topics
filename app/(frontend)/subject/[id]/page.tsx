@@ -4,14 +4,13 @@ import Link from 'next/link'
 import React from 'react'
 
 type Props = {
-  params: Promise<{ id: string }>
+  params: { id: string }
 }
 
 export const generateMetadata = async ({
   params,
 }: Props): Promise<Metadata> => {
-  const id = (await params).id
-  const subject = await getSinglSubject(id)
+  const subject = await getSinglSubject(params.id)
 
   return {
     title: subject?.name || 'Subject',
@@ -33,53 +32,50 @@ export default async function Page({ params }: { params: { id: string } }) {
   }
 
   return (
-    <div className='max-w-3xl mx-5 md:mx-auto'>
-      <div className='mb-6 space-y-6'>
-        <h1 className='text-2xl font-bold text-gray-700'>{subject?.name}</h1>
-        <div className='card bg-base-100 rounded-none p-4'>
-          <p className='text-gray-800 text-opacity-90'>{subject?.short_desc}</p>
+    <div className='max-w-4xl mx-auto px-4 py-10'>
+      <div className='mb-10'>
+        <h1 className='text-xl md:text-3xl font-bold text-gray-800 mb-2'>
+          {subject.name}
+        </h1>
+        <div className='bg-[#6FE6FC] p-5 rounded-lg shadow border border-gray-100'>
+          <p className='text-gray-700'>{subject.short_desc}</p>
         </div>
       </div>
 
-      <div className='flex flex-col gap-4'>
-        {subject?.topics?.length > 0 ? (
+      <div className='flex flex-col gap-6'>
+        {subject.topics?.length > 0 ? (
           subject.topics.map((topic) => (
             <div
-              key={topic?.id}
-              className='card bg-white bg-opacity-80 shadow-lg rounded-none'
+              key={topic.id}
+              className='bg-white shadow-sm hover:shadow-md transition-shadow duration-200 border border-gray-100 rounded-lg p-5'
             >
-              <div className='card-body'>
-                <Link
-                  href={`/topic/${topic.id}`}
-                  className='card-title border-b pb-2 hover:text-primary'
-                >
-                  {topic?.title}
-                </Link>
+              <Link
+                href={`/topic/${topic.id}`}
+                className='text-lg font-semibold text-blue-600 hover:underline block mb-2'
+              >
+                {topic.title}
+              </Link>
 
-                <p className='text-black text-sm border-b pb-2'>
-                  {topic?.short_desc}
-                </p>
+              <p className='text-sm text-gray-700 mb-4'>{topic.short_desc}</p>
 
-                <div className='card-actions justify-between items-center pt-3'>
-                  <span className='text-sm text-gray-800'>
-                    {topic?.createdAt
-                      ? new Date(topic.createdAt).toLocaleDateString('en-US', {
-                          year: 'numeric',
-                          month: 'long',
-                          day: 'numeric',
-                        })
-                      : 'N/A'}
-                  </span>
-
-                  <span className='badge badge-primary badge-lg px-4 py-2'>
-                    {subject?.short_name || 'Unknown'}
-                  </span>
-                </div>
+              <div className='flex items-center justify-between text-sm text-gray-500'>
+                <span>
+                  {topic.createdAt
+                    ? new Date(topic.createdAt).toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                      })
+                    : 'N/A'}
+                </span>
+                <span className='bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-xs font-medium'>
+                  {subject.short_name || 'Unknown'}
+                </span>
               </div>
             </div>
           ))
         ) : (
-          <p className='text-gray-500 text-center'>No topics available.</p>
+          <p className='text-center text-gray-500'>No topics available.</p>
         )}
       </div>
     </div>

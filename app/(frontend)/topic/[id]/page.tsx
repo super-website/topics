@@ -1,7 +1,5 @@
-import { getAllSubject, getAllTopics, getSingleTopic } from '@/utils/actions'
+import { getAllTopics, getSingleTopic } from '@/utils/actions'
 import Link from 'next/link'
-import React from 'react'
-
 import { Metadata } from 'next'
 import AdSlot from '@/components/AdsComponent'
 
@@ -17,150 +15,140 @@ interface Topic {
 }
 
 type Props = {
-  params: Promise<{ id: string }>
+  params: { id: string }
 }
 
 export const generateMetadata = async ({
   params,
 }: Props): Promise<Metadata> => {
-  const id = (await params).id
-  const topic = await getSingleTopic(id)
+  const topic = await getSingleTopic(params.id)
 
   if (!topic) {
     return {
       title: 'Topic Not Found',
-      description: 'This topic does not exists.',
+      description: 'This topic does not exist.',
       keywords: ['not found', 'error', 'missing topic'],
     }
   }
 
   return {
-    title: {
-      absolute: topic.title || 'Topic',
-    },
+    title: topic.title || 'Topic',
     description: topic.short_desc || 'Learn more about this topic.',
     keywords: topic.tags || [],
   }
 }
 
-export default async function Page({ params }: Props) {
-  const id = (await params).id
-  const topic = await getSingleTopic(id)
+export default async function Page({ params }: { params: { id: string } }) {
+  const topic = await getSingleTopic(params.id)
   const topicsData = await getAllTopics('')
 
-  let filteredTopics: Topic[] = []
-
-  if (Array.isArray(topicsData)) {
-    filteredTopics = topicsData.filter(
-      (singleTopic) =>
-        singleTopic?.subject?.id === topic?.subject?.id &&
-        singleTopic.id !== topic?.id
+  if (!topic) {
+    return (
+      <p className='text-red-500 text-center mt-10 text-lg'>Topic not found.</p>
     )
   }
 
+  const relatedTopics = (topicsData || []).filter(
+    (t) => t?.subject?.id === topic.subject?.id && t.id !== topic.id
+  )
+
   return (
-    <div>
-      <div className='breadcrumbs text-sm ml-5 md:ml-0'>
-        <ul>
+    <div className='max-w-3xl mx-auto px-4 py-10 space-y-8'>
+      {/* Breadcrumb */}
+      <nav className='text-sm breadcrumbs'>
+        <ul className='flex flex-wrap gap-1 text-gray-600'>
           <li>
             <Link href='/'>Home</Link>
           </li>
+          {topic.subject && (
+            <li>
+              <Link href={`/subject/${topic.subject.id}`}>
+                {topic.subject.short_name}
+              </Link>
+            </li>
+          )}
           <li>
-            <Link href={`/subject/${topic?.subject?.id}`}>
-              {topic?.subject?.short_name}
-            </Link>
-          </li>
-
-          <li>
-            <span>{topic?.title}</span>
+            <span className='text-gray-800'>{topic.title}</span>
           </li>
         </ul>
+      </nav>
+
+      {/* Short Description */}
+      <div className='bg-[#6FE6FC] p-4 rounded-md shadow-sm'>
+        <p className='text-gray-700 text-sm'>{topic.short_desc}</p>
       </div>
 
-      <div className='max-w-2xl mx-5  md:mx-auto pt-10 space-y-5'>
-        <div className='card bg-info p-4 rounded-none bg-opacity-30'>
-          <p className='text-sm space-y-3'>{topic?.short_desc}</p>
-        </div>
+      {/* Ad */}
+      <div className='text-center'>
+        <p className='text-xs text-gray-500 mb-1'>Advertisement</p>
+        <AdSlot adClient='ca-pub-7339717436236652' adSlot='7306166999' />
+      </div>
 
-        <div className='my-4'>
-          <p className='text-xs text-gray-500 mb-1'>Advertisement</p>
-          <AdSlot adClient='ca-pub-7339717436236652' adSlot='7306166999' />
+      {/* Topic Detail */}
+      <div className='bg-white p-6 shadow-md rounded-md space-y-4'>
+        <h1 className='text-2xl font-bold border-b pb-2'>{topic.title}</h1>
+        <div className='prose prose-sm max-w-none text-gray-800'>
+          <div dangerouslySetInnerHTML={{ __html: topic.long_desc || '' }} />
         </div>
-
-        <div className='card bg-white rounded-none p-4'>
-          <div className='card-title border-b pb-3 border-gray-500'>
-            <h1 className='text-2xl'>{topic?.title}</h1>
-          </div>
-          <div className='card-body border-b border-gray-500 p-2 text-black'>
-            <p dangerouslySetInnerHTML={{ __html: topic?.long_desc || '' }}></p>
-          </div>
-          <div className='card-actions justify-between py-2'>
-            <span>
-              {topic?.createdAt
-                ? new Date(topic.createdAt).toLocaleDateString()
-                : 'N/A'}
+        <div className='flex justify-between text-sm text-gray-600 pt-4 border-t'>
+          <span>
+            {topic.createdAt
+              ? new Date(topic.createdAt).toLocaleDateString()
+              : 'N/A'}
+          </span>
+          {topic.subject?.short_name && (
+            <span className='bg-blue-100 text-blue-700 px-3 py-1 rounded-full'>
+              {topic.subject.short_name}
             </span>
-
-            <span className='badge badge-primary p-4 bg-opacity-80'>
-              {topic?.subject?.short_name}
-            </span>
-          </div>
-        </div>
-
-        <div>
-          {filteredTopics.length > 0 && (
-            <>
-              <div>
-                <h2 className='text-sm'>
-                  More From This {topic?.subject?.short_name}
-                </h2>
-              </div>
-
-              {filteredTopics.map((topic) => (
-                <div className='my-5' key={topic.id}>
-                  <div className='card max-w-sm md:max-w-2xl bg-base-100 card-sm shadow-sm rounded-none'>
-                    <div className='card-body'>
-                      <Link
-                        href={`/topic/${topic.id}`}
-                        className='card-title border-b hover:text-primary'
-                      >
-                        {topic.title}
-                      </Link>
-                      <p className='text-sm mt-2 border-b py-2'>
-                        {topic.short_desc.substring(0, 200)}
-                        {topic.short_desc.length > 200 && (
-                          <>
-                            ...{' '}
-                            <Link
-                              href={`/topic/${topic.id}`}
-                              className='text-primary font-semibold hover:underline'
-                            >
-                              Read more
-                            </Link>
-                          </>
-                        )}
-                      </p>
-                      <div className='justify-between card-actions'>
-                        <span>
-                          {new Date(topic.createdAt).toLocaleDateString()}
-                        </span>
-                        {topic.subject && (
-                          <Link
-                            href={`/subject/${topic.subject.id}`}
-                            className='btn btn-primary'
-                          >
-                            {topic.subject.short_name}
-                          </Link>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </>
           )}
         </div>
       </div>
+
+      {/* Related Topics */}
+      {relatedTopics.length > 0 && (
+        <div className='space-y-4'>
+          <h2 className='text-lg font-semibold text-gray-800'>
+            More from {topic.subject?.short_name}
+          </h2>
+
+          {relatedTopics.map((t) => (
+            <div key={t.id} className='bg-white p-4 rounded-md shadow-sm'>
+              <Link
+                href={`/topic/${t.id}`}
+                className='text-blue-600 font-semibold hover:underline'
+              >
+                {t.title}
+              </Link>
+              <p className='text-sm text-gray-700 mt-2'>
+                {t.short_desc.length > 200 ? (
+                  <>
+                    {t.short_desc.slice(0, 200)}...
+                    <Link
+                      href={`/topic/${t.id}`}
+                      className='text-primary font-medium ml-1'
+                    >
+                      Read more
+                    </Link>
+                  </>
+                ) : (
+                  t.short_desc
+                )}
+              </p>
+              <div className='flex justify-between text-sm text-gray-500 mt-3'>
+                <span>{new Date(t.createdAt).toLocaleDateString()}</span>
+                {t.subject && (
+                  <Link
+                    href={`/subject/${t.subject.id}`}
+                    className='text-blue-600 hover:underline'
+                  >
+                    {t.subject.short_name}
+                  </Link>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   )
 }

@@ -38,6 +38,8 @@ model Subject {
   short_desc  String   
   tags       String[]
   topics      Topics[]  
+  classId   String? 
+  class     Class?    @relation(fields: [classId], references: [id])
 }
 
 
@@ -65,7 +67,8 @@ model Gallery {
 
   id        String   @id @default(uuid()) @map("_id")
   title     String
-  images    Json   
+  image    String 
+  text      String?
   createdAt DateTime @default(now())
 }
 
@@ -86,6 +89,8 @@ model pdf {
   like    Int @default(0)
   createdAt DateTime @default(now())
   download  Int @default(0)
+    classId   String?   
+  class     Class?    @relation(fields: [classId], references: [id])
 }
 
 
@@ -98,9 +103,10 @@ model Scheme {
   short_desc String @db.String
   tags    String[]
   url String
-  class   String
  createdAt DateTime @default(now())
  reviews  Review[]
+  classId   String?   
+  class     Class?    @relation(fields: [classId], references: [id])
  
 }
 
@@ -122,4 +128,25 @@ model NewsLetter {
 }
 
 
+
+
+model Class {
+  id          String   @id @default(uuid()) @map("_id")
+  slug        String   @unique
+  title       String
+  short_desc  String?  @db.String
+  long_desc   String?  @db.String
+  pdfs        pdf[]  
+  subject      Subject[]
+  schemes     Scheme[] 
+}
+
+
+
+model User {
+  id          String   @id @default(uuid()) @map("_id")
+  name        String
+  email        String @unique
+  password      String
+}
 

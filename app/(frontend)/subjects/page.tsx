@@ -15,24 +15,39 @@ export const revalidate = 0
 export default async function Page() {
   const subjects = await getAllSubject()
   return (
-    <div className='max-w-2xl mx-auto px-4 py-6'>
-      <h1 className='text-2xl font-semibold mb-4'>Subjects</h1>
-      <div className='space-y-10'>
+    <div className='max-w-6xl mx-auto px-4 py-6'>
+      <h1 className='text-2xl font-semibold mb-4'>
+        Subjects | Education With Hamza
+      </h1>
+      <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
         {subjects.map((subject) => (
           <div
             key={subject.id}
-            className='card border rounded-none p-4 bg-base-100'
+            className='bg-white rounded-xl shadow-md border border-gray-200 p-6 flex flex-col justify-between transition-transform duration-300 hover:scale-[1.02]'
           >
-            <Link
-              href={`/subject/${subject.id}`}
-              className='text-blue-600 font-medium text-lg hover:underline cursor-pointer'
-            >
-              {subject.name}
-            </Link>
-            <p className='text-gray-500 text-sm'>
-              Contains ({subject.topics.length}) topics.
-            </p>
-            <p className='text-sm mt-4 text-black'>{subject.short_desc}</p>
+            <div>
+              <Link
+                href={`/subject/${subject.id}`}
+                className='text-cyan-600 text-xl font-semibold hover:underline'
+              >
+                {subject.name}
+              </Link>
+              <p className='text-sm text-textPrimary mt-1'>
+                Contains ({subject.topics.length}) topics
+              </p>
+              <p className='text-gray-700 text-sm mt-4'>
+                {subject.short_desc.substring(0, 100) + '...'}
+              </p>
+            </div>
+
+            <div className='mt-6 flex justify-end'>
+              <Link
+                href={`/subject/${subject.id}`}
+                className='px-5 py-2 rounded-full bg-[#A8F1FF] text-black text-sm font-medium hover:bg-[#A8F1F0] transition-colors duration-200'
+              >
+                Visit
+              </Link>
+            </div>
           </div>
         ))}
       </div>

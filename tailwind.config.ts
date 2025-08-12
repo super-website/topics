@@ -19,6 +19,7 @@ const config: Config = {
       },
       colors: {
         bgPrimary: '#FFFFFF',
+        textPrimary: '#4ED7F1',
       },
     },
   },

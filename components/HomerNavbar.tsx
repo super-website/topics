@@ -1,42 +1,21 @@
-'use client'
-
 import Image from 'next/image'
 import Link from 'next/link'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import React, { useState, useEffect } from 'react'
 import logo from '../public/images/logo2.png'
+import { cookies } from 'next/headers'
+import { userLogout } from '@/utils/actions'
 
-const navItems = [
-  { id: 1, name: 'Home', url: '/' },
-  { id: 2, name: 'Subjects', url: '/subjects' },
-  { id: 3, name: 'Gallery', url: '/gallery' },
-  { id: 4, name: 'PDF', url: '/notes-pdf' },
-  { id: 5, name: 'Schemes', url: '/scheme' },
-]
-
-export default function HomeNavbar() {
-  const searchParams = useSearchParams()
-  const pathname = usePathname()
-  const { replace } = useRouter()
-
-  const [searchTerm, setSearchTerm] = useState(searchParams.get('query') || '')
-
-  useEffect(() => {
-    const params = new URLSearchParams(searchParams)
-    if (searchTerm) {
-      params.set('query', searchTerm)
-    } else {
-      params.delete('query')
-    }
-    replace(`${pathname}?${params.toString()}`)
-  }, [searchTerm, pathname, searchParams, replace])
+export default async function HomeNavbar() {
+  const cookieStore = cookies()
+  const token = cookieStore.get('userToken')?.value
+  const name = cookieStore.get('name')?.value
 
   return (
-    <nav className='bg-base-200 shadow-md'>
-      <div className='max-w-7xl mx-auto navbar px-4 lg:px-8'>
-        <div className='navbar-start flex items-center gap-3'>
-          <Link href='/' className='flex items-center space-x-2'>
-            <div className='w-[50px] h-[50px] relative'>
+    <nav className='bg-white border-b border-gray-200 py-3'>
+      <div className='max-w-7xl mx-auto flex items-center justify-between px-4 lg:px-8'>
+        {/* Logo */}
+        <div className='flex items-center gap-2'>
+          <Link href='/' className='flex items-center gap-2'>
+            <div className='w-8 h-8 relative'>
               <Image
                 src={logo}
                 alt='Education With Hamza logo'
@@ -45,35 +24,24 @@ export default function HomeNavbar() {
                 className='object-contain'
               />
             </div>
-            <h2 className='text-xl md:text-2xl font-semibold text-gray-700 hover:text-blue-600 transition-colors duration-300'>
+            <span className='text-textPrimary text-xs md:text-lg font-medium'>
               EducationWithHamza
-            </h2>
+            </span>
           </Link>
         </div>
 
-        {pathname === '/topics' && (
-          <div className='navbar-center hidden md:flex'>
-            <input
-              type='text'
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder='Search for a topic 🤗'
-              className='input input-sm rounded-full input-bordered w-64'
-            />
-          </div>
-        )}
-
-        <div className='navbar-end flex md:hidden'>
-          <div className='dropdown dropdown-left'>
-            <div
-              tabIndex={0}
-              role='button'
-              aria-label='navButton'
-              className='btn btn-ghost btn-circle'
-            >
+        <div className='flex-1 mx-6 md:block hidden'>
+          <form action='/search/' method='GET' className='w-full'>
+            <div className='relative w-full max-w-xl mx-auto'>
+              <input
+                type='text'
+                name='query'
+                placeholder='Search "addition worksheets"'
+                className='w-full rounded-full border border-gray-300 pl-10 pr-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#00C4C9]'
+              />
               <svg
+                className='absolute left-3 top-2.5 h-4 w-4 text-gray-400'
                 xmlns='http://www.w3.org/2000/svg'
-                className='h-5 w-5'
                 fill='none'
                 viewBox='0 0 24 24'
                 stroke='currentColor'
@@ -82,49 +50,42 @@ export default function HomeNavbar() {
                   strokeLinecap='round'
                   strokeLinejoin='round'
                   strokeWidth={2}
-                  d='M4 6h16M4 12h16M4 18h7'
+                  d='M21 21l-4.35-4.35M16.65 10.65a6 6 0 11-12 0 6 6 0 0112 0z'
                 />
               </svg>
             </div>
-            <ul
-              tabIndex={0}
-              className='menu menu-sm dropdown-content bg-base-100 rounded-box w-40 mt-4 shadow-2xl z-10'
-            >
-              {navItems.map((item) => (
-                <li key={item.id}>
-                  <Link
-                    href={item.url}
-                    className={`capitalize text-lg font-medium ${
-                      pathname === item.url
-                        ? 'text-primary font-semibold'
-                        : 'text-gray-700'
-                    }`}
-                  >
-                    {item.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          </form>
         </div>
 
-        <div className='navbar-end hidden md:flex'>
-          <ul className='flex space-x-6'>
-            {navItems.map((item) => (
-              <li key={item.id}>
-                <Link
-                  href={item.url}
-                  className={`capitalize text-lg font-medium hover:text-primary ${
-                    pathname === item.url
-                      ? 'text-primary font-semibold'
-                      : 'text-gray-700'
-                  }`}
-                >
-                  {item.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
+        <div className='flex items-center gap-4'>
+          {token ? (
+            <>
+              <span className='w-8 h-8 flex items-center justify-center rounded-full bg-blue-500 text-white text-sm font-semibold'>
+                {name?.slice(0, 2).toUpperCase()}
+              </span>
+
+              <form action={userLogout}>
+                <button type='submit' className='text-black  text-sm'>
+                  Logout!
+                </button>
+              </form>
+            </>
+          ) : (
+            <>
+              <Link
+                href='/login'
+                className='text-gray-700 text-sm md:text-sm hover:underline'
+              >
+                Log In
+              </Link>
+              <Link
+                href='/login?path=register'
+                className='bg-[#4ED7F1] hover:bg-[#4ED7F0] text-white md:text-sm font-medium rounded-full md:px-5 px-2 py-1 text-xs md:py-2 transition-colors '
+              >
+                Sign Up
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </nav>

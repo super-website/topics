@@ -1,11 +1,11 @@
 import SubmitBtn from '@/components/SubmitBtn'
-import { getSingleScheme, updateScheme } from '@/utils/actions'
+import { getClass, getSingleScheme, updateScheme } from '@/utils/actions'
 import React from 'react'
 
 export default async function page({ params }: { params: { id: string } }) {
   const { id } = params
   const scheme = await getSingleScheme(id)
-
+  const classes = await getClass()
   return (
     <div>
       <h2>Edit Scheme</h2>
@@ -54,6 +54,26 @@ export default async function page({ params }: { params: { id: string } }) {
           <span className='text-sm text-gray-500'>
             Current file: {scheme?.url}
           </span>
+        </div>
+
+        <div className='form-control mt-5'>
+          <label htmlFor='classId' className='block text-sm font-medium'>
+            Class
+          </label>
+          <span>Already Selected: {scheme?.class?.title}</span>
+          <select
+            name='classId'
+            id='classId'
+            required
+            className='input input-bordered w-full mt-1'
+          >
+            <option value=''>Select a class</option>
+            {classes.map((cls) => (
+              <option key={cls.id} value={cls.id}>
+                {cls.title}
+              </option>
+            ))}
+          </select>
         </div>
 
         <SubmitBtn />

@@ -1,5 +1,5 @@
 import DeleteBtn from '@/components/DeleteBtn'
-import { deleteSubject, getAllSubject } from '@/utils/actions'
+import { addClass, deleteSubject, getAllSubject } from '@/utils/actions'
 import Link from 'next/link'
 import React, { Suspense } from 'react'
 

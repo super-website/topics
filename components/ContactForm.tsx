@@ -2,15 +2,22 @@
 import { createComment } from "@/utils/actions";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import SubmitBtn from "./SubmitBtn";
 
 export default function ContactForm() {
   const searchParams = useSearchParams();
   const success = searchParams.get("success");
+  const ref = useRef<HTMLFormElement>(null);
+
+  useEffect(() => {
+    if (success && ref.current) {
+      ref.current.reset();
+    }
+  }, [success]);
 
   return (
-    <div className="max-w-4xl mx-auto p-5 ">
+    <div className="max-w-4xl mx-auto p-5 py-16 ">
       {success && (
         <div className="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-5">
           <p className="font-bold">Success</p>
@@ -20,13 +27,19 @@ export default function ContactForm() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
         <div className="space-y-5">
           <h1 className="text-2xl font-bold">Leave a Message</h1>
-          <form action={createComment} method="POST" className="space-y-4">
+          <form
+            action={createComment}
+            method="POST"
+            className="space-y-4"
+            ref={ref}
+          >
             <div className="form-label">
               <input
                 type="text"
                 placeholder="Enter Your Name"
                 className="input input-bordered focus:ring-blue-600 w-full p-2"
                 name="name"
+                required
               />
             </div>
             <div className="form-label">
@@ -35,6 +48,7 @@ export default function ContactForm() {
                 placeholder="Enter Your Email"
                 className="input input-bordered focus:ring-blue-600 w-full p-2"
                 name="email"
+                required
               />
             </div>
             <div className="form-label">
@@ -42,6 +56,7 @@ export default function ContactForm() {
                 placeholder="Enter Your Message"
                 className="textarea textarea-bordered focus:ring-blue-600 w-full p-2"
                 name="message"
+                required
               ></textarea>
             </div>
             <SubmitBtn />

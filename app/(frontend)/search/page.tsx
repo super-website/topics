@@ -128,7 +128,7 @@ export default async function Page({
           <div className="flex flex-col items-center justify-center h-64 text-center text-gray-500 space-y-2">
             <Search className="w-8 h-8 text-gray-400" />
             <span>
-              No results found for "<strong>{query}</strong>". Try a different
+              No results found for <strong>{query}</strong>. Try a different
               keyword.
             </span>
           </div>

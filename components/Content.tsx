@@ -14,7 +14,7 @@ interface Topic {
 }
 
 export default async function Content({ query }: { query: string }) {
-  let topics: Topic[] = await getAllTopics();
+  let topics: Topic[] = await getAllTopics(query);
 
   try {
     const topics = await getAllTopics(query);

@@ -4,8 +4,7 @@ import { getAllPdf, getAllSubject, getAllTopics } from "@/utils/actions";
 export const revalidate = 60;
 
 export default async function page() {
-  const rawTopics = await getAllTopics("");
-  const topics = Array.isArray(rawTopics) ? rawTopics : rawTopics.topics;
+  const topics = await getAllTopics("");
   const pdfs = await getAllPdf("", 10);
   const subjects = await getAllSubject();
   return (

@@ -9,7 +9,6 @@ interface ClassData {
   title: string;
   short_desc: string | null;
   long_desc: string | null;
-  pdfId: string | null;
 }
 
 export default function UploadPdf() {

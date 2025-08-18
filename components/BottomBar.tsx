@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation'
 import React from 'react'
 import DeleteBtn from './DeleteBtn'
 import { logout } from '@/utils/actions'
+import { Book } from 'lucide-react'
 
 const lists = [
   {
@@ -131,6 +132,12 @@ const lists = [
         />
       </svg>
     ),
+  },
+  {
+    id: 7,
+    name: 'grades',
+    url: '/control/grades',
+    icon: <Book />,
   },
 ]
 

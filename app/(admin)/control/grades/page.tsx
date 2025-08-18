@@ -17,7 +17,12 @@ export default async function Page() {
                 Grades Table View
               </h2>
               <div className='flex items-center gap-2'>
-                {`${grades.length} artists`}
+                <Link
+                  href='/control/grades/add-grade'
+                  className='btn btn-primary'
+                >
+                  Add New
+                </Link>
               </div>
             </div>
           </div>

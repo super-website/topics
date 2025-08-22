@@ -103,7 +103,7 @@ export default async function Page() {
           <div className='text-center py-16 bg-white rounded-2xl shadow-sm border border-slate-200'>
             <User className='w-16 h-16 text-slate-400 mx-auto mb-4' />
             <h3 className='text-xl font-semibold text-slate-800 mb-2'>
-              No artists found
+              No grades found
             </h3>
           </div>
         )}

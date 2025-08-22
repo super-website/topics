@@ -1,13 +1,9 @@
-import DeleteBtn from '@/components/DeleteBtn'
-import { getAllComments, deleteComment } from '@/utils/actions'
-import { Trash2 } from 'lucide-react'
+import { getAllUsers } from '@/utils/actions'
 import Link from 'next/link'
+import React from 'react'
 
-export const revalidate = 0
-
-export default async function Page() {
-  const data = await getAllComments()
-
+export default async function page() {
+  const users = await getAllUsers()
   return (
     <div>
       <nav className='text-sm breadcrumbs m-2'>
@@ -16,7 +12,7 @@ export default async function Page() {
             <Link href='/cms'>Dashboard</Link>
           </li>
           <li>
-            <span className='text-gray-800'>Comments</span>
+            <span className='text-gray-800'>Users</span>
           </li>
         </ul>
       </nav>
@@ -25,11 +21,8 @@ export default async function Page() {
           <div className='px-6 py-4 border-b border-slate-200 bg-slate-50'>
             <div className='flex items-center justify-between'>
               <h2 className='text-lg font-semibold text-slate-800'>
-                Comments Table View
+                Users Table View
               </h2>
-              <div className='flex items-center gap-2'>
-                {data.length} Comments
-              </div>
             </div>
           </div>
 
@@ -45,66 +38,35 @@ export default async function Page() {
                   </th>
 
                   <th className='px-6 py-4 text-left text-sm font-semibold text-slate-700'>
-                    Message
-                  </th>
-                  <th className='px-6 py-4 text-right text-sm font-semibold text-slate-700'>
-                    Actions
+                    Status
                   </th>
                 </tr>
               </thead>
               <tbody className='divide-y divide-slate-200'>
-                {data.map((comment) => (
+                {users.map((user) => (
                   <tr
-                    key={comment.id}
+                    key={user.id}
                     className='hover:bg-slate-50 transition-colors'
                   >
                     <td className='px-6 py-4'>
                       <div className='flex items-center gap-4'>
                         <div>
                           <div className='font-semibold text-slate-800'>
-                            {comment.name}
+                            {user.name}
                           </div>
-                          <div className='text-sm text-slate-500'>
-                            {new Date(comment.createdAt).toLocaleDateString(
-                              'en-US',
-                              {
-                                year: 'numeric',
-                                month: 'short',
-                                day: 'numeric',
-                              }
-                            )}
-                          </div>
+                          <div className='text-sm text-slate-500'>user</div>
                         </div>
                       </div>
                     </td>
 
                     <td className='px-6 py-4'>
                       <code className='px-2 py-1 bg-slate-100 text-slate-700 rounded text-sm'>
-                        {comment.email}
+                        {user.email}
                       </code>
                     </td>
                     <td>
-                      <div className='font-semibold text-slate-800'>
-                        {comment.message}
-                      </div>
-                    </td>
-
-                    <td className='px-6 py-4 text-right'>
-                      <div className='flex items-center justify-end gap-2'>
-                        <form
-                          action={deleteComment}
-                          method='POST'
-                          className='inline-block'
-                        >
-                          <input type='hidden' name='id' value={comment.id} />
-                          <button
-                            type='submit'
-                            className='p-2 text-slate-500 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors'
-                            title='Delete comment'
-                          >
-                            <Trash2 className='w-4 h-4' />
-                          </button>
-                        </form>
+                      <div className='bg-green-400 badge  shadow-sm rounded-lg p-3 text-sm'>
+                        Verified
                       </div>
                     </td>
                   </tr>

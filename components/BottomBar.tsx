@@ -4,140 +4,58 @@ import { usePathname } from 'next/navigation'
 import React from 'react'
 import DeleteBtn from './DeleteBtn'
 import { logout } from '@/utils/actions'
-import { Book } from 'lucide-react'
+import {
+  Book,
+  BookA,
+  File,
+  Image as ImageIcon,
+  MessageCircle,
+  PanelLeftDashed,
+  Users,
+} from 'lucide-react'
 
 const lists = [
   {
     id: 1,
-    name: 'topics',
-    url: '/control/topics',
-    icon: (
-      <svg
-        xmlns='http://www.w3.org/2000/svg'
-        className='h-5 w-5'
-        fill='none'
-        viewBox='0 0 24 24'
-        stroke='currentColor'
-      >
-        <path
-          strokeLinecap='round'
-          strokeLinejoin='round'
-          strokeWidth='2'
-          d='M12 6v6l4 2'
-        />
-      </svg>
-    ),
+    name: 'users',
+    url: '/control/users',
+    icon: <Users className='h-5 w-5' />,
   },
   {
     id: 2,
     name: 'subjects',
     url: '/control/subjects',
-    icon: (
-      <svg
-        xmlns='http://www.w3.org/2000/svg'
-        className='h-5 w-5'
-        fill='none'
-        viewBox='0 0 24 24'
-        stroke='currentColor'
-      >
-        <path
-          strokeLinecap='round'
-          strokeLinejoin='round'
-          strokeWidth='2'
-          d='M5 13l4 4L19 7'
-        />
-      </svg>
-    ),
+    icon: <BookA className='h-5 w-5' />,
   },
   {
     id: 3,
-    name: 'gallery',
+    name: 'Banners',
     url: '/control/gallery',
-    icon: (
-      <svg
-        xmlns='http://www.w3.org/2000/svg'
-        className='h-5 w-5'
-        fill='none'
-        viewBox='0 0 24 24'
-        stroke='currentColor'
-      >
-        <path
-          strokeLinecap='round'
-          strokeLinejoin='round'
-          strokeWidth='2'
-          d='M3 7h18M3 12h18M3 17h18'
-        />
-      </svg>
-    ),
+    icon: <ImageIcon className='h-5 w-5' />,
   },
   {
     id: 4,
     name: 'pdf',
     url: '/control/pdf',
-    icon: (
-      <svg
-        xmlns='http://www.w3.org/2000/svg'
-        className='h-5 w-5'
-        fill='none'
-        viewBox='0 0 24 24'
-        stroke='currentColor'
-      >
-        <path
-          strokeLinecap='round'
-          strokeLinejoin='round'
-          strokeWidth='2'
-          d='M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z'
-        />
-      </svg>
-    ),
+    icon: <PanelLeftDashed className='h-5 w-5' />,
   },
   {
     id: 5,
     name: 'comments',
     url: '/control/contact',
-    icon: (
-      <svg
-        xmlns='http://www.w3.org/2000/svg'
-        className='h-5 w-5'
-        fill='none'
-        viewBox='0 0 24 24'
-        stroke='currentColor'
-      >
-        <path
-          strokeLinecap='round'
-          strokeLinejoin='round'
-          strokeWidth='2'
-          d='M8 10h.01M12 10h.01M16 10h.01M21 16.5a2.5 2.5 0 00-2.5-2.5H5.5A2.5 2.5 0 003 16.5V20l4-4h14z'
-        />
-      </svg>
-    ),
+    icon: <MessageCircle className='h-5 w-5' />,
   },
   {
     id: 6,
     name: 'scheme',
     url: '/control/scheme',
-    icon: (
-      <svg
-        xmlns='http://www.w3.org/2000/svg'
-        className='h-5 w-5'
-        fill='none'
-        viewBox='0 0 24 24'
-        stroke='currentColor'
-      >
-        <path
-          strokeLinecap='round'
-          strokeLinejoin='round'
-          strokeWidth='2'
-          d='M9.75 17L4.5 12l5.25-5m5.5 10l5.25-5-5.25-5'
-        />
-      </svg>
-    ),
+    icon: <File className='h-5 w-5' />,
   },
   {
     id: 7,
     name: 'grades',
     url: '/control/grades',
-    icon: <Book />,
+    icon: <Book className='h-5 w-5' />,
   },
 ]
 

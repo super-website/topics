@@ -424,7 +424,9 @@ export const createComment = async (formData: FormData) => {
 }
 
 export const getAllComments = async () => {
-  return await prisma.contact.findMany({})
+  return await prisma.contact.findMany({
+    orderBy: { createdAt: 'desc' },
+  })
 }
 
 export const deleteComment = async (formData: FormData) => {
@@ -1036,4 +1038,8 @@ export const createGrade = async (formData: FormData) => {
   })
 
   redirect(`/control/grades/${slug}/?success=true`)
+}
+
+export const getAllUsers = async () => {
+  return await prisma.user.findMany({})
 }

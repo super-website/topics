@@ -103,14 +103,6 @@ export default async function Page() {
 
                     <td className='px-6 py-4 text-right'>
                       <div className='flex items-center justify-end gap-2'>
-                        {/* <Link
-                          href={`pdfs/edit-pdf/${pdf.id}`}
-                          className='p-2 text-slate-500 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors'
-                          title='Edit Artist'
-                        >
-                          <Edit className='w-4 h-4' />
-                        </Link> */}
-
                         <form
                           action={deletePdf}
                           method='POST'

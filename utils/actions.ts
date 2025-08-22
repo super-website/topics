@@ -448,8 +448,6 @@ export const createPdf = async (formData: FormData) => {
     const classEl = formData.get('classId') as string
     const file = formData.get('file') as File
 
-    console.log(title, tags, classEl, file)
-
     if (!title || !classEl) {
       throw new Error('Title and pdf are required')
     }

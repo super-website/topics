@@ -39,7 +39,11 @@ export default async function Page() {
         <i className='flex align items-center justify-center'>
           {' '}
           <Pen className='h-6 w-6 text-blue-500' />
-          Where learning meets Hamza’s style.
+          Should you experience any errors, feel free to
+          <Link href='/contact' className='text-blue-600 font-semibold mx-1'>
+            reach out
+          </Link>{' '}
+          us.
         </i>
       </div>
       {/* Banner */}

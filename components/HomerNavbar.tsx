@@ -10,7 +10,7 @@ export default async function HomeNavbar() {
   const name = cookieStore.get('name')?.value
 
   return (
-    <nav className='bg-white border-b border-gray-200 py-3'>
+    <nav className='bg-black border-b-8 border-yellow-300 py-3'>
       <div className='max-w-7xl mx-auto flex items-center justify-between px-4 lg:px-8'>
         {/* Logo */}
         <div className='flex items-center gap-2'>
@@ -24,7 +24,7 @@ export default async function HomeNavbar() {
                 className='object-contain'
               />
             </div>
-            <span className='text-textPrimary text-xs md:text-lg font-medium'>
+            <span className='text-white text-xs md:text-lg font-medium uppercase'>
               EducationWithHamza
             </span>
           </Link>
@@ -60,13 +60,16 @@ export default async function HomeNavbar() {
         <div className='flex items-center gap-4'>
           {token ? (
             <>
-              <span className='w-8 h-8 flex items-center justify-center rounded-full bg-blue-500 text-white text-sm font-semibold'>
+              <span className='w-10 h-10 flex items-center justify-center rounded-full bg-blue-500 text-white text-sm font-semibold'>
                 {name?.slice(0, 2).toUpperCase()}
               </span>
 
               <form action={userLogout}>
-                <button type='submit' className='text-black  text-sm'>
-                  Logout!
+                <button
+                  type='submit'
+                  className='bg-yellow-300 hover:bg-yellow-400 text-black md:text-sm font-medium rounded-full md:px-5 px-2 py-1 text-xs md:py-2 transition-colors'
+                >
+                  Logout
                 </button>
               </form>
             </>
@@ -74,15 +77,9 @@ export default async function HomeNavbar() {
             <>
               <Link
                 href='/login'
-                className='text-gray-700 text-sm md:text-sm hover:underline'
+                className='bg-blue-500 hover:bg-blue-600 text-white md:text-sm font-medium rounded-full md:px-5 px-2 py-1 text-xs md:py-2 transition-colors '
               >
-                Log In
-              </Link>
-              <Link
-                href='/login?path=register'
-                className='bg-[#4ED7F1] hover:bg-[#4ED7F0] text-white md:text-sm font-medium rounded-full md:px-5 px-2 py-1 text-xs md:py-2 transition-colors '
-              >
-                Sign Up
+                Login
               </Link>
             </>
           )}

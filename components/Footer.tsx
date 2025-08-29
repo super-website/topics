@@ -11,7 +11,7 @@ const data = [
 
 export default function Footer() {
   return (
-    <footer className='footer footer-horizontal footer-center bg-[#FFFA8D] text-base-content rounded p-10 overflow-hidden md:overflow-auto'>
+    <footer className='footer footer-horizontal footer-center bg-black text-white rounded p-10 overflow-hidden md:overflow-auto'>
       <nav className='sm:grid grid-flow-col gap-4 flex flex-col'>
         {data.map((item) => (
           <Link key={item.id} href={item.link} className='link link-hover '>

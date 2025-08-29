@@ -9,6 +9,7 @@ import {
   GraduationCap,
   Pen,
 } from 'lucide-react'
+import Image from 'next/image'
 
 export const metadata: Metadata = {
   title: 'Education With Hamza - Learn the Right Way',
@@ -46,22 +47,13 @@ export default async function Page() {
         <section
           key={banner.id}
           className='relative h-[400px] bg-cover bg-center bg-no-repeat flex items-center justify-start px-8'
-          style={{
-            backgroundImage: `url(${banner.image})`,
-          }}
         >
-          <div className='absolute inset-0 bg-black bg-opacity-30' />
-
-          <div className='relative z-10 text-left max-w-xl space-y-4 px-10'>
-            <h1 className='text-white text-3xl md:text-5xl font-bold drop-shadow-md'>
-              {banner.title}
-            </h1>
-            {banner.text && (
-              <p className='text-white text-sm md:text-lg opacity-90 drop-shadow-sm'>
-                {banner.text}
-              </p>
-            )}
-          </div>
+          <Image
+            src={banner.image}
+            alt={banner.title}
+            fill
+            className='object-cover object-center'
+          />
         </section>
       ))}
 

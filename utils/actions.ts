@@ -1000,31 +1000,49 @@ export const userLogout = async () => {
   return redirect('/')
 }
 
-export async function searchAll(query: string) {
-  if (!query) return { subjects: [], grades: [], pdfs: [], schemes: [] }
+export async function searchAll(rawQuery: string) {
+  if (!rawQuery) return { subjects: [], grades: [], pdfs: [], schemes: [] }
 
-  const search: Prisma.StringFilter = {
-    contains: query,
-    mode: 'insensitive',
-  }
+  const query = rawQuery.trim().toLowerCase()
+
+  const tokens = query.split(/\s+/).filter(Boolean)
+
+  const buildSearch = (field: string) => ({
+    OR: tokens.map((t) => ({
+      [field]: {
+        contains: t,
+        mode: Prisma.QueryMode.insensitive,
+      },
+    })),
+  })
 
   const [subjects, grades, pdfs, schemes] = await Promise.all([
     prisma.subject.findMany({
-      where: { name: search },
+      where: buildSearch('name'),
     }),
     prisma.class.findMany({
-      where: {
-        OR: [{ title: search }],
-      },
+      where: buildSearch('title'),
     }),
     prisma.pdf.findMany({
       where: {
-        OR: [{ title: search }, { tags: { has: query } }],
+        OR: [
+          ...tokens.map((t) => ({
+            title: { contains: t, mode: Prisma.QueryMode.insensitive },
+          })),
+          { tags: { hasSome: tokens } },
+        ],
       },
     }),
     prisma.scheme.findMany({
       where: {
-        OR: [{ title: search }, { short_desc: search }],
+        OR: [
+          ...tokens.map((t) => ({
+            title: { contains: t, mode: Prisma.QueryMode.insensitive },
+          })),
+          ...tokens.map((t) => ({
+            short_desc: { contains: t, mode: Prisma.QueryMode.insensitive },
+          })),
+        ],
       },
     }),
   ])

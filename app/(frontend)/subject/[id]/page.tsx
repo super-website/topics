@@ -33,11 +33,23 @@ export default async function Page({ params }: { params: { id: string } }) {
 
   return (
     <div className='max-w-4xl mx-auto px-4 py-10'>
-      <div className='mb-10'>
+      <div className='breadcrumbs text-sm'>
+        <ul>
+          <li>
+            <Link href='/'>Home</Link>
+          </li>
+          <li>
+            <Link href='/subjects'>Subjects</Link>
+          </li>
+          <li>{subject.name}</li>
+        </ul>
+      </div>
+
+      <div className='mb-10 space-y-4'>
         <h1 className='text-xl md:text-3xl font-bold text-gray-800 mb-2'>
           {subject.name}
         </h1>
-        <div className='bg-[#6FE6FC] p-5 rounded-lg shadow border border-gray-100'>
+        <div className='bg- p-5 rounded-lg shadow border border-gray-100'>
           <p className='text-gray-700'>{subject.short_desc}</p>
         </div>
       </div>

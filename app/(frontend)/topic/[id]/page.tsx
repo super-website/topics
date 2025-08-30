@@ -72,18 +72,16 @@ export default async function Page({ params }: { params: { id: string } }) {
           </li>
         </ul>
       </nav>
-
-      {/* Short Description */}
-      <div className='bg-[#6FE6FC] p-4 rounded-md shadow-sm'>
+      {/* Topic Title and Short Description */}{' '}
+      <h1 className='text-3xl font-bold text-gray-900'>{topic.title}</h1>
+      <div className=' p-4 rounded-md shadow-md border border-gray-200'>
         <p className='text-gray-700 text-sm'>{topic.short_desc}</p>
       </div>
-
       {/* Ad */}
       <div className='text-center'>
         <p className='text-xs text-gray-500 mb-1'>Advertisement</p>
         <AdSlot adClient='ca-pub-7339717436236652' adSlot='7306166999' />
       </div>
-
       {/* Topic Detail */}
       <div className='bg-white p-6 shadow-md rounded-md space-y-4'>
         <h1 className='text-2xl font-bold border-b pb-2'>{topic.title}</h1>
@@ -103,7 +101,6 @@ export default async function Page({ params }: { params: { id: string } }) {
           )}
         </div>
       </div>
-
       {/* Related Topics */}
       {relatedTopics.length > 0 && (
         <div className='space-y-4'>

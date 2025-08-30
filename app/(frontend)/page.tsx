@@ -10,6 +10,7 @@ import {
   Pen,
 } from 'lucide-react'
 import Image from 'next/image'
+import { link } from 'fs'
 
 export const metadata: Metadata = {
   title: 'Education With Hamza - Learn the Right Way',
@@ -35,7 +36,7 @@ export default async function Page() {
 
   return (
     <>
-      <div className='bg-white/10  p-4  place-items-center'>
+      <div className='bg-base-200  p-2  text-center text-sm text-slate-700 mb-2'>
         <i className='flex align items-center justify-center'>
           {' '}
           <Pen className='h-6 w-6 text-blue-500' />
@@ -73,129 +74,115 @@ export default async function Page() {
             experience with real projects and expert guidance.
           </p>
 
-          <div className='grid md:grid-cols-3 gap-8'>
+          <div className='grid md:grid-cols-3 gap-6'>
             {[
               {
                 title: 'Free Quality Resources',
-                desc: 'Get top-tier notes, schemes, and study materials for 1st & 2nd year – all for free.',
-                color: 'bg-blue-600',
+                desc: 'Get top-tier notes, schemes, and study materials for matric and fsc – all for free.',
+                button: 'View resources',
+                color: 'bg-blue-600 text-white',
+                link: '/grades',
               },
               {
                 title: 'Exam-Focused Content',
                 desc: 'Access updated PDFs, past papers, and guides tailored for board success.',
-                color: 'bg-green-600',
+                button: 'Access content',
+                color: 'bg-gray-200 text-black',
+                link: '/notes-pdf',
               },
               {
                 title: 'Community Support',
                 desc: 'Learn with guidance, tips, and help from students and educators alike.',
-                color: 'bg-purple-600',
+                button: 'Join community',
+                color: 'bg-black/80 text-white',
+                link: '/contact',
               },
             ].map((item, i) => (
               <div
                 key={i}
-                className='p-6 rounded-2xl bg-gradient-to-br from-gray-50 to-white shadow-md hover:shadow-lg transition'
+                className={`p-8 rounded-2xl shadow-md hover:shadow-lg transition flex flex-col justify-between ${item.color} hover:scale-[1.02] transition-transform duration-300`}
               >
-                <div
-                  className={`w-16 h-16 ${item.color} rounded-full flex items-center justify-center mx-auto mb-4`}
-                >
-                  <span className='text-white text-2xl font-bold'>★</span>
+                <div>
+                  <h3 className='text-2xl font-bold mb-3'>{item.title}</h3>
+                  <p className='text-base opacity-90'>{item.desc}</p>
                 </div>
-                <h3 className='text-xl font-bold text-slate-800 mb-2'>
-                  {item.title}
-                </h3>
-                <p className='text-slate-600 text-sm'>{item.desc}</p>
+                <Link
+                  href={item.link}
+                  className='mt-6 px-4 py-2 bg-white text-black font-semibold rounded-lg shadow hover:shadow-md transition'
+                >
+                  {item.button}
+                </Link>
               </div>
             ))}
           </div>
         </div>
       </section>
+      <section className='py-20 bg-white'>
+        <div className='max-w-6xl mx-auto px-6 text-center'>
+          <h2 className='text-3xl md:text-4xl font-bold text-slate-800 mb-3'>
+            Grades, Subjects, Notes & Schemes
+          </h2>
+          <p className='text-lg text-blue-600 font-medium mb-12'>
+            Stay on track with resources designed to support your academic
+            success.
+          </p>
 
-      <section className='py-20 bg-[#A8F1FF]'>
-        <div className='max-w-5xl mx-auto px-6'>
-          <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
-            <div className='bg-white p-6 rounded-lg shadow-sm border border-gray-200 text-center'>
-              <div className='flex justify-center mb-4'>
-                <div className='bg-cyan-100 p-3 rounded-full'>
-                  <GraduationCap className='w-6 h-6 text-cyan-600' />
+          <div className='grid grid-cols-2 md:grid-cols-4 gap-10'>
+            <Link
+              href='/grades'
+              className='
+            transition hover:scale-105 duration-200 
+            '
+            >
+              <div className='flex justify-center mb-3'>
+                <div className='bg-blue-500 p-4 rounded-full'>
+                  <GraduationCap className='w-10 h-10 text-white' />
                 </div>
               </div>
-              <h3 className='text-xl font-semibold text-cyan-600 mb-2'>
-                Grades
-              </h3>
-              <p className='text-gray-700 mb-4'>
-                Track academic performance and view grade reports to monitor
-                student progress.
-              </p>
-              <Link
-                href='/grades'
-                className='bg-indigo-500 hover:bg-indigo-600 text-white font-medium py-2 px-6 rounded-full shadow-sm'
-              >
-                View grades
-              </Link>
-            </div>
+              <h3 className='text-lg font-semibold text-slate-700'>Grades</h3>
+            </Link>
 
-            <div className='bg-white p-6 rounded-lg shadow-sm border border-gray-200 text-center'>
-              <div className='flex justify-center mb-4'>
-                <div className='bg-cyan-100 p-3 rounded-full'>
-                  <Layers className='w-6 h-6 text-cyan-600' />
+            <Link
+              href='/subjects'
+              className='
+            transition hover:scale-105 duration-200 
+            '
+            >
+              <div className='flex justify-center mb-3'>
+                <div className='bg-blue-500 p-4 rounded-full'>
+                  <Layers className='w-10 h-10 text-white' />
                 </div>
               </div>
-              <h3 className='text-xl font-semibold text-cyan-600 mb-2'>
-                Subjects
-              </h3>
-              <p className='text-gray-700 mb-4'>
-                Dive into detailed subjects and get comprehensive educational
-                resources tailored by topic.
-              </p>
-              <Link
-                href='/subjects'
-                className='bg-indigo-500 hover:bg-indigo-600 text-white font-medium py-2 px-6 rounded-full shadow-sm'
-              >
-                Check it out
-              </Link>
-            </div>
+              <h3 className='text-lg font-semibold text-slate-700'>Subjects</h3>
+            </Link>
 
-            <div className='bg-white p-6 rounded-lg shadow-sm border border-gray-200 text-center'>
-              <div className='flex justify-center mb-4'>
-                <div className='bg-cyan-100 p-3 rounded-full'>
-                  <FileText className='w-6 h-6 text-cyan-600' />
+            <Link
+              href='/notes-pdf'
+              className='
+            transition hover:scale-105 duration-200 
+            '
+            >
+              <div className='flex justify-center mb-3'>
+                <div className='bg-blue-500 p-4 rounded-full'>
+                  <FileText className='w-10 h-10 text-white' />
                 </div>
               </div>
-              <h3 className='text-xl font-semibold text-cyan-600 mb-2'>
-                Notes
-              </h3>
-              <p className='text-gray-700 mb-4'>
-                Download and print PDF notes and resources to help reinforce
-                learning offline.
-              </p>
-              <Link
-                href='notes-pdf'
-                className='bg-indigo-500 hover:bg-indigo-600 text-white font-medium py-2 px-6 rounded-full shadow-sm'
-              >
-                View & Download
-              </Link>
-            </div>
+              <h3 className='text-lg font-semibold text-slate-700'>Notes</h3>
+            </Link>
 
-            <div className='bg-white p-6 rounded-lg shadow-sm border border-gray-200 text-center'>
-              <div className='flex justify-center mb-4'>
-                <div className='bg-cyan-100 p-3 rounded-full'>
-                  <ClipboardList className='w-6 h-6 text-cyan-600' />
+            <Link
+              href='/schemes'
+              className='
+            transition hover:scale-105 duration-200 
+            '
+            >
+              <div className='flex justify-center mb-3'>
+                <div className='bg-blue-500 p-4 rounded-full'>
+                  <ClipboardList className='w-10 h-10 text-white' />
                 </div>
               </div>
-              <h3 className='text-xl font-semibold text-cyan-600 mb-2'>
-                Schemes
-              </h3>
-              <p className='text-gray-700 mb-4'>
-                Access structured schemes of work to align your teaching plan
-                with national standards.
-              </p>
-              <Link
-                href='/scheme'
-                className='bg-indigo-500 hover:bg-indigo-600 text-white font-medium py-2 px-6 rounded-full shadow-sm'
-              >
-                View schemes
-              </Link>
-            </div>
+              <h3 className='text-lg font-semibold text-slate-700'>Schemes</h3>
+            </Link>
           </div>
         </div>
       </section>
@@ -205,6 +192,7 @@ export default async function Page() {
           <h2 className='text-3xl font-bold text-center mb-6'>
             Featured Topics
           </h2>
+
           {topics.length > 0 ? (
             <div className='grid sm:grid-cols-2 lg:grid-cols-3 gap-6'>
               {topics.map((topic) => (
@@ -277,7 +265,8 @@ export default async function Page() {
         <div className='max-w-7xl mx-auto px-6 text-center'>
           <h2 className='text-3xl font-bold mb-4'>Connect with Us</h2>
           <p className='mb-10 text-slate-600'>
-            Stay updated with our latest content and announcements.
+            <span className='text-blue-500'>Stay updated</span> with our latest
+            content and announcements.
           </p>
           <div className='grid md:grid-cols-3 gap-6'>
             {[

@@ -1,5 +1,4 @@
 import React from 'react'
-
 import { getAllPdf } from '@/utils/actions'
 import PDFCard from '@/components/PDFCard'
 
@@ -12,24 +11,10 @@ export const metadata = {
   author: 'Ameer Muhavia',
 }
 
-interface Pdf {
-  id: string
-  title: string
-  url: string
-  download: number
-}
-
 export const revalidate = 0
 
-export default async function Page({
-  searchParams,
-}: {
-  searchParams: Record<string, string>
-}) {
-  const query = searchParams.query || ''
-  const limit = parseInt(searchParams.limit || '25', 25)
+export default async function Page() {
+  const initialPdfs = await getAllPdf('', 25)
 
-  const pdf: Pdf[] = await getAllPdf(query, limit)
-
-  return <PDFCard pdfs={pdf} query={query} limit={limit} />
+  return <PDFCard initialPdfs={initialPdfs} />
 }

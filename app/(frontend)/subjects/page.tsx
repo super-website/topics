@@ -16,6 +16,15 @@ export default async function Page() {
   const subjects = await getAllSubject()
   return (
     <div className='max-w-6xl mx-auto px-4 py-6'>
+      <div className='breadcrumbs text-sm'>
+        <ul>
+          <li>
+            <Link href='/'>Home</Link>
+          </li>
+          <li>Subjects</li>
+        </ul>
+      </div>
+
       <h1 className='text-2xl font-semibold mb-4'>
         Subjects | Education With Hamza
       </h1>
@@ -28,22 +37,27 @@ export default async function Page() {
             <div>
               <Link
                 href={`/subject/${subject.id}`}
-                className='text-cyan-600 text-xl font-semibold hover:underline'
+                className='text-blue-500 text-xl font-semibold hover:underline'
               >
                 {subject.name}
               </Link>
-              <p className='text-sm text-textPrimary mt-1'>
+              <p className='text-sm text-black mt-1'>
                 Contains ({subject.topics.length}) topics
               </p>
-              <p className='text-gray-700 text-sm mt-4'>
-                {subject.short_desc.substring(0, 100) + '...'}
+              <p className='text-gray-700 text-sm mt-4 text-justify'>
+                {subject.short_desc.substring(0, 150) + '...'}
               </p>
             </div>
 
-            <div className='mt-6 flex justify-end'>
+            <div className='mt-6 flex justify-between items-center'>
+              <div>
+                <span className='text-xs text-black/60 italic'>
+                  {subject.class?.title}
+                </span>
+              </div>
               <Link
                 href={`/subject/${subject.id}`}
-                className='px-5 py-2 rounded-full bg-[#A8F1FF] text-black text-sm font-medium hover:bg-[#A8F1F0] transition-colors duration-200'
+                className='btn btn-sm bg-blue-600 text-white hover:bg-blue-700 transition'
               >
                 Visit
               </Link>
@@ -52,8 +66,8 @@ export default async function Page() {
         ))}
       </div>
 
-      <div className='prose mx-auto px-6 md:px-10 py-10 max-w-4xl text-justify mt-10'>
-        <h2 className='text-2xl font-bold mb-4 text-center'>
+      <div className='prose  px-6 md:px-10 py-10 text-justify mt-10 '>
+        <h2 className='text-2xl font-bold mb-4 '>
           Explore Subjects & Resources
         </h2>
         <p className='my-5'>

@@ -17,7 +17,7 @@ cloudinary.config({
 
 export const getAllSubject = async () => {
   return await prisma.subject.findMany({
-    include: { topics: true },
+    include: { topics: true, class: true },
   })
 }
 
@@ -859,7 +859,17 @@ export const getClass = async () => {
 export const getSingleClass = async (id: string) => {
   return await prisma.class.findUnique({
     where: { slug: id },
-    include: { subject: true, pdfs: true, schemes: true },
+    include: {
+      subject: {
+        include: { class: true },
+      },
+      pdfs: true,
+      schemes: {
+        include: {
+          class: true,
+        },
+      },
+    },
   })
 }
 

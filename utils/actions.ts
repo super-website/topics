@@ -540,7 +540,6 @@ export const createPdf = async (formData: FormData) => {
           }
         : undefined,
     },
-    
   })
 
   redirect('/control/pdf')
@@ -571,7 +570,7 @@ export const getAllPdf = async (query: string, limit: number) => {
   const findOptions: any = {
     take: limit,
     orderBy: {
-      download: 'asc',
+      createdAt: 'desc',
     },
   }
 

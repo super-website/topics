@@ -4,9 +4,9 @@ import Link from 'next/link'
 export const metadata = {
   title: ' Top Subjects',
   description:
-    'Explore various MBA subjects with detailed topics to enhance your learning experience.',
+    'Explore a variety of subjects with comprehensive study resources and online courses at Education With Hamza.',
   keywords:
-    'MBA, MBA subjects, online education, learning, study resources, business management',
+    'online education, FSC notes, 1st year, 2nd year, board exam prep, education with hamza, study resources, e-learning, free study material',
   author: 'Ameer Muhavia',
 }
 

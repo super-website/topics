@@ -1,4 +1,3 @@
-import SubmitBtn from '@/components/SubmitBtn'
 import UploadPdf from '@/components/UploadPdf'
 import React from 'react'
 

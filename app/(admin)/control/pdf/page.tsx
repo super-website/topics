@@ -14,7 +14,7 @@ export default async function Page() {
       <nav className='text-sm breadcrumbs m-2'>
         <ul className='flex flex-wrap gap-1 text-gray-600'>
           <li>
-            <Link href='/cms'>Dashboard</Link>
+            <Link href='/control'>Dashboard</Link>
           </li>
           <li>
             <span className='text-gray-800'>Notes</span>
@@ -108,7 +108,7 @@ export default async function Page() {
                           method='POST'
                           className='inline-block'
                         >
-                          <input type='hidden' name='slug' value={pdf.id} />
+                          <input type='hidden' name='id' value={pdf.id} />
                           <button
                             type='submit'
                             className='p-2 text-slate-500 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors'

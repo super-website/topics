@@ -16,7 +16,7 @@ export const generateMetadata = async ({
 
   if (!error) {
     return {
-      title: 'Register | Education with Hamza',
+      title: 'Register',
       description:
         'Create an account to start learning with Hamza’s educational resources.',
       keywords: [

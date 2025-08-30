@@ -22,7 +22,9 @@ export const generateMetadata = async ({
 
   return {
     title: pdf.title,
-    description: `Learn more about ${pdf.title}`,
+    description: pdf.short_desc
+      ? pdf.short_desc
+      : `Download the ${pdf.title} PDF for comprehensive educational resources.`,
     keywords: pdf.tags,
   }
 }

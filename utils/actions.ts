@@ -445,74 +445,103 @@ export const deleteComment = async (formData: FormData) => {
   revalidatePath('/control/contact')
 }
 
+// export const createPdf = async (formData: FormData) => {
+//   try {
+//     const title = formData.get('title') as string
+//     const tags = formData.get('tags') as string
+//     const classEl = formData.get('classId') as string
+//     const file = formData.get('file') as File
+
+//     if (!title || !classEl) {
+//       throw new Error('Title and pdf are required')
+//     }
+
+//     if (file.type !== 'application/pdf') {
+//       throw new Error('Only PDF files are allowed')
+//     }
+
+//     const arrayBuffer = await file.arrayBuffer()
+//     const buffer = Buffer.from(arrayBuffer)
+
+//     const result = await new Promise<UploadApiResponse>((resolve, reject) => {
+//       const stream = cloudinary.uploader.upload_stream(
+//         {
+//           folder: 'pdfs',
+//           resource_type: 'raw',
+//           transformation: [
+//             {
+//               width: 1000,
+//               height: 1000,
+//               crop: 'limit',
+//             },
+//           ],
+//         },
+//         (error, result) => {
+//           if (error || !result) {
+//             return reject(error || new Error('Upload failed'))
+//           }
+//           resolve(result)
+//         }
+//       )
+
+//       stream.end(buffer)
+//     })
+
+//
+
+//     await prisma.pdf.create({
+//       data: {
+//         title,
+//         url: result.secure_url,
+//         tags: tagsArray,
+//         class: classEl
+//           ? {
+//               connect: {
+//                 id: classEl,
+//               },
+//             }
+//           : undefined,
+//       },
+//     })
+//   } catch (error: any) {
+//     console.error('Error creating PDF:', error)
+
+//     throw new Error(
+//       `Failed to create PDF. Error details: ${error.message || error}`
+//     )
+//   }
+
+//   redirect('/control/pdf')
+// }
+
 export const createPdf = async (formData: FormData) => {
-  try {
-    const title = formData.get('title') as string
-    const tags = formData.get('tags') as string
-    const classEl = formData.get('classId') as string
-    const file = formData.get('file') as File
+  const title = formData.get('title') as string
+  const tags = formData.get('tags') as string
+  const file = formData.get('file') as string
+  const classEl = formData.get('classId') as string
+  const short_desc = formData.get('short_desc') as string | null
 
-    if (!title || !classEl) {
-      throw new Error('Title and pdf are required')
-    }
+  const tagsArray = tags
+    .split(',')
+    .map((tag) => tag.trim())
+    .filter((tag) => tag.length > 0)
 
-    if (file.type !== 'application/pdf') {
-      throw new Error('Only PDF files are allowed')
-    }
-
-    const arrayBuffer = await file.arrayBuffer()
-    const buffer = Buffer.from(arrayBuffer)
-
-    const result = await new Promise<UploadApiResponse>((resolve, reject) => {
-      const stream = cloudinary.uploader.upload_stream(
-        {
-          folder: 'pdfs',
-          resource_type: 'raw',
-          transformation: [
-            {
-              width: 1000,
-              height: 1000,
-              crop: 'limit',
+  await prisma.pdf.create({
+    data: {
+      title,
+      url: file,
+      tags: tagsArray,
+      short_desc,
+      class: classEl
+        ? {
+            connect: {
+              id: classEl,
             },
-          ],
-        },
-        (error, result) => {
-          if (error || !result) {
-            return reject(error || new Error('Upload failed'))
           }
-          resolve(result)
-        }
-      )
-
-      stream.end(buffer)
-    })
-
-    const tagsArray = tags
-      .split(',')
-      .map((tag) => tag.trim())
-      .filter((tag) => tag.length > 0)
-
-    await prisma.pdf.create({
-      data: {
-        title,
-        url: result.secure_url,
-        tags: tagsArray,
-        class: classEl
-          ? {
-              connect: {
-                id: classEl,
-              },
-            }
-          : undefined,
-      },
-    })
-  } catch (error: any) {
-    console.error('Error creating PDF:', error)
-
-    throw new Error(
-      `Failed to create PDF. Error details: ${error.message || error}`
-    )
-  }
+        : undefined,
+    },
+    
+  })
 
   redirect('/control/pdf')
 }

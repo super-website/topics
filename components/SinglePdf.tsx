@@ -8,6 +8,7 @@ import {
 import { CheckCheck, Download, ThumbsUp } from 'lucide-react'
 import Link from 'next/link'
 import React, { useState, useEffect } from 'react'
+import AdSlot from './AdsComponent'
 
 interface Pdf {
   id: string
@@ -140,6 +141,10 @@ export default function SinglePdf({ pdf }: { pdf: Pdf }) {
           </div>
         </div>
 
+        <div className='col-span-1 flex flex-col items-center justify-center p-4 border border-gray-200 rounded-lg'>
+          <p className='text-xs text-gray-500 mb-1'>Advertisement</p>
+          <AdSlot adClient='ca-pub-7339717436236652' adSlot='7306166999' />
+        </div>
         <hr />
 
         {/* Related PDFs */}

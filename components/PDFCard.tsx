@@ -63,14 +63,14 @@ export default function PDFCard({ initialPdfs }: PDFCardProps) {
       {/* Header */}
       <div className='flex flex-col md:flex-row justify-between items-center mb-8 gap-4'>
         <h1 className='text-2xl font-semibold text-gray-800'>Notes PDF</h1>
-        <div className='text-center'>
-          <p className='text-xs text-gray-500 mb-1'>Advertisement</p>
-          <AdSlot adClient='ca-pub-7339717436236652' adSlot='7306166999' />
-        </div>
       </div>
 
       {/* Grid */}
       <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
+        <div className='col-span-1 flex flex-col items-center justify-center p-4 border border-gray-200 rounded-lg'>
+          <p className='text-xs text-gray-500 mb-1'>Advertisement</p>
+          <AdSlot adClient='ca-pub-7339717436236652' adSlot='7306166999' />
+        </div>
         {pdfs.map((pdf) => {
           const isBouncing = loading === null && pdf.id === recentlyDownloaded
           return (

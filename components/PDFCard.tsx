@@ -11,6 +11,7 @@ interface Pdf {
   title: string
   url: string
   download: number
+  short_desc: string | null
 }
 
 interface PDFCardProps {
@@ -60,12 +61,10 @@ export default function PDFCard({ initialPdfs }: PDFCardProps) {
 
   return (
     <div className='px-6 md:px-10 max-w-7xl mx-auto py-10'>
-      {/* Header */}
       <div className='flex flex-col md:flex-row justify-between items-center mb-8 gap-4'>
         <h1 className='text-2xl font-semibold text-gray-800'>Notes PDF</h1>
       </div>
 
-      {/* Grid */}
       <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
         <div className='col-span-1 flex flex-col items-center justify-center p-4 border border-gray-200 rounded-lg'>
           <p className='text-xs text-gray-500 mb-1'>Advertisement</p>
@@ -93,6 +92,13 @@ export default function PDFCard({ initialPdfs }: PDFCardProps) {
                     {pdf.title}
                   </h3>
                 </Link>
+
+                {pdf.short_desc && (
+                  <p className='text-xs text-gray-600 my-1 line-clamp-3'>
+                    {pdf.short_desc}
+                  </p>
+                )}
+
                 <div className='flex items-center justify-between mt-4'>
                   <button
                     onClick={(e) => {

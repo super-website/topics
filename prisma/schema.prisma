@@ -85,11 +85,12 @@ model pdf {
   id        String   @id @default(uuid()) @map("_id")
   title     String
   url       String
+  short_desc String? @db.String
   tags     String[]
   like    Int @default(0)
   createdAt DateTime @default(now())
   download  Int @default(0)
-    classId   String?   
+  classId   String?   
   class     Class?    @relation(fields: [classId], references: [id])
 }
 

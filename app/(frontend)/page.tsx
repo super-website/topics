@@ -48,8 +48,16 @@ export default async function Page() {
         </i>
       </div>
       {banners.map((banner) => (
-        <section key={banner.id} className=' h-[400px]  px-8'>
-          <Image src={banner.image} alt={banner.title} fill className='' />
+        <section
+          key={banner.id}
+          className='relative h-[400px] w-full px-8 rounded-xl overflow-hidden shadow-lg'
+        >
+          <Image
+            src={banner.image}
+            alt={banner.title}
+            fill
+            className='object-cover rounded-xl'
+          />
         </section>
       ))}
 

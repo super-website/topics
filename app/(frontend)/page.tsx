@@ -48,10 +48,7 @@ export default async function Page() {
         </i>
       </div>
       {banners.map((banner) => (
-        <section
-          key={banner.id}
-          className=' h-[470px] bg-cover bg-center bg-no-repeat px-8'
-        >
+        <section key={banner.id} className=' h-[400px]  px-8'>
           <Image src={banner.image} alt={banner.title} fill className='' />
         </section>
       ))}

@@ -891,7 +891,9 @@ export const getSingleClass = async (id: string) => {
       subject: {
         include: { class: true },
       },
-      pdfs: true,
+      pdfs: {
+        include: { class: true },
+      },
       schemes: {
         include: {
           class: true,

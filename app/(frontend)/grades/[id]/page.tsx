@@ -125,16 +125,26 @@ export default async function Page({ params }: Props) {
                 <div>
                   <Link
                     href={`/notes-pdf/${pdf.id}`}
-                    className='text-cyan-600 text-xl font-semibold hover:underline'
+                    className='text-blue-500 text-xl font-semibold hover:underline'
                   >
                     {pdf.title}
                   </Link>
                 </div>
+                <p className='text-sm text-gray-600 mt-4 text-justify'>
+                  {pdf?.short_desc
+                    ? pdf.short_desc.substring(0, 150) + '...'
+                    : ''}
+                </p>
 
-                <div className='mt-6 flex justify-end'>
+                <div className='mt-6 flex justify-between items-center'>
+                  <div>
+                    <span className='text-xs text-black/60 italic'>
+                      {pdf.class?.title}
+                    </span>
+                  </div>
                   <Link
                     href={`/notes-pdf/${pdf.id}`}
-                    className='px-5 py-2 rounded-full bg-[#A8F1FF] text-black text-sm font-medium hover:bg-[#A8F1F0] transition-colors duration-200'
+                    className='btn btn-sm bg-blue-600 text-white hover:bg-blue-700 transition'
                   >
                     Visit
                   </Link>
@@ -175,7 +185,7 @@ export default async function Page({ params }: Props) {
                     </span>
                   </div>
                   <Link
-                    href={`/schemes/${scheme.id}`}
+                    href={`/scheme/${scheme.id}`}
                     className='btn btn-sm bg-blue-600 text-white hover:bg-blue-700 transition'
                   >
                     Visit

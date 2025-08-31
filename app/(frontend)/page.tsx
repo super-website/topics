@@ -52,12 +52,7 @@ export default async function Page() {
           key={banner.id}
           className='relative h-[300px] w-full px-8 rounded-xl overflow-hidden shadow-lg'
         >
-          <Image
-            src={banner.image}
-            alt={banner.title}
-            fill
-            className=' rounded-xl'
-          />
+          <Image src={banner.image} alt={banner.title} fill className='' />
         </section>
       ))}
 

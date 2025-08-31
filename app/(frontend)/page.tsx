@@ -50,14 +50,9 @@ export default async function Page() {
       {banners.map((banner) => (
         <section
           key={banner.id}
-          className='relative h-[470px] bg-cover bg-center bg-no-repeat flex items-center justify-start px-8'
+          className=' h-[470px] bg-cover bg-center bg-no-repeat px-8'
         >
-          <Image
-            src={banner.image}
-            alt={banner.title}
-            fill
-            className=''
-          />
+          <Image src={banner.image} alt={banner.title} fill className='' />
         </section>
       ))}
 

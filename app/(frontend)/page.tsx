@@ -56,7 +56,7 @@ export default async function Page() {
             src={banner.image}
             alt={banner.title}
             fill
-            className='object-cover object-center'
+            className=''
           />
         </section>
       ))}

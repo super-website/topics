@@ -47,11 +47,10 @@ export default async function Page() {
           us.
         </i>
       </div>
-      {/* Banner */}
       {banners.map((banner) => (
         <section
           key={banner.id}
-          className='relative h-[400px] bg-cover bg-center bg-no-repeat flex items-center justify-start px-8'
+          className='relative h-[470px] bg-cover bg-center bg-no-repeat flex items-center justify-start px-8'
         >
           <Image
             src={banner.image}
@@ -62,7 +61,6 @@ export default async function Page() {
         </section>
       ))}
 
-      {/* Why Choose Section */}
       <section className='py-20 bg-white'>
         <div className='max-w-7xl mx-auto px-6 text-center'>
           <h2 className='text-3xl font-bold mb-2 text-slate-800'>

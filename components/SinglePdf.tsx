@@ -115,7 +115,7 @@ export default function SinglePdf({ pdf }: { pdf: Pdf }) {
 
           {/* Actions */}
           <div className='flex flex-col sm:flex-row gap-4 justify-between'>
-            <div>
+            <div className='flex gap-4 flex-col md:flex-row'>
               <button
                 onClick={() => handleDownload(pdf)}
                 className='btn btn-primary w-full sm:w-auto'

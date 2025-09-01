@@ -5,7 +5,7 @@ import {
   incrementPdfLike,
   updateDownloadCount,
 } from '@/utils/actions'
-import { CheckCheck, Download, ThumbsUp } from 'lucide-react'
+import { CheckCheck, Clock10, Download, ThumbsUp } from 'lucide-react'
 import Link from 'next/link'
 import React, { useState, useEffect } from 'react'
 import AdSlot from './AdsComponent'
@@ -17,6 +17,7 @@ interface Pdf {
   download: number
   short_desc: string | null
   like: number
+  createdAt: Date
 }
 
 export default function SinglePdf({ pdf }: { pdf: Pdf }) {
@@ -95,7 +96,7 @@ export default function SinglePdf({ pdf }: { pdf: Pdf }) {
           <p className='text-gray-600 text-sm my-3'>
             {pdf.short_desc
               ? pdf.short_desc + ' '
-              : `The {pdf.title} offers comprehensive material to
+              : `The ${pdf.title} offers comprehensive material to
             aid students in mastering key concepts. Ideal for revision and exam
             prep. Download and strengthen your learning today.`}
           </p>
@@ -113,31 +114,42 @@ export default function SinglePdf({ pdf }: { pdf: Pdf }) {
           </div>
 
           {/* Actions */}
-          <div className='flex flex-col sm:flex-row gap-4'>
-            <button
-              onClick={() => handleDownload(pdf)}
-              className='btn btn-primary w-full sm:w-auto'
-              disabled={loadingId === pdf.id}
-            >
-              {loadingId === pdf.id ? (
-                <span className='loading loading-spinner'></span>
-              ) : recentlyDownloaded === pdf.id ? (
-                <CheckCheck />
-              ) : (
-                <Download />
-              )}
-            </button>
-
-            <form action={incrementPdfLike} className='w-full sm:w-auto'>
-              <input type='hidden' name='id' value={pdf.id} />
-              <input type='hidden' name='like' value='like' />
+          <div className='flex flex-col sm:flex-row gap-4 justify-between'>
+            <div>
               <button
-                type='submit'
-                className='btn bg-[#A8F1FF] w-full sm:w-auto'
+                onClick={() => handleDownload(pdf)}
+                className='btn btn-primary w-full sm:w-auto'
+                disabled={loadingId === pdf.id}
               >
-                <ThumbsUp /> ({pdf.like})
+                {loadingId === pdf.id ? (
+                  <span className='loading loading-spinner'></span>
+                ) : recentlyDownloaded === pdf.id ? (
+                  <CheckCheck />
+                ) : (
+                  <Download />
+                )}
               </button>
-            </form>
+
+              <form action={incrementPdfLike} className='w-full sm:w-auto'>
+                <input type='hidden' name='id' value={pdf.id} />
+                <input type='hidden' name='like' value='like' />
+                <button
+                  type='submit'
+                  className='btn bg-[#A8F1FF] w-full sm:w-auto'
+                >
+                  <ThumbsUp /> ({pdf.like})
+                </button>
+              </form>
+            </div>
+
+            <span>
+              <Clock10 className='inline-block h-4 w-4 mr-1' />
+              {new Date(pdf.createdAt).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              })}
+            </span>
           </div>
         </div>
 

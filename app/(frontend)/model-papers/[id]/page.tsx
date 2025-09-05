@@ -106,33 +106,31 @@ export default async function Page({ params }: { params: { id: string } }) {
           </h2>
 
           <ul className='space-y-6'>
-            {paper.class.pdfs
-              .filter((pdf) => pdf.id !== paper.id) // exclude current paper
-              .map((pdf) => (
-                <li key={pdf.id} className='group'>
-                  <Link
-                    href={`/${pdf.id}`}
-                    className='flex items-start gap-3 hover:text-primary transition'
-                  >
-                    <FileText className='h-5 w-5 text-primary mt-1 flex-shrink-0' />
-                    <div className='flex flex-col'>
-                      <div className='flex items-center gap-2'>
-                        <h3 className='text-md font-medium'>
-                          {pdf.title.length > 50
-                            ? pdf.title.substring(0, 50) + '...'
-                            : pdf.title}
-                        </h3>
-                        <ArrowRight className='h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity text-primary' />
-                      </div>
-                      <p className='text-gray-500 text-sm mt-1 line-clamp-3'>
-                        {pdf.short_desc
-                          ? pdf.short_desc
-                          : 'No description available.'}
-                      </p>
+            {paper.class.pdfs.map((pdf) => (
+              <li key={pdf.id} className='group'>
+                <Link
+                  href={`/notes-pdf/${pdf.id}`}
+                  className='flex items-start gap-3 hover:text-primary transition'
+                >
+                  <FileText className='h-5 w-5 text-primary mt-1 flex-shrink-0' />
+                  <div className='flex flex-col'>
+                    <div className='flex items-center gap-2'>
+                      <h3 className='text-md font-medium'>
+                        {pdf.title.length > 50
+                          ? pdf.title.substring(0, 50) + '...'
+                          : pdf.title}
+                      </h3>
+                      <ArrowRight className='h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity text-primary' />
                     </div>
-                  </Link>
-                </li>
-              ))}
+                    <p className='text-gray-500 text-sm mt-1 line-clamp-3'>
+                      {pdf.short_desc
+                        ? pdf.short_desc
+                        : 'No description available.'}
+                    </p>
+                  </div>
+                </Link>
+              </li>
+            ))}
           </ul>
         </aside>
       )}

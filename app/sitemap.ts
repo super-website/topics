@@ -1,6 +1,6 @@
 export const dynamic = 'force-dynamic'
 import {
-  getAllGallery,
+  getPapers,
   getAllPdf,
   getAllScheme,
   getAllSubject,
@@ -33,6 +33,7 @@ export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
   const pdfs = await getAllPdf('', 100)
   const topicsInside: Topic[] = topics
   const grades = await getClass()
+  const papers = await getPapers()
 
   const urls = subjects.map((subject) => ({
     url: `https://educationwithhamza.vercel.app/subject/${subject.id}`,
@@ -64,6 +65,13 @@ export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
     changeFrequency: 'daily' as const,
     priority: 0.8,
   }))
+
+  const papersUrl = papers.map((paper) => ({
+    url: `https://educationwithhamza.vercel.app/model-papers/${paper.id}`,
+    changeFrequency: 'daily' as const,
+    priority: 0.8,
+  }))
+
   return [
     {
       url: `https://educationwithhamza.vercel.app`,
@@ -103,10 +111,17 @@ export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.9,
     },
 
+    {
+      url: 'https://educationwithhamza.vercel.app/model-papers',
+      changeFrequency: 'daily',
+      priority: 0.9,
+    },
+
     ...urls,
     ...topicUrls,
     ...schemesUrls,
     ...pdfUrls,
     ...gradesUrl,
+    ...papersUrl,
   ]
 }

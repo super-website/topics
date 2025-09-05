@@ -140,6 +140,7 @@ model Class {
   pdfs        pdf[]  
   subject      Subject[]
   schemes     Scheme[] 
+  papers       Papers[]
 }
 
 
@@ -151,3 +152,15 @@ model User {
   password      String
 }
 
+
+
+model Papers {
+  id          String   @id @default(uuid()) @map("_id")
+  title       String
+  pdf         String
+  classId   String?   
+  tags    String[]
+  class     Class?    @relation(fields: [classId], references: [id])
+  description  String?  @db.String
+  createdAt   DateTime  @default(now())
+}

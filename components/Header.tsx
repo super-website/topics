@@ -8,6 +8,7 @@ const navItems = [
   { id: 2, name: 'Subjects', url: '/subjects' },
   { id: 3, name: 'Notes', url: '/notes-pdf' },
   { id: 4, name: 'Schemes', url: '/scheme' },
+  { id: 5, name: 'Model Papers', url: '/model-papers' },
 ]
 
 export default async function Header() {

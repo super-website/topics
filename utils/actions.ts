@@ -1103,3 +1103,68 @@ export const createGrade = async (formData: FormData) => {
 export const getAllUsers = async () => {
   return await prisma.user.findMany({})
 }
+
+// modal papers
+
+export const createPapers = async (formData: FormData) => {
+  const title = formData.get('title') as string
+  const tags = formData.get('tags') as string
+  const pdf = formData.get('pdf') as string
+  const classEl = formData.get('classId') as string
+  const description = formData.get('description') as string | null
+
+  const tagsArray = tags
+    .split(',')
+    .map((tag) => tag.trim())
+    .filter((tag) => tag.length > 0)
+
+  await prisma.papers.create({
+    data: {
+      title,
+      pdf,
+      tags: tagsArray,
+      description,
+      class: classEl
+        ? {
+            connect: {
+              id: classEl,
+            },
+          }
+        : undefined,
+    },
+  })
+
+  redirect('/control/papers')
+}
+
+export const getPapers = async () => {
+  return await prisma.papers.findMany({
+    orderBy: {
+      createdAt: 'desc',
+    },
+  })
+}
+
+export const deletePaper = async (formData: FormData) => {
+  const id = formData.get('id') as string
+  await prisma.papers.delete({
+    where: {
+      id,
+    },
+  })
+
+  revalidatePath('/control/papers')
+}
+
+export const getPaper = async (id: string) => {
+  return await prisma.papers.findUnique({
+    where: { id },
+    include: {
+      class: {
+        include: {
+          pdfs: true,
+        },
+      },
+    },
+  })
+}

@@ -27,7 +27,7 @@ export default function RootLayout({
           crossOrigin='anonymous'
         ></script>
       </head>
-      <body className='bg-gray-200'>
+      <body>
         {children}
         <Analytics />
       </body>

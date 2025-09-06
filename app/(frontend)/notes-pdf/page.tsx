@@ -1,19 +1,14 @@
 import React from 'react'
 import { getAllPdf } from '@/utils/actions'
 import PDFCard from '@/components/PDFCard'
-import { Metadata } from 'next'
 
-export const generateMetadata = async (): Promise<Metadata> => {
-  const pdfs = await getAllPdf('', 100)
-
-  const allTags = pdfs.flatMap((pdf) => pdf.tags || [''])
-
-  return {
-    title: 'Educational Resources',
-    description:
-      'Browse and download comprehensive educational resources in PDF format.',
-    keywords: allTags,
-  }
+export const metadata = {
+  title: 'Educational Resources',
+  description:
+    'Explore a comprehensive gallery of student notes, study materials, and educational resources in PDF format, shared by students and educators.',
+  keywords:
+    'student notes, study resources, educational PDFs, online learning materials, classroom resources, notes gallery, teacher and student notes, study guides, education with hamza, notes pdf, education notes pdf , 1st class notes, 2nd yeay notes',
+  author: 'Ameer Muhavia',
 }
 
 export const revalidate = 0

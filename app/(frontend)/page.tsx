@@ -50,7 +50,10 @@ export default async function Page() {
       {banners.map((banner) => (
         <section
           key={banner.id}
-          className='relative h-[300px] w-full px-8 rounded-xl overflow-hidden shadow-lg'
+          className={`
+      relative h-[300px] w-full px-8 rounded-xl overflow-hidden shadow-lg
+      ${banner.text === 'mobile' ? 'block md:hidden' : 'hidden md:block'}
+    `}
         >
           <Image src={banner.image} alt={banner.title} fill className='' />
         </section>

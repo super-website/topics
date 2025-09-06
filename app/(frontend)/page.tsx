@@ -51,8 +51,12 @@ export default async function Page() {
         <section
           key={banner.id}
           className={`
-      relative h-[300px] w-full px-8 rounded-xl overflow-hidden shadow-lg
-      ${banner.text === 'mobile' ? 'block md:hidden' : 'hidden md:block'}
+      relative  w-full px-8 rounded-xl overflow-hidden shadow-lg
+      ${
+        banner.text === 'mobile'
+          ? 'block md:hidden h-[400px]'
+          : 'hidden md:block h-[300px]'
+      }
     `}
         >
           <Image src={banner.image} alt={banner.title} fill className='' />

@@ -59,7 +59,14 @@ export default async function Page() {
       }
     `}
         >
-          <Image src={banner.image} alt={banner.title} fill className='' />
+          <Image
+            src={banner.image}
+            alt={banner.title}
+            fill
+            priority
+            sizes='100vw'
+            style={{ objectFit: 'cover' }}
+          />
         </section>
       ))}
 

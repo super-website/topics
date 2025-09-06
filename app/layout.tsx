@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description:
     'Education With Hamza offers high-quality online courses and resources to help you excel in academics. Learn at your own pace with expertly crafted content for Pakistani students.',
   keywords:
-    'online education, FSC notes, 1st year, 2nd year, board exam prep, education with hamza, study resources, e-learning, free study material',
+    'online education, FSC notes, 1st year, 2nd year, board exam prep, education with hamza, study resources, e-learning, free study material, education with hamza, education notes',
 }
 
 export default function RootLayout({

@@ -77,7 +77,7 @@ export default async function HomeNavbar() {
             <>
               <Link
                 href='/login'
-                className='bg-blue-500 hover:bg-blue-600 text-white md:text-sm font-medium rounded-full md:px-5 px-2 py-1 text-xs md:py-2 transition-colors '
+                className='bg-blue-600 hover:bg-blue-700 text-white md:text-sm font-medium rounded-full md:px-5 px-2 py-1 text-xs md:py-2 transition-colors '
               >
                 Login
               </Link>

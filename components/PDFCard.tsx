@@ -88,9 +88,9 @@ export default function PDFCard({ initialPdfs }: PDFCardProps) {
               </Link>
               <div className='flex-1 flex flex-col justify-between'>
                 <Link href={`/notes-pdf/${pdf.id}`}>
-                  <h3 className='font-semibold text-sm hover:underline min-h-[2.5rem] line-clamp-2'>
+                  <h2 className='font-semibold text-sm hover:underline min-h-[2.5rem] line-clamp-2'>
                     {pdf.title}
-                  </h3>
+                  </h2>
                 </Link>
 
                 {pdf.short_desc && (

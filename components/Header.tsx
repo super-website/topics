@@ -56,7 +56,7 @@ export default async function Header() {
 
       <div className='overflow-visible block md:hidden text-center bg-gray-600'>
         <div className='dropdown dropdown-hover'>
-          <div tabIndex={0} role='button' className='  flex items-center'>
+          <div tabIndex={0} role='button' className='  flex items-center text-white'>
             Grades <ChevronDown />
           </div>
           <ul

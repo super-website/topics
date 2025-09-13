@@ -155,7 +155,11 @@ export default function SinglePdf({ pdf }: { pdf: Pdf }) {
 
         <div className='col-span-1 flex flex-col items-center justify-center p-4 border border-gray-200 rounded-lg'>
           <p className='text-xs text-gray-500 mb-1'>Advertisement</p>
-          <AdSlot adClient='ca-pub-7339717436236652' adSlot='7306166999' />
+          <AdSlot
+            adClient='ca-pub-7339717436236652'
+            adSlot='7306166999'
+            style={{ display: 'block', minHeight: 100 }}
+          />
         </div>
         <hr />
 

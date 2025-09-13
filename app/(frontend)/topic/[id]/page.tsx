@@ -80,7 +80,11 @@ export default async function Page({ params }: { params: { id: string } }) {
       {/* Ad */}
       <div className='text-center'>
         <p className='text-xs text-gray-500 mb-1'>Advertisement</p>
-        <AdSlot adClient='ca-pub-7339717436236652' adSlot='7306166999' />
+        <AdSlot
+          adClient='ca-pub-7339717436236652'
+          adSlot='7306166999'
+          style={{ display: 'block', minHeight: 100 }}
+        />
       </div>
       {/* Topic Detail */}
       <div className='bg-white p-6 shadow-md rounded-md space-y-4'>

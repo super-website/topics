@@ -105,7 +105,7 @@ export default function PDFCard({ initialPdfs }: PDFCardProps) {
                       e.stopPropagation()
                       handleDownload(pdf)
                     }}
-                    className='btn btn-sm bg-blue-500 hover:bg-blue-600 text-white rounded-full transition-all px-4'
+                    className='btn btn-sm bg-blue-600 hover:bg-blue-700 text-white rounded-full transition-all px-4'
                     disabled={loading === pdf.id}
                   >
                     {loading === pdf.id ? (

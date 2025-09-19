@@ -99,11 +99,11 @@ export default async function Page() {
                 link: "/notes-pdf",
               },
               {
-                title: "Community Support",
-                desc: "Learn with guidance, tips, and help from students and educators alike.",
+                title: "Become a Contributor",
+                desc: "Share your knowledge, tips, and educational content to help students succeed. ",
                 button: "Join community",
                 color: "bg-black/80 text-white",
-                link: "/contact",
+                link: "/write",
               },
             ].map((item, i) => (
               <div

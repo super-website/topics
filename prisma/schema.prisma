@@ -164,3 +164,14 @@ model Papers {
   description  String?  @db.String
   createdAt   DateTime  @default(now())
 }
+
+
+model articles {
+  id          String   @id @default(uuid()) @map("_id")
+  slug        String   @unique
+  author_name  String?
+  title      String
+  content    String  @db.String
+  like    Int @default(0)
+  createdAt   DateTime  @default(now())
+}

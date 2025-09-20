@@ -33,9 +33,9 @@ export default async function Page({ params }: { params: { slug: string } }) {
   const article = await getArticle(params.slug);
 
   return (
-    <div className="max-w-7xl mx-auto py-10">
+    <div className="max-w-7xl mx-auto py-10 px-4">
       <nav className="text-sm breadcrumbs">
-        <ul className="flex flex-wrap gap-1 text-gray-600">
+        <ul className="flex gap-1 text-gray-600">
           <li>
             <Link href="/">Home</Link>
           </li>
@@ -48,13 +48,13 @@ export default async function Page({ params }: { params: { slug: string } }) {
         </ul>
       </nav>
 
-      <h1 className="text-3xl font-bold mt-6">{article?.title}</h1>
+      <h1 className="text-xl md:text-3xl font-bold mt-6">{article?.title}</h1>
       <p className="text-sm text-gray-500 mb-4">
         By {article?.author_name || "Anonymous"}
       </p>
 
       <article
-        className="prose max-w-none"
+        className="prose max-w-none text-justify"
         dangerouslySetInnerHTML={{ __html: article?.content || "" }}
       />
     </div>

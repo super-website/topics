@@ -1208,3 +1208,25 @@ export const getArticle = async (id: string) => {
     },
   });
 };
+
+export const deleteArticle = async (formData: FormData) => {
+  const id = formData.get("slug");
+
+  if (typeof id !== "string" || !id.trim()) {
+    throw new Error("Id is required");
+  }
+
+  try {
+    await prisma.articles.delete({
+      where: {
+        slug: id,
+      },
+    });
+
+    revalidatePath("/control/articles");
+  } catch (error) {
+    console.error("Error deleting article:", error);
+
+    throw new Error(`Failed to delete article`);
+  }
+};

@@ -1,13 +1,11 @@
 import DeleteBtn from "@/components/DeleteBtn";
-import { deletePdf, getAllPdf } from "@/utils/actions";
-import { Download, Edit, Trash2, View } from "lucide-react";
+import { deleteArticle, deleteSubject, getArticles } from "@/utils/actions";
+import { Edit, Heart, Trash2, View } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 
-export const revalidate = 0;
-
-export default async function Page() {
-  const data = await getAllPdf("", 30);
+export default async function page() {
+  const articles = await getArticles();
 
   return (
     <div>
@@ -17,7 +15,7 @@ export default async function Page() {
             <Link href="/control">Dashboard</Link>
           </li>
           <li>
-            <span className="text-gray-800">Notes</span>
+            <span className="text-gray-800">Articles</span>
           </li>
         </ul>
       </nav>
@@ -26,16 +24,8 @@ export default async function Page() {
           <div className="px-6 py-4 border-b border-slate-200 bg-slate-50">
             <div className="flex items-center justify-between">
               <h2 className="text-lg font-semibold text-slate-800">
-                Notes Table View
+                Articles Table View
               </h2>
-              <div className="flex items-center gap-2">
-                <Link
-                  href="/control/pdf/add-pdf"
-                  className="btn btn-primary btn-xs"
-                >
-                  Add New
-                </Link>
-              </div>
             </div>
           </div>
 
@@ -44,17 +34,14 @@ export default async function Page() {
               <thead className="bg-slate-50 border-b border-slate-200">
                 <tr>
                   <th className="px-6 py-4 text-left text-sm font-semibold text-slate-700">
-                    Name
+                    Title
                   </th>
                   <th className="px-6 py-4 text-left text-sm font-semibold text-slate-700">
-                    Downloads
-                  </th>
-                  <th className="px-6 py-4 text-left text-sm font-semibold text-slate-700">
-                    Visit
+                    Author Name
                   </th>
 
-                  <th className="px-4 py-4 text-left text-sm font-semibold text-slate-700">
-                    Created At
+                  <th className="px-6 py-4 text-left text-sm font-semibold text-slate-700">
+                    Likes
                   </th>
                   <th className="px-6 py-4 text-right text-sm font-semibold text-slate-700">
                     Actions
@@ -62,57 +49,58 @@ export default async function Page() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-200">
-                {data.map((pdf) => (
+                {articles.map((article) => (
                   <tr
-                    key={pdf.id}
+                    key={article.id}
                     className="hover:bg-slate-50 transition-colors"
                   >
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-4">
                         <div>
                           <div className="font-semibold text-slate-800">
-                            {pdf.title}
+                            {article.title}
                           </div>
-                          <div className="text-sm text-slate-500">Notes</div>
+                          <div className="text-sm text-slate-500">Subject</div>
                         </div>
                       </div>
                     </td>
 
                     <td className="px-6 py-4">
-                      <code className="px-2 py-1 bg-slate-100 text-slate-700 rounded text-sm flex">
-                        <Download className="h-4 w-4" />
-                        {pdf.download}
+                      <code className="px-2 py-1 bg-slate-100 text-slate-700 rounded text-sm">
+                        {article.author_name}
                       </code>
                     </td>
-
-                    <td className="px-6 py-4">
-                      <div className="font-semibold text-slate-800">
-                        <Link href={`/notes-pdf/${pdf.id}`}>
-                          <View className="h-4 w-4 inline mr-1" />
-                        </Link>
-                      </div>
-                    </td>
-
-                    <td className="px-6 py-4">
-                      <div className="font-semibold text-slate-800">
-                        {pdf.createdAt
-                          ? new Date(pdf.createdAt).toLocaleDateString()
-                          : "N/A"}
+                    <td>
+                      <div className="font-semibold text-slate-800 flex items-center gap-1">
+                        {article.like}{" "}
+                        <Heart className="w-4 h-4 text-red-500 " />
                       </div>
                     </td>
 
                     <td className="px-6 py-4 text-right">
                       <div className="flex items-center justify-end gap-2">
+                        <Link
+                          href={`/articles/${article.slug}`}
+                          className="p-2 text-slate-500 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                          title="Edit Artist"
+                        >
+                          <View className="w-4 h-4" />
+                        </Link>
+
                         <form
-                          action={deletePdf}
+                          action={deleteArticle}
                           method="POST"
                           className="inline-block"
                         >
-                          <input type="hidden" name="id" value={pdf.id} />
+                          <input
+                            type="hidden"
+                            name="slug"
+                            value={article.slug}
+                          />
                           <button
                             type="submit"
                             className="p-2 text-slate-500 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
-                            title="Delete pdf"
+                            title="Delete Subject"
                           >
                             <Trash2 className="w-4 h-4" />
                           </button>

@@ -1,5 +1,4 @@
 "use server";
-import nodemailer from "nodemailer";
 import prisma from "@/prisma/script";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
@@ -1209,20 +1208,3 @@ export const getArticle = async (id: string) => {
     },
   });
 };
-
-export async function sendEmail() {
-  const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: process.env.GMAIL_USER,
-      pass: process.env.GMAIL_PASS,
-    },
-  });
-
-  await transporter.sendMail({
-    from: process.env.GMAIL_USER,
-    to: "kh.muhavia1@gmail.com",
-    subject: "test",
-    text: "hey there",
-  });
-}

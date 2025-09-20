@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { ThumbsUp, ThumbsDown, CheckCircle2 } from "lucide-react";
 import { likeDislikeArticle } from "@/utils/actions";
 
@@ -24,6 +24,12 @@ export function LikeDislikeAlert({ articleId, likeCount }: Props) {
       });
     });
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setVoted(null);
+    }, 3000);
+  }, [voted]);
 
   return (
     <div className="flex flex-col gap-2 mt-8 px-4 py-3 border rounded-md bg-yellow-50 text-yellow-800 border-yellow-300">

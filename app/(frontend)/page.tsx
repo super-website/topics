@@ -73,10 +73,10 @@ export default async function Page() {
 
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6 text-center">
-          <h2 className="text-3xl font-bold mb-2 text-slate-800">
+          <h1 className="text-3xl font-bold mb-2 text-slate-800">
             <span className="text-blue-500">Why Choose </span>
             Education with Hamza?
-          </h2>
+          </h1>
           <p className="text-sm mb-12">
             <span className="text-blue-500">Get hands-on </span>
             experience with real projects and expert guidance.

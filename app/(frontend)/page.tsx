@@ -179,7 +179,7 @@ export default async function Page() {
             </Link>
 
             <Link
-              href="/schemes"
+              href="/scheme"
               className="
             transition hover:scale-105 duration-200 
             "

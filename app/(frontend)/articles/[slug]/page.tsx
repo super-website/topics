@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { Metadata } from "next";
 import { getArticle } from "@/utils/actions";
+import { ThumbsDown, ThumbsUp } from "lucide-react";
+import { LikeDislikeAlert } from "@/components/Likes";
 
 type Props = {
   params: { slug: string };
@@ -57,6 +59,13 @@ export default async function Page({ params }: { params: { slug: string } }) {
         className="prose max-w-none text-justify"
         dangerouslySetInnerHTML={{ __html: article?.content || "" }}
       />
+
+      <div>
+        <LikeDislikeAlert
+          articleId={article?.slug!}
+          likeCount={article?.like || 0}
+        />
+      </div>
     </div>
   );
 }

@@ -1230,3 +1230,27 @@ export const deleteArticle = async (formData: FormData) => {
     throw new Error(`Failed to delete article`);
   }
 };
+
+export const likeDislikeArticle = async (formData: FormData) => {
+  const id = formData.get("id") as string;
+  const action = formData.get("action") as "like" | "dislike";
+
+  if (!id || !["like", "dislike"].includes(action)) {
+    throw new Error("Invalid form submission");
+  }
+
+  const article = await prisma.articles.findUnique({ where: { slug: id } });
+  if (!article) throw new Error("Article not found");
+
+  const currentLikes = article.like ?? 0;
+
+  await prisma.articles.update({
+    where: { slug: id },
+    data: {
+      like:
+        action === "like" ? currentLikes + 1 : Math.max(0, currentLikes - 1),
+    },
+  });
+
+  revalidatePath(`/articles/${id}`);
+};

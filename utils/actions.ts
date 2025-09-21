@@ -1254,3 +1254,77 @@ export const likeDislikeArticle = async (formData: FormData) => {
 
   revalidatePath(`/articles/${id}`);
 };
+
+export const createLectureCategory = async (formData: FormData) => {
+  const title = formData.get("title") as string;
+  const description = formData.get("description") as string;
+  const classId = formData.get("classId") as string;
+  const subjectId = formData.get("subjectId") as string;
+
+  if (!title || !classId || !subjectId) {
+    throw new Error("Missing required fields.");
+  }
+
+  await prisma.lectureCategory.create({
+    data: {
+      title,
+      description,
+      class: { connect: { id: classId } },
+      subject: { connect: { id: subjectId } },
+    },
+  });
+
+  redirect("/control/lecture-category/add?success=true");
+};
+
+export const getLecturesCategories = async () => {
+  return await prisma.lectureCategory.findMany({
+    include: {
+      class: true,
+      subject: true,
+      lectures: true,
+    },
+  });
+};
+
+export const getLecturesByClass = async (slug: string) => {
+  return await prisma.lectureCategory.findMany({
+    where: {
+      class: {
+        slug: slug,
+      },
+    },
+    include: {
+      lectures: true,
+      class: true,
+      subject: true,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+};
+
+export const createLecture = async (formData: FormData) => {
+  const title = formData.get("title") as string;
+  const description = formData.get("description") as string;
+  const duration = formData.get("duration") as string;
+  const youtubeUrl = formData.get("youtubeUrl") as string;
+  const categoryId = formData.get("categoryId") as string;
+
+  if (!title || !youtubeUrl || !categoryId) {
+    throw new Error("Missing required fields.");
+  }
+
+  await prisma.lecture.create({
+    data: {
+      title,
+      description,
+      youtubeUrl,
+      duration,
+      lectureCategory: { connect: { id: categoryId } },
+    },
+  });
+
+  redirect("/control/lectures/add?success=true");
+};

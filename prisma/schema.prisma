@@ -40,6 +40,7 @@ model Subject {
   topics      Topics[]  
   classId   String? 
   class     Class?    @relation(fields: [classId], references: [id])
+  lectureCategory  LectureCategory[]
 }
 
 
@@ -141,6 +142,7 @@ model Class {
   subject      Subject[]
   schemes     Scheme[] 
   papers       Papers[]
+  lectureCategory  LectureCategory[]
 }
 
 
@@ -174,4 +176,28 @@ model articles {
   content    String  @db.String
   like    Int @default(0)
   createdAt   DateTime  @default(now())
+}
+
+
+model LectureCategory {
+  id          String    @id @default(uuid()) @map("_id")
+  title       String
+  description String?   @db.String
+  subjectId   String?
+  subject     Subject?  @relation(fields: [subjectId], references: [id])
+  classId     String?
+  class       Class?    @relation(fields: [classId], references: [id])
+  lectures    Lecture[]
+  createdAt   DateTime  @default(now())
+}
+
+model Lecture {
+  id              String    @id @default(uuid()) @map("_id")
+  title           String
+  youtubeUrl      String
+  duration        String?   
+  description     String?   @db.String
+  lectureCategoryId String?
+  lectureCategory LectureCategory? @relation(fields: [lectureCategoryId], references: [id])
+  createdAt       DateTime  @default(now())
 }

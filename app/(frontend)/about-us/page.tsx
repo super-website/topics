@@ -2,7 +2,7 @@ import React from "react";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "About Us | Education With Hamza",
+  title: "About Us",
   description:
     "Learn about our mission to provide free, high-quality educational content to students in Pakistan. Education With Hamza is committed to empowering learners through accessible resources.",
   keywords: [

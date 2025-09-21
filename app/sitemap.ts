@@ -6,6 +6,7 @@ import {
   getAllTopics,
   getClass,
   getArticles,
+  getLecturesCategories,
 } from "@/utils/actions";
 import { MetadataRoute } from "next";
 
@@ -37,6 +38,7 @@ export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
   const grades = await getClass();
   const papers = await getPapers();
   const articles = await getArticles();
+  const lectures = await getLecturesCategories();
 
   const urls = subjects.map((subject) => ({
     url: `https://educationwithhamza.vercel.app/subject/${subject.id}`,
@@ -82,6 +84,21 @@ export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const articlesUrl = articles.map((article) => ({
     url: `https://educationwithhamza.vercel.app/articles/${article.slug}`,
+    changeFrequency: "daily" as const,
+    priority: 0.8,
+    lastModified: new Date().toISOString(),
+  }));
+
+  const uniqueClassesMap = new Map();
+  lectures.forEach((cat) => {
+    if (cat.class?.id && !uniqueClassesMap.has(cat.class.id)) {
+      uniqueClassesMap.set(cat.class.id, cat.class);
+    }
+  });
+  const uniqueClasses = Array.from(uniqueClassesMap.values());
+
+  const lecturesUrl = uniqueClasses.map((cls) => ({
+    url: `https://educationwithhamza.vercel.app/lectures/${cls.slug}`,
     changeFrequency: "daily" as const,
     priority: 0.8,
     lastModified: new Date().toISOString(),
@@ -153,6 +170,13 @@ export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date().toISOString(),
     },
 
+    {
+      url: "https://educationwithhamza.vercel.app/lectures",
+      changeFrequency: "daily",
+      priority: 0.9,
+      lastModified: new Date().toISOString(),
+    },
+
     ...urls,
     ...topicUrls,
     ...schemesUrls,
@@ -160,5 +184,6 @@ export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
     ...gradesUrl,
     ...papersUrl,
     ...articlesUrl,
+    ...lecturesUrl,
   ];
 }

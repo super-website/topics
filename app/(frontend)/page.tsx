@@ -8,10 +8,9 @@ import {
   FileText,
   ClipboardList,
   GraduationCap,
-  Pen,
+  Video,
 } from "lucide-react";
 import Image from "next/image";
-import { link } from "fs";
 
 export const metadata: Metadata = {
   title: "Education With Hamza - Learn the Right Way",
@@ -39,13 +38,11 @@ export default async function Page() {
     <>
       <div className="bg-base-200  p-2  text-center text-sm text-slate-700 mb-2">
         <i className="flex align items-center justify-center">
-          {" "}
-          <Pen className="h-6 w-6 text-blue-500" />
-          Should you experience any errors, feel free to
-          <Link href="/contact" className="text-blue-600 font-semibold mx-1">
-            reach out
-          </Link>{" "}
-          us.
+          <Video className="h-6 w-6 text-blue-500" />
+          <Link href="/lectures" className="text-blue-600 font-semibold mx-1">
+            Video Lectures
+          </Link>
+          Are Here – Dive In! us.
         </i>
       </div>
       {banners.map((banner) => (

@@ -42,7 +42,7 @@ export default async function Page() {
           <Link href="/lectures" className="text-blue-600 font-semibold mx-1">
             Video Lectures
           </Link>
-          Are Here – Dive In! us.
+          Are Here – Dive In!
         </i>
       </div>
       {banners.map((banner) => (

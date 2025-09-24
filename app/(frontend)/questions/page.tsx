@@ -58,12 +58,13 @@ export default async function Page() {
       {/* low word count */}
       <div className='mt-10 text-sm text-gray-500'>
         <p>
-          Have questions about your studies? You're not alone! Many students
-          have questions about various subjects and topics. Don't hesitate to
-          ask - whether it's about a tricky math problem, a confusing science
-          concept, or advice on study techniques. Asking questions is a great
-          way to learn and grow. Our community is here to help you find the
-          answers you need. So go ahead, ask away, and let's learn together!
+          Have questions about your studies? You&apos;re not alone! Many
+          students have questions about various subjects and topics. Don&apos;t
+          hesitate to ask - whether it&apos;s about a tricky math problem, a
+          confusing science concept, or advice on study techniques. Asking
+          questions is a great way to learn and grow. Our community is here to
+          help you find the answers you need. So go ahead, ask away, and
+          let&apos;s learn together!
         </p>
       </div>
     </div>

@@ -71,7 +71,7 @@ export default async function AskPage() {
             type='text'
             name='title'
             required
-            placeholder='E.g. How does async/await work in JavaScript?'
+            placeholder='e.g., How to solve quadratic equations?'
             className='input input-bordered w-full'
           />
         </div>
@@ -83,7 +83,7 @@ export default async function AskPage() {
           <textarea
             name='body'
             required
-            placeholder="Explain what you're trying to understand, and what you've tried..."
+            placeholder="Provide more details about your question. You can include what you've tried and where you're stuck."
             className='textarea textarea-bordered w-full min-h-[120px]'
           ></textarea>
         </div>

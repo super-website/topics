@@ -25,7 +25,7 @@ export default async function Page() {
 
   return (
     <div className='max-w-3xl mx-auto pt-16 pb-40 px-4 '>
-      <div className='mb-6 flex justify-between items-center'>
+      <div className='mb-6 flex justify-between items-center '>
         <h1 className='text-3xl font-bold'>Questions</h1>
         <Link href='/questions/ask' className='btn btn-primary'>
           Ask Question
@@ -34,7 +34,7 @@ export default async function Page() {
       {questions.length === 0 ? (
         <p className='text-gray-500'>No questions found.</p>
       ) : (
-        <ul className='space-y-4'>
+        <ul className='space-y-4 '>
           {questions.map((question) => (
             <li key={question.id} className='border p-4 rounded-lg'>
               <Link href={`/questions/${question.id}`}>
@@ -54,6 +54,18 @@ export default async function Page() {
           ))}
         </ul>
       )}
+
+      {/* low word count */}
+      <div className='mt-10 text-sm text-gray-500'>
+        <p>
+          Have questions about your studies? You're not alone! Many students
+          have questions about various subjects and topics. Don't hesitate to
+          ask - whether it's about a tricky math problem, a confusing science
+          concept, or advice on study techniques. Asking questions is a great
+          way to learn and grow. Our community is here to help you find the
+          answers you need. So go ahead, ask away, and let's learn together!
+        </p>
+      </div>
     </div>
   )
 }

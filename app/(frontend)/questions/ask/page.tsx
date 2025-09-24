@@ -29,7 +29,7 @@ export default async function AskPage() {
 
   if (!userId) {
     return (
-      <div className='max-w-2xl mx-auto py-10 px-4 text-center'>
+      <div className='max-w-2xl mx-auto py-10 px-4 text-center min-h-screen'>
         <h1 className='text-3xl font-bold mb-4'>401 - Unauthorized</h1>
         <p className='text-gray-500 mb-4'>
           You must be logged in to ask a question.

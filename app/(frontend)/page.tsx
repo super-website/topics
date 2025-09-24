@@ -9,6 +9,7 @@ import {
   ClipboardList,
   GraduationCap,
   MessageCircle,
+  Video,
 } from 'lucide-react'
 import Image from 'next/image'
 
@@ -135,7 +136,7 @@ export default async function Page() {
             success.
           </p>
 
-          <div className='grid grid-cols-2 md:grid-cols-4 gap-10'>
+          <div className='grid grid-cols-2 md:grid-cols-3 gap-10'>
             <Link
               href='/grades'
               className='
@@ -190,6 +191,38 @@ export default async function Page() {
                 </div>
               </div>
               <h3 className='text-lg font-semibold text-slate-700'>Schemes</h3>
+            </Link>
+
+            <Link
+              href='/questions'
+              className='
+            transition hover:scale-105 duration-200 
+            '
+            >
+              <div className='flex justify-center mb-3'>
+                <div className='bg-blue-500 p-4 rounded-full'>
+                  <MessageCircle className='w-10 h-10 text-white' />
+                </div>
+              </div>
+              <h3 className='text-lg font-semibold text-slate-700'>
+                Find Answers
+              </h3>
+            </Link>
+
+            <Link
+              href='/lectures'
+              className='
+            transition hover:scale-105 duration-200 
+            '
+            >
+              <div className='flex justify-center mb-3'>
+                <div className='bg-blue-500 p-4 rounded-full'>
+                  <Video className='w-10 h-10 text-white' />
+                </div>
+              </div>
+              <h3 className='text-lg font-semibold text-slate-700'>
+                Video Lectures
+              </h3>
             </Link>
           </div>
         </div>

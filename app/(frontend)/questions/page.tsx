@@ -25,10 +25,15 @@ export default async function Page() {
 
   return (
     <div className='max-w-3xl mx-auto pt-16 pb-40 px-4 '>
-      <div className='mb-6 flex justify-between items-center '>
-        <h1 className='text-3xl font-bold'>Questions</h1>
-        <Link href='/questions/ask' className='btn btn-primary'>
-          Ask Question
+      <div className='mb-6 flex flex-col   '>
+        <h1 className='text-3xl font-bold'>
+          All Questions ({questions.length})
+        </h1>
+        <Link
+          href='/questions/ask'
+          className='text-blue-600 hover:underline text-sm mt-2'
+        >
+          Ask Questions
         </Link>
       </div>
       {questions.length === 0 ? (
@@ -42,6 +47,7 @@ export default async function Page() {
                   {question.title}
                 </h2>
               </Link>
+
               <p className='text-gray-700 mt-2'>
                 {question.body.length > 150
                   ? question.body.slice(0, 150) + '...'

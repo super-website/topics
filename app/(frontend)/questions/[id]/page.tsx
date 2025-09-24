@@ -76,7 +76,7 @@ export default async function Page({ params }: Props) {
 
       <h1 className='text-3xl font-bold mb-2 capitalize'>
         {' '}
-        Q: {question.title}?
+        Q: {question.title}
       </h1>
 
       <p className='text-sm text-gray-500 mb-6'>
@@ -85,7 +85,7 @@ export default async function Page({ params }: Props) {
       </p>
 
       <div className='flex flex-col md:flex-row md:gap-6 justify-between '>
-        <div className='prose max-w-none mb-6 md:mb-0'>
+        <div className='prose max-w-none mb-6 md:mb-0 shadow-sm p-6 rounded-lg bg-white border'>
           <h3 className='text-xl font-semibold mb-4'>Details</h3>
           <p>{question.body}</p>
         </div>

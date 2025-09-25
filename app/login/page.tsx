@@ -2,6 +2,7 @@ import RegisterPage from '@/components/RegisterPage'
 import SubmitBtn from '@/components/SubmitBtn'
 import { userLogin } from '@/utils/actions'
 import { Metadata } from 'next'
+import Link from 'next/link'
 import React, { Suspense } from 'react'
 
 type Props = {
@@ -94,9 +95,9 @@ export default async function Page({ searchParams }: Props) {
 
         <p className='text-center text-sm mt-4'>
           Don’t have an account?
-          <a href='#' className='link link-hover'>
+          <Link href='/register' className='link link-hover'>
             Sign up
-          </a>
+          </Link>
         </p>
       </div>
     </div>

@@ -1,77 +1,62 @@
-import SubmitBtn from "@/components/SubmitBtn";
-import { login } from "@/utils/actions";
+import SubmitBtn from '@/components/SubmitBtn'
+import { login } from '@/utils/actions'
 
 export default function LoginPage({
   searchParams,
 }: {
-  searchParams: { error: string | undefined };
+  searchParams: { error: string | undefined }
 }) {
-  const error = searchParams?.error;
+  const error = searchParams?.error
 
   return (
-    <div className="flex justify-center pt-10">
-      <div className="shadow-xl rounded-lg w-full sm:w-96 bg-white p-8">
-        <form action={login} className="space-y-6">
-          {error && (
-            <div
-              role="alert"
-              className="alert alert-error alert-soft text-white mb-6 p-4 rounded-lg bg-red-600 flex items-center"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 shrink-0 stroke-current mr-3"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M18.364 5.636l-12.728 12.728M5.636 5.636l12.728 12.728"
-                />
-              </svg>
-              <span>{error}</span>
-            </div>
-          )}
+    <div className='flex min-h-[80vh] items-center justify-center  px-4 py-8 md:px-0 md:py-0 '>
+      <div className='card w-full max-w-md bg-base-100 shadow-2xl p-8'>
+        <h2 className='text-2xl font-semibold text-center mb-2'>
+          Welcome back
+        </h2>
+        <p className='text-center text-sm text-gray-500 mb-4'>
+          Please login to your account
+        </p>
 
-          {/* Form Section */}
-          <fieldset className="bg-gray-50 border border-gray-300 rounded-lg p-6">
-            <legend className="text-xl font-medium text-gray-700 mb-4">
-              Login
-            </legend>
+        <div className='divider text-xs'>
+          Continue with your email and password
+        </div>
 
-            <div>
-              <label className="block text-gray-700 mb-2" htmlFor="email">
-                Email
-              </label>
-              <input
-                type="email"
-                name="email"
-                id="email"
-                className="input input-bordered w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                placeholder="Enter your email"
-              />
-            </div>
+        {error && (
+          <div className='bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4'>
+            {error}
+          </div>
+        )}
 
-            <div>
-              <label className="block text-gray-700 mb-2" htmlFor="password">
-                Password
-              </label>
-              <input
-                type="password"
-                name="password"
-                id="password"
-                className="input input-bordered w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                placeholder="Enter your password"
-              />
+        <form action={login}>
+          <label className='form-control w-full mb-2'>
+            <div className='label'>
+              <span className='label-text'>Email</span>
             </div>
+            <input
+              type='text'
+              placeholder='m@example.com'
+              name='email'
+              className='input input-bordered w-full'
+            />
+          </label>
 
-            <div className="w-full mt-6">
-              <SubmitBtn />
-            </div>
-          </fieldset>
+          <div className='flex justify-between items-center'>
+            <label className='label label-text'>Password</label>
+          </div>
+          <input
+            type='password'
+            placeholder='••••••••'
+            name='password'
+            className='input input-bordered w-full mb-4'
+          />
+
+          <SubmitBtn
+            text='login'
+            className='btn btn-neutral w-full capitalize'
+          />
         </form>
       </div>
     </div>
-  );
+  )
 }

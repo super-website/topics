@@ -41,7 +41,7 @@ export const generateMetadata = async ({
 }
 
 export default async function Page({ searchParams }: Props) {
-  const { success } = await searchParams
+  const { error } = await searchParams
 
   return (
     <div className='flex min-h-screen items-center justify-center bg-gray-100 px-4 py-8 md:px-0 md:py-0'>
@@ -55,9 +55,9 @@ export default async function Page({ searchParams }: Props) {
 
         <div className='divider text-xs'>Continue with</div>
 
-        {success && (
+        {error && (
           <div className='bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4'>
-            Registration successful! Please log in.
+            {error}
           </div>
         )}
 

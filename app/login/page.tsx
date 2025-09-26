@@ -76,9 +76,6 @@ export default async function Page({ searchParams }: Props) {
 
           <div className='flex justify-between items-center'>
             <label className='label label-text'>Password</label>
-            {/* <a href='#' className='label-text-alt link link-hover text-sm'>
-              Forgot your password?
-            </a> */}
           </div>
           <input
             type='password'

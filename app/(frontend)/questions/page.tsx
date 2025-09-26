@@ -1,4 +1,7 @@
-import { getAllQuestions } from '@/utils/actions'
+import SubmitBtn from '@/components/SubmitBtn'
+import { deleteQuestion, getAllQuestions } from '@/utils/actions'
+import { getUserId } from '@/utils/utils'
+import { Trash } from 'lucide-react'
 import Link from 'next/link'
 
 export const metadata = {
@@ -22,6 +25,7 @@ export const metadata = {
 
 export default async function Page() {
   const questions = await getAllQuestions()
+  const userId = await getUserId()
 
   return (
     <div className='max-w-3xl mx-auto pt-16 pb-40 px-4 '>
@@ -53,15 +57,26 @@ export default async function Page() {
                   ? question.body.slice(0, 150) + '...'
                   : question.body}
               </p>
-              <p className='text-sm text-gray-500 mt-2'>
-                Asked on {new Date(question.createdAt).toLocaleDateString()}
-              </p>
+              <div className='flex justify-between items-center px-1'>
+                <p className='text-sm text-gray-500 mt-2'>
+                  Asked on {new Date(question.createdAt).toLocaleDateString()}
+                </p>
+                <p>Answers: {question._count.answers}</p>
+              </div>
+
+              {userId === question.authorId && (
+                <form action={deleteQuestion}>
+                  <input type='hidden' name='id' value={question.id} />
+                  <button className='text-sm text-red-600 hover:underline mt-3 place-self-end flex items-center cursor-pointer'>
+                    <SubmitBtn text='Delete' className='btn btn-ghost btn-sm' />
+                  </button>
+                </form>
+              )}
             </li>
           ))}
         </ul>
       )}
 
-      {/* low word count */}
       <div className='mt-10 text-sm text-gray-500'>
         <p>
           Have questions about your studies? You&apos;re not alone! Many

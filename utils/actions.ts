@@ -1429,3 +1429,24 @@ export const createAnswer = async (formData: FormData) => {
   })
   redirect(`/questions/${questionId}?success=true`)
 }
+
+export const deleteQuestion = async (formData: FormData) => {
+  const id = formData.get('id') as string
+  if (typeof id !== 'string' || !id.trim()) {
+    throw new Error('Id is Required')
+  }
+
+  await prisma.answer.deleteMany({
+    where: {
+      questionId: id,
+    },
+  })
+
+  await prisma.question.delete({
+    where: {
+      id,
+    },
+  })
+
+  revalidatePath('/control/questions')
+}

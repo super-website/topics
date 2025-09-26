@@ -7,6 +7,7 @@ import {
   getClass,
   getArticles,
   getLecturesCategories,
+  getAllQuestions,
 } from '@/utils/actions'
 import { MetadataRoute } from 'next'
 
@@ -39,6 +40,7 @@ export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
   const papers = await getPapers()
   const articles = await getArticles()
   const lectures = await getLecturesCategories()
+  const allQuestions = await getAllQuestions()
 
   const urls = subjects.map((subject) => ({
     url: `https://educationwithhamza.vercel.app/subject/${subject.id}`,
@@ -99,6 +101,13 @@ export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const lecturesUrl = uniqueClasses.map((cls) => ({
     url: `https://educationwithhamza.vercel.app/lectures/${cls.slug}`,
+    changeFrequency: 'daily' as const,
+    priority: 0.8,
+    lastModified: new Date().toISOString(),
+  }))
+
+  const questionsUrl = allQuestions.map((question) => ({
+    url: `https://educationwithhamza.vercel.app/questions/${question.id}`,
     changeFrequency: 'daily' as const,
     priority: 0.8,
     lastModified: new Date().toISOString(),
@@ -199,5 +208,6 @@ export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
     ...papersUrl,
     ...articlesUrl,
     ...lecturesUrl,
+    ...questionsUrl,
   ]
 }

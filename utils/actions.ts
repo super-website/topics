@@ -913,6 +913,19 @@ export const createUser = async (formData: FormData) => {
     )
   }
 
+  // regex expression for email
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  if (!emailRegex.test(email)) {
+    return redirect('/register?error=' + encodeURIComponent('Invalid Email.'))
+  }
+
+  if (!name || !email || !password) {
+    return redirect(
+      '/register?error=' + encodeURIComponent('All fields are required.')
+    )
+  }
+
   const hashedPassword = await bcrypt.hash(password, 10)
 
   await prisma.user.create({

@@ -67,9 +67,10 @@ export default async function Page({ searchParams }: Props) {
               <span className='label-text'>Email</span>
             </div>
             <input
-              type='text'
+              type='email'
               placeholder='m@example.com'
               name='email'
+              required
               className='input input-bordered w-full'
             />
           </label>
@@ -81,6 +82,7 @@ export default async function Page({ searchParams }: Props) {
             type='password'
             placeholder='••••••••'
             name='password'
+            required
             className='input input-bordered w-full mb-4'
           />
 

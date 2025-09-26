@@ -41,7 +41,7 @@ export const generateMetadata = async ({
 }
 
 export default async function Page({ searchParams }: Props) {
-  const { success } = await searchParams
+  const { success, error } = await searchParams
 
   return (
     <div className='flex min-h-screen items-center justify-center bg-gray-100 px-4 py-8 md:px-0 md:py-0'>
@@ -59,6 +59,12 @@ export default async function Page({ searchParams }: Props) {
           <p className='text-green-600 text-center mb-4'>
             Registration successful! Please log in.
           </p>
+        )}
+
+        {error && (
+          <div className='bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4'>
+            {error}
+          </div>
         )}
 
         <form action={createUser}>

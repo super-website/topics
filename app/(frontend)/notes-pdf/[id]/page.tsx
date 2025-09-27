@@ -21,7 +21,9 @@ export const generateMetadata = async ({
   }
 
   return {
-    title: pdf.title,
+    title: {
+      absolute: pdf.title || 'PDF',
+    },
     description:
       pdf.short_desc ||
       `Download the ${pdf.title} PDF for comprehensive educational resources.`,

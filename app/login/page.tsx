@@ -46,9 +46,9 @@ export default async function Page({ searchParams }: Props) {
   return (
     <div className='flex min-h-screen items-center justify-center bg-gray-100 px-4 py-8 md:px-0 md:py-0'>
       <div className='card w-full max-w-md bg-base-100 shadow-xl p-8'>
-        <h2 className='text-2xl font-semibold text-center mb-2'>
+        <h1 className='text-2xl font-semibold text-center mb-2'>
           Welcome back
-        </h2>
+        </h1>
         <p className='text-center text-sm text-gray-500 mb-4'>
           Please login to your account
         </p>

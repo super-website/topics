@@ -194,7 +194,7 @@ export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
     },
 
     {
-      url: 'https://educationwithhamza.vercel.app/ask',
+      url: 'https://educationwithhamza.vercel.app/questions/ask',
       changeFrequency: 'daily',
       priority: 0.9,
       lastModified: new Date().toISOString(),
